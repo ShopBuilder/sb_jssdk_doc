@@ -1,0 +1,106 @@
+// @temp 3rd party app
+
+// form submit handler
+  window.submissionCallbackExample = function (){
+ // return {'error': 'This is an error '};
+    return true;
+  };
+
+// dom injection
+  window.inject_custom_data_7597992162 = function(){
+// text input field
+    dom1 = window.SBsdk.SBfunctions.generateDom('textfield', {class: 'textfield-dummy-class',wrapperClass: 'textfield-wrapper-dummy-class',Title: 'Title',required: 1,placeholder: 'placeholder',id: 'i-am-an-id',name: 'hello',size: 60,maxlength: 255,value: 'default value'});
+
+// select field
+    dom1 += window.SBsdk.SBfunctions.generateDom('select', {required: 1, Title : 'hello select', wrapperClass: 'select-dummy-wrapper-class',class: ' select-dummy-class',id: 'id-select', options: [{'value': 'one', 'label' : 'one'}, {'value': 'two', 'selected' : 'selected' , 'label' : 'two'}] });
+
+// select2 field
+    dom1 += window.SBsdk.SBfunctions.generateDom('select', {select2: {'dropdownCssClass':'sb-intro-theme-drop'},required: 1, Title : 'hello select', wrapperClass: 'select-dummy-wrapper-class',class: ' select-dummy-class',id: 'id-select', options: [{'value': 'one', 'label' : 'one'}, {'value': 'two', 'selected' : 'selected' , 'label' : 'two'}] });
+// upload field
+    dom1 += window.SBsdk.SBfunctions.generateDom('upload', {class: 'upload-dummy-class',wrapperClass: 'upload-wrapper-dummy-class',Title: 'Title upload',required: 1, id: 'id-upload',name: 'hello',size: 60,value: 'default value'});
+// link field
+    dom1 += window.SBsdk.SBfunctions.generateDom('link', {wrapperClass: 'link-wrapper', class: 'link-class', href: '#', id: 'link-id', Title: 'Hello link'});
+// textarea field
+    dom1 += window.SBsdk.SBfunctions.generateDom('textarea', {wrapperClass: 'textarea-wrapper', id: 'textarea-id' , Title: 'text area here',required: 1, value: 'default value' ,class: 'textarea class', name : 'textarea-name',rows: '5', cols: '10',placeholder: 'hello placeholder', maxlength: '5'});
+// fieldsets
+    dom1 += window.SBsdk.SBfunctions.generateDom('fieldset', {wrapperClass: 'fieldset-custom-wrapper' , mainTitle: 'Hello fieldset',subTitle: 'hello subtitle', content: 'fieldset content fieldset content fieldset content '});
+    dom1 += window.SBsdk.SBfunctions.generateDom('fieldset', {wrapperClass: 'fieldset-custom-wrapper2' , mainTitle: 'Hello1 fieldset',subTitle: 'hello1 subtitle', content: 'fieldset1 content fieldset1 content fieldset1 content '});
+// multiple select 2 field
+dom1 += '<br/><br/>' +  window.SBsdk.SBfunctions.generateDom('select',  {select2: {'dropdownCssClass':'sb-intro-theme-drop'}, Title : 'hello select', wrapperClass: 'select-dummy-wrapper-class-multiple-select', class: ' select-dummy-multiple-class',id: 'id-multi-select', options: [{'value': 'one', 'label' : 'test'}, {'value': 'two', 'selected' : 'selected' , 'label' : 'test2'}], name: 'hello[]' , multiple : 1});
+
+dom1 += '<br/><br/>' +  window.SBsdk.SBfunctions.generateDom('section_title',  {Title: 'Title hello section'});
+
+dom1 += '<br/><br/>' +  window.SBsdk.SBfunctions.generateDom('section_subtitle',  {Title: 'SubTitle hello section'});
+
+dom1 += '<br/><br/>' +  window.SBsdk.SBfunctions.generateDom('select',  {select2: {'dropdownCssClass':'sb-intro-theme-drop'}, Title : 'hello select', wrapperClass: 'select-dummy-wrapper-class-multiple-select', class: ' select-dummy-multiple-class',id: 'id-multi-select', options: [{'value': 'one', 'label' : 'test'}, {'value': 'two', 'selected' : 'selected' , 'label' : 'test2'}], name: 'hello[]' , multiple : 1});
+
+// multiple select 2 widget field
+dom1 += '<br/><br/>' +  window.SBsdk.SBfunctions.generateDom('select',  {widget: { emptyText: 'Type To Add A new X' , addButtonClass: 'add-x-functionality'} , select2: {'dropdownCssClass':'sb-intro-theme-drop'}, Title : 'hello select222', wrapperClass: 'select-dummy-wrapper-class-multiple-select-widget2', class: ' select-dummy-multiple-widget2-class',id: 'id-multi-widget2-select' , name: 'widgetselect2[]' , multiple : 1});
+
+    dom = '<h1>I Love You</h1>';
+    id1 = 'textfield';
+    id = 'returnedID';
+    ret = {
+      'data' : [{'id': id, 'dom': dom}, {'id': id1, 'dom': dom1}],
+      'submitHandler': 'submissionCallbackExample',
+    };
+    //return { 'wait' : '7597992162' }; // incase i wanted the function to wait
+    return ret;
+  };
+
+ // test wait
+  window.test_wait_in_inject_function = function(){
+    var returnOf123Callback = {
+      'data' : [{'id': '123Id', 'dom': '<h1>Ray</h1>'}, {'id': '123Test', 'dom': '<h1>Test</h1>'}],
+      'submitHandler': 'submissionCallbackExample'
+    };
+    window.SBsdk.SBfunctions.injectCustomDataCallback(123, returnOf123Callback);
+    return ret;
+  };
+
+// dom position
+  // those functions should return the positioned ids.
+  window.inject_position_data_7597992162 = function(appId, appId_dom_data){
+    window.SBsdk.SBfunctions.SBmessages.set_message('hello there error', 'error');
+    window.SBsdk.SBfunctions.SBmessages.set_message('hello there success', 'success');
+    window.SBsdk.SBfunctions.SBmessages.set_message('hello there warning', 'warning');
+    window.SBsdk.SBfunctions.SBmessages.set_message('hello there warning in navbar position', 'warning', { positionInWrapperId :'navbar'});
+
+    //return the Ids of the elements that you have positioned.
+    var title0 = document.createElement('div');
+    title0.className = 'returnedID';
+    title0.innerHTML = appId_dom_data['returnedID'];
+    document.getElementById('block-system-main').appendChild(title0);
+
+    //return the Ids of the elements that you have positioned.
+    var title1 = document.createElement('div');
+    title1.className = 'textfield-inject';
+    title1.innerHTML = appId_dom_data['textfield'];
+    document.getElementById('block-system-main').appendChild(title1);
+    return ['returnedID' , 'textfield'];
+  };
+// css injection
+  window.inject_css_7597992162 = function(){
+    return [
+      {
+        css : 'body{background-color: darkgray;}',
+        type : 'inline'
+      },
+      {
+        css : 'test789.css',
+        type : 'external'
+      },
+      {
+        css : 'h1{color: aqua !important;}',
+        type : 'inline'
+      },
+    ]
+  };
+  window.inject_css_123 = function(){
+    return [
+      {
+        css : 'test123.css',
+        type : 'external'
+      }
+    ];
+  };
