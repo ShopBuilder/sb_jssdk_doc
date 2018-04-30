@@ -2,11 +2,10 @@ site_name: Shopbuilder SDK documentation
 
 pages:
 - Set up: 'index.md'
-- SDK Guide:
-    - "Let's start": 'sdk-guide/general.md'
-    - 'page information': 'sdk-guide/page-info.md'
-# - Notes: 'notes.md'
-# - Main: 'info.md'
-# - Examples:
-#     - 'Menu CUD': 'sdk-guide/writing-your-docs.md'
-#     - 'CSS Injection': 'sdk-guide/styling-your-docs.md'
+- SDK:
+  - 'Introduction': 'sdk/introduction.md'
+  - 'Globals': 'sdk/globals.md'
+  - 'Functions': 'sdk/functions.md'
+  - "Events": 'sdk/events.md'
+  - 'Callbacks': 'sdk/callbacks.md'
+  - 'DOM generation': 'sdk/dom-generation.md'
