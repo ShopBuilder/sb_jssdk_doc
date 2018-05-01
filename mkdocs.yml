@@ -1,0 +1,11 @@
+site_name: Shopbuilder SDK documentation
+
+pages:
+- Set up: 'index.md'
+- SDK:
+  - 'Introduction': 'sdk/introduction.md'
+  - 'Globals': 'sdk/globals.md'
+  - 'Functions': 'sdk/functions.md'
+  - "Events": 'sdk/events.md'
+  - 'Callbacks': 'sdk/callbacks.md'
+  - 'DOM generation': 'sdk/dom-generation.md'
