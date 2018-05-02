@@ -15,7 +15,7 @@ The refresh function attaches all the libraries again on the selectors if not at
 incase of **ajax** or *inserting dom* using **dom generation** functions        
 if there are some libraries not being initialized on elements        
 call the refresh function:           
-`window.SBsdk.SBfunctions.refresh();`      
+`window.SBsdk.SBfunctions.refresh();`   
 
 ---------------------------------
             
@@ -577,8 +577,38 @@ window.SBsdk.SBfunctions.get_resource('view_product', {'id': prodId}, function (
 
 -----------------------------------------
 
-#### Dom Generation & management
+#### Dom Generation & Management
             
 To generate dom use: `window.SBsdk.SBfunctions.SBmessages.generateDom(type, options);`         
 
 For all this function details click [here](/sdk/dom-generation)
+           
+--------------------
+
+#### Apply Special Select Effect On Existing Selects
+        
+To transform existing select found in the website to a [special select](/sdk/dom-generation/#special-select) use the function of `window.SBsdk.SBfunctions.sbsdk_select_style (selector, options)`;   
+         
+*where*:                     
+**Selector** is your select field selector ex: `#selector` or `.selector`       
+and **options**: `(optional)`               
+> `options = {`         
+>   `dropdownCssClass: 'class',` // class that is added for the dropdown     
+>   `addAsterisk: defaultValueOfSelectField,` // adding astericks for the default value     
+>   `searchable: {placeholder: 'hello'},` // adding a search field with an optional placeholder          
+> `}`              
+                 
+*Note 1: If you want to call this library for a select **after ajax call** this function in [page_event_{{appd}}](/sdk/callbacks/#page-ajax-events)*             
+           
+*Note 2: If you want to generate a special select, check [here](/sdk/dom-generation/#special-select).*          
+      
+**Example:**   
+```       
+window.SBsdk.SBfunctions.sbsdk_select_style('select#edit-field-gender-und',
+{
+  dropdownCssClass: 'hello-dropdown-css-class',
+  addAsterisk:  '_none',
+  searchable: {placeholder: 'hello'}
+});
+
+```
