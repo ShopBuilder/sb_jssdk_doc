@@ -22,9 +22,9 @@
 
 **Hello Developers,**    
 
-*  to begin you should [get a free website](https://www.shopbuilder.me) first.    
-*  [create an account](https://developers.shopbuilder.me/user/register) on our developers website *(make sure to use the same email-address for your store and the developers website)*   
-*  In the developers website you create [your apps](https://developers.shopbuilder.me/admin/apps) to manipulate your free website *(note that all of your code should be placed in the Widget Javascript section)*.
+*  to begin you should <a href="https://www.shopbuilder.me" target="_blank">get a free website</a> first.    
+*  <a href="https://developers.shopbuilder.me/user/register" target="_blank">create an account</a> on our developers website *(make sure to use the same email-address for your store and the developers website)*   
+*  In the developers website you create <a href="https://developers.shopbuilder.me/admin/apps" target="_blank">your apps</a> to manipulate your free website *(note that all of your code should be placed in the Widget Javascript section)*.
 *  Lastly is to login to your free website navigate to *(Settings > App Store)* and install your app.      
 
 # it has to be more detailed about the widget (Loader)
