@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Callbacks - Shopbuilder SDK documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Callbacks";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Shopbuilder SDK documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../..">Set up</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>SDK</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../introduction/">Introduction</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../globals/">Globals</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../functions/">Functions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../events/">Events</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">Callbacks</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#dom-injection">Dom Injection</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#form-submission-callback">Form Submission Callback</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#dom-position">Dom Position</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#inject-css">Inject CSS</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#page-ajax-events">Page Ajax Events</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../dom-generation/">DOM Generation & Management</a>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Shopbuilder SDK documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>SDK &raquo;</li>
+        
+      
+    
+    <li>Callbacks</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h4 id="dom-injection">Dom Injection</h4>
+<p>To insert Dom implement:             <br />
+<code>function inject_custom_data_{{appId}}(){}</code>       <br />
+<strong>parameters</strong> : no parameters provided             <br />
+<strong>Return</strong> (obj)       </p>
+<p>-<strong>Return</strong> should be of the following structure:             <br />
+<em>case 1)</em> I have my dom. so generate your dom and returned it directly.      </p>
+<pre><code>ret = {
+  'data' : [
+    {'id': id1, 'dom': dom1}, // descriptive unique id should be given for the dom you want to inject
+    {'id': id2, 'dom': dom2},
+    {'id': id3, 'dom': dom3}
+  ],
+  // if you have injected fields (custom text fields etc etc) that you need to validate upon submission of the page
+  // give the html id of the form with the corresponding validation function name. 
+  'submitHandler': {'formId1': 'submitHandler1', 'formId2': 'submitHandler2'}
+};
+</code></pre>
+
+<p><em>case 2)</em> I dont have the dom yet, still waiting for it; The DOM is being generated from another (scope) js code <strong>asyncrounously</strong>.    </p>
+<pre><code>ret = { 'wait' : {{appId}} }
+</code></pre>
+
+<p>~~~~~  ~~~~~~  ~~~~~  ~~~~~~  ~~~~~  ~~~~~~  ~~~~~  ~~~~~~</p>
+<p><strong>For case 1:</strong> Inject your dom and define your submit handler:  <strong>Example:</strong>       </p>
+<pre><code>
+window.submissionCallbackExample = function (){
+ // validate your custom data before submission 
+ // If your validation suceeds or fails
+ // YOUR SUBMIT HANDLER SHOULD RETURN
+ // TRUE OR FALSE respectively
+
+  return true; // validation success
+};
+
+window.inject_custom_data_456 = function(){
+
+  var dom = window.SBsdk.SBfunctions.generateDom('textfield', {
+    class: 'textfield-dummy-class',
+    wrapperClass: 'textfield-wrapper-dummy-class',
+    Title: 'Title',
+    required: 1,
+    placeholder: 'placeholder',
+    id: 'i-am-an-id',
+    name: 'hello',
+    size: 60,
+    maxlength: 255,
+    value: 'default value'
+  });
+
+  id = 'validate-test';
+
+  ret = {
+    'data' : [{'id': id, 'dom': dom}], 
+     // dom will be appended after body by default unless positioned
+    'submitHandler': {'form-id': 'submissionCallbackExample'}
+     // (optional) you can skip this if you have no form
+  };
+
+  return ret;
+};
+</code></pre>
+
+<p><strong>For case 2:</strong>      <br />
+- Return wait <em>(to wait for the dom to arrive)</em>       <br />
+- call <code>window.SBsdk.SBfunctions.injectCustomDataCallback(appId, returnCallback);</code> once you have the dom needed; with the <code>appId</code> and the <code>returncallback</code>.   <br />
+-the return callback should be of the following structure as well:   </p>
+<pre><code>ret = {
+  'data' : [
+    {'id': id1, 'dom': dom1}, // descriptive unique id should be given for the dom you want to inject
+    {'id': id2, 'dom': dom2},
+    {'id': id3, 'dom': dom3}
+  ],
+  // if you have injected fields (custom text fields etc etc) that you need to validate upon submission of the page
+  // give the html id of the form with the corresponding validation function name. 
+  'submitHandler': {'formId1': 'submitHandler1', 'formId2': 'submitHandler2'}
+};
+</code></pre>
+
+<p><strong>Example for case 2:</strong>       </p>
+<pre><code>// if for Some reason you don't need to return the data at this level
+// and you want to provide the data from another scope asynchronously:
+
+//Step1:
+
+  window.submissionCallbackExample = function(){
+    // validate your custom data before submission 
+    // If your validation suceeds or fails
+    // YOUR SUBMIT HANDLER SHOULD RETURN
+    // TRUE OR FALSE respectively
+    return true;
+  }
+
+  window.inject_custom_data_123 = function(){
+    // you return wait with the {{appId}}
+    // to tell the hook to wait for the dom of this function
+    return { 'wait' : '123' };
+  }
+
+// Now to populate data of appId 123 in some other scope or function:
+// All that you have to do is call: window.SBsdk.SBfunctions.injectCustomDataCallback
+// Ex.
+
+//Step2:
+// prepare the data in this structure:
+  jQuery.ajax(
+    url: url,
+    type: GET,
+    success: function(data){
+      var returnOf123Callback = {
+       'data' : [{'id': '123Id-1', 'dom': '&lt;h1&gt;'+data+'&lt;/h1&gt;'}, {'id': '123Id-2', 'dom': '&lt;h1&gt;dom2&lt;/h1&gt;'}],
+        'submitHandler': 'submissionCallbackExample', // (optional)
+      };
+      // call this function giving it the appId and the Dom data
+      window.SBsdk.SBfunctions.injectCustomDataCallback(123, returnOf123Callback);
+    }
+  );
+</code></pre>
+
+<hr />
+<h4 id="form-submission-callback">Form Submission Callback</h4>
+<p>If what is needed is to validate a form <strong>without</strong> the use of inject_custom_data_{{appId}}:                   <br />
+1-   <br />
+call: <code>injectCustomFormCallbacks(form_callbacks);</code>      <br />
+where the <strong>form_callbacks</strong> is of the structure:    <br />
+<code>form_callbacks = {'formId1': 'submitHandler1', 'formId2': 'submitHandler2'}</code>     </p>
+<p>2-      <br />
+define your callback functions  <code>function submitHandler1()</code> &amp; <code>function submitHandler2()</code>   </p>
+<p>This callback function should <code>return true</code> or <code>return false</code>       <br />
+OR should <code>return 'wait'</code> in case the result is returned asynchronously like ajax result for example..     <br />
+3-        <br />
+after getting the needed result         <br />
+call <code>errorsWaitedToValidateCallback(appId, result);</code> where the <code>result should be either true or false</code>      </p>
+<p><strong>Example:</strong> </p>
+<pre><code>//Example of an ajax form
+function callback_hello(){
+  alert('HELLOOOO');
+}
+// page ajax events
+window.page_events_4705647385 = function(data){
+   if($('form[action=&quot;/ajax_register/login/ajax&quot;]').length){
+       id = $('form[action=&quot;/ajax_register/login/ajax&quot;]').attr('id');
+       obj = {};
+       obj[id] = 'callback_hello';
+       window.SBsdk.SBfunctions.injectCustomFormCallbacks(obj);
+   }
+}
+</code></pre>
+
+<hr />
+<h4 id="dom-position">Dom Position</h4>
+<p>To position DOM implement:              <br />
+<code>function inject_position_data_{{appId}}(appId, appId_dom_data){}</code>         <br />
+<strong>parameters</strong> :                 <br />
+-<strong>appId</strong> will contain the app id                     <br />
+-<strong>appId_dom_data</strong> will contain all the Dom data for this specific app (coming from dom inject) to be able to position them                          </p>
+<p><strong>Return</strong> <code>an array of the elements that have been positioned</code>            </p>
+<p><strong>Examples</strong>:                       </p>
+<pre><code>// Step1 inject the data.
+  window.inject_custom_data_568 = function(){
+    // populate the dom
+    dom1 = '&lt;h1&gt;DOMM 1&lt;/h1&gt;';
+    dom2 = '&lt;h1&gt;DOMM body&lt;/h1&gt;';
+    dom3 = '&lt;h1&gt;DOMM 2&lt;/h1&gt;';
+    // specify a descriptive id for each dom
+    id1 = 'collectionDom'; // will be positioned in inject_position_data_568
+    id2 = 'bodyyy';        // will not be positioned in inject_position_data_568  
+                           // and so will be appeneded to the body
+    id3 = 'productDom';    // will be positioned in inject_position_data_568
+
+    ret = {
+      'data' : [{'id': id1, 'dom': dom1}, {'id': id2, 'dom': dom2}, {'id': id3, 'dom': dom3}],
+      'submitHandler': 'submissionCallbackExample', // optional in case wanted to handle submission
+    };
+
+    return ret;
+  };
+
+// Step2 To position the previously populated dom .. we only need to know the id of each dom
+
+  window.inject_position_data_568 = function(appId, appId_dom_data){
+
+
+    var title = document.createElement('div');
+    title.className = 'collectionDom';
+     // Step:1) GET THE DOM: appId_dom_data[ID]
+    title.innerHTML = appId_dom_data['collectionDom'];
+     // Step:2) insert it where wanted
+    document.getElementById('block-system-main').appendChild(title);
+
+    var title2 = document.createElement('div');
+    title2.className = 'productDom';
+    title2.innerHTML = appId_dom_data['productDom'];
+    document.getElementById('block-system-main').appendChild(title2);
+
+     // Step:3) return an array of keys of the positioned ids
+    return ['collectionDom', 'productDom'];
+  };
+
+</code></pre>
+
+<hr />
+<h4 id="inject-css">Inject CSS</h4>
+<p>To inject custom css implement:              <br />
+<code>function inject_css_{{appId}}(){}</code>           </p>
+<p><strong>parameters</strong> : no parameters provided        <br />
+<strong>Return</strong>:  <code>you can return inline or external css</code>   </p>
+<p>Look at the example to see how to achieve this. </p>
+<p><strong>Examples</strong>: </p>
+<pre><code>  window.inject_css_123 = function(){
+    return [
+      {
+        css : 'body{ background-color: darkgray; }',
+        type : 'inline'
+        // adds a style tag to the head with the css written
+      },
+      {
+        css : '{{path-to-your-css}}/test789.css',
+        type : 'external'
+        // adds a link tag stylesheet with href *test789.css* to the head
+      }, ...
+    ]
+  };
+
+</code></pre>
+
+<hr />
+<h4 id="page-ajax-events">Page Ajax Events</h4>
+<p>Respond to page ajax events.    </p>
+<p><strong>A)</strong> To act upon page ajax events implement:          <br />
+<code>function page_events_{{appId}}(data){}</code>    </p>
+<p><strong>Return</strong> <code>No return</code> // if not asyncronous
+<strong>Parameter:</strong> <br />
+- <strong>data</strong> an array containing information about the ajax that has occured       </p>
+<p><strong>data</strong> you might get should look something like this:</p>
+<pre><code>'id' =&gt; '',
+'type' =&gt; 'user',
+'action' =&gt; 'signup',
+'query_strings' =&gt; $query_strings_text,
+'wrapper_id' =&gt; 'modalContent',
+'wrapper_class' =&gt;
+</code></pre>
+
+<p>Look at the example to see how to achieve this. </p>
+<p><strong>Examples</strong>: </p>
+<pre><code>  window.page_events_111 = function(data){
+    // Act on data.
+  };
+
+</code></pre>
+
+<p><strong>B)</strong> To wait for asyncronous calls:   <br />
+in the implementation of function: <code>function page_events_{{appId}}(){}</code> simply <code>return 'wait';</code> </p>
+<p>this will keep on waiting for function <code>pageEventWaitedCallback(appId);</code> that you need to call later on to stop the waiting</p>
+<p><strong>Example</strong></p>
+<pre><code>  var know_result = '';
+  window.page_events_111 = function(data){
+    jQuery.ajax({
+      url: url,
+      type: GET,
+      success: function(e){
+        know_result = true;
+        // end the waiting process
+        window.SBsdk.SBfunctions.pageEventWaitedCallback(111);
+      },
+      error: function(e){
+        know_result = false;
+        // end the waiting process
+        window.SBsdk.SBfunctions.pageEventWaitedCallback(111);
+      }
+    });
+    // In this example
+    // after a page event happened, wait for the response of ajax to set the variable
+    return 'wait';
+  };
+</code></pre>
+
+<p><strong>C)</strong> Events executed after ajax requests:    </p>
+<p>in your implementation of the <code>function page_events_{{app_id}}(data){}</code>               </p>
+<p><em>in the parameter</em> <code>data</code>                  <br />
+you can get information after an ajax about the following events:                                  </p>
+<p>-After changing the product varaition within add-to-cart form (For example at product view page or product drawer)           </p>
+<pre><code> {
+    'id' =&gt; $node-&gt;uuid,
+    'type' =&gt;  'product',
+    'action' =&gt; 'product-variation-change',
+    'query_strings' =&gt; $query_strings_text,
+    'wrapper_id' =&gt; 'node-' . $node-&gt;nid,
+    'wrapper_class' =&gt; '',
+  },
+</code></pre>
+
+<p>-After updating cart form, for example changing number of purchased products would trigger this event. (Cart form usually found in a block)</p>
+<pre><code> {
+    'id' =&gt; '',
+    'type' =&gt; 'cart',
+    'action' =&gt; 'update',
+  }
+</code></pre>
+
+<p>-After pressing quick-edit in orders listing page</p>
+<pre><code>{
+    'id' =&gt; $order-&gt;uuid,
+    'type' =&gt;  'order',
+    'action' =&gt; 'quick-edit',
+    'query_strings' =&gt; $query_strings_text,
+    'wrapper_id' =&gt; '',
+    'wrapper_class' =&gt; 'views-megarow-content-' . $order_id,
+  }
+</code></pre>
+
+<p>-When any ajax request has been fired within checkout page </p>
+<pre><code>  {
+    'id' =&gt; $order-&gt;uuid,
+    'type' =&gt;  'checkout',
+    'action' =&gt; 'ajax-complete',
+    'query_strings' =&gt; $query_strings_text,
+    'order' =&gt; array(
+      'total_amount' =&gt;  '',
+      'currency_code' =&gt; '',
+      'currency_symbol' =&gt; '',
+    )
+  }
+</code></pre>
+
+<p>-When user login/forgot-password/signup forms has been opened in a popup'</p>
+<pre><code>{
+    'id' =&gt; '',
+    'type' =&gt; 'user',
+    'action' =&gt; 'login || password|| signup',
+    'query_strings' =&gt; $query_strings_text,
+    'wrapper_id' =&gt; 'modalContent',
+    'wrapper_class' =&gt; '',
+  }
+</code></pre>
+
+<p>-After creating or updating an address profile'</p>
+<pre><code>  {
+    'id' =&gt; $profile-&gt;uuid,
+    'type' =&gt; 'shipping-customer-address || billing-customer-address',
+    'action' =&gt; 'new || updated',
+    'query_strings' =&gt; $query_strings_text
+  }
+</code></pre>
+
+<p>-When opening add/edit profile forms or when deleting an address profile</p>
+<pre><code> {
+    'id' =&gt; isset($profile-&gt;profile_id) ? $profile-&gt;uuid : '',
+    'type' =&gt;  'shipping-customer-address || billing-customer-address',
+    'action' =&gt; 'open edit || open add || delete',
+    'query_strings' =&gt; $query_strings_text
+  }
+</code></pre>
+
+<hr />
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../dom-generation/" class="btn btn-neutral float-right" title="DOM Generation & Management"/>Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../events/" class="btn btn-neutral" title="Events"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../events/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../dom-generation/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+
+</body>
+</html>

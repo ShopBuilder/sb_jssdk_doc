@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>DOM Generation & Management - Shopbuilder SDK documentation</title>
+  
+
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/highlight.css">
+
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "DOM Generation & Management";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js"></script>
+  <script src="../../js/modernizr-2.8.3.min.js"></script>
+  <script type="text/javascript" src="../../js/highlight.pack.js"></script>
+  <script src="../../js/theme.js"></script> 
+
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> Shopbuilder SDK documentation</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        <ul class="current">
+          
+            <li>
+    <li class="toctree-l1 ">
+        <a class="" href="../..">Set up</a>
+        
+    </li>
+<li>
+          
+            <li>
+    <ul class="subnav">
+    <li><span>SDK</span></li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../introduction/">Introduction</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../globals/">Globals</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../functions/">Functions</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../events/">Events</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 ">
+        <a class="" href="../callbacks/">Callbacks</a>
+        
+    </li>
+
+        
+            
+    <li class="toctree-l1 current">
+        <a class="current" href="./">DOM Generation & Management</a>
+        
+            <ul>
+            
+                <li class="toctree-l3"><a href="#textfield">TEXTFIElD</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#select">SELECT</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#special-select">SPECIAL SELECT</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#special-select-image-widget">SPECIAL SELECT IMAGE WIDGET</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#special-select-widget">SPECIAL SELECT WIDGET</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#upload">UPLOAD</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#textarea">TEXTAREA</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#wysiwyg-text-editor">WYSIWYG TEXT EDITOR</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#radio">RADIO</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#checkbox">CHECKBOX</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#image-widget">IMAGE WIDGET</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#link">LINK</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#fieldset">FIELDSET</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#button">BUTTON</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#titles">TITLES</a></li>
+                
+                    <li><a class="toctree-l4" href="#examples">Examples</a></li>
+                
+            
+            </ul>
+        
+    </li>
+
+        
+    </ul>
+<li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">Shopbuilder SDK documentation</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>SDK &raquo;</li>
+        
+      
+    
+    <li>DOM Generation & Management</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <p>For Dom Generation you have the following function.</p>
+<p><code>window.SBsdk.SBfunctions.SBmessages.generateDom(type, options);</code>         </p>
+<p>The parameters:      <br />
+-<strong>type</strong> is a String    <br />
+-<strong>options</strong> is an obj      </p>
+<h2 id="textfield">TEXTFIElD</h2>
+<p><strong>Parameters:</strong><br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'textfield';
+options = {
+  wrapperClass: 'wrapper-class',
+  type: password' or 'date', // if type is text dont put it
+  class: 'class',
+  name: 'name',
+  value: 'value',
+  Title: 'title',
+  required: '1', // (don't use if not required)
+  placeholder: '',
+  id: '',
+  size: '',
+  maxleng: ''
+};
+
+</code></pre>
+
+<p><strong>Helper Functions:</strong><br />
+  ~~~~~~~~~~~~ </p>
+<p><strong>- The textfield type is date:</strong></p>
+<p>The following function will help you get or set the value in the date picker</p>
+<p><code>function SBsdk.SBfunctions.date_actions(selector, action, value)</code>        </p>
+<blockquote>
+<p><strong>Selector</strong> ex <code>Selector = '#inputSelector'</code> || <code>Selector = '#inputSelector'</code>         <br />
+<strong>action</strong> can be 'set' || 'get'           <br />
+<strong>value</strong> use in case of <code>action = 'set'</code> ex. <code>value= '12/13/2018'</code>    </p>
+</blockquote>
+<p><strong>Example:</strong>                     </p>
+<pre><code>jQuery('body').append(window.SBsdk.SBfunctions.generateDom('textfield', {
+      wrapperClass: 'wrapper-date',
+      Title: 'Title',
+      type: 'date',
+      id: 'datee',
+      name: 'date',
+      maxlength: 255,
+})
+);
+SBsdk.SBfunctions.refresh();
+SBsdk.SBfunctions.date_actions('#datee', 'set', '5/30/1994');
+console.log(SBsdk.SBfunctions.date_actions('#datee', 'get'));
+</code></pre>
+
+<hr />
+<h2 id="select">SELECT</h2>
+<p><strong>Preview:</strong>    <br />
+ ~~~~~~</p>
+<p>-single select:    <br />
+<img alt="normal_select" src="../../img/normal_select.png" />       </p>
+<p>-multiple select:        <br />
+<img alt="multipleSelect" src="../../img/multipleSelect.png" />              </p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'select';
+options = {
+  wrapperClass: 'wrapper-class',
+  class: 'class',
+  name: 'name', // required for a multi select
+  Title: 'title',
+  required: '1', // (don't use if not required)
+  id: '',
+  multiple: 1, // multiple select (don't use if not multiple)
+  options: [{value: '', selected: 1, label: '', class:''}, ..],
+};
+</code></pre>
+
+<hr />
+<h2 id="special-select">SPECIAL SELECT</h2>
+<p><strong>Preview:</strong> <br />
+ ~~~~~~~</p>
+<p>-single select:    <br />
+<img alt="singleSelect2" src="../../img/singleSelect2.png" />  </p>
+<p>-multi select:    <br />
+<img alt="multipleselect2" src="../../img/multipleselect2.png" />  </p>
+<p><strong>Parameters:</strong>     <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'select';
+options = {
+  wrapperClass: 'wrapper-class',
+  class: 'class',
+  name: 'name', // required for a multi select
+  Title: 'title',
+  required: '1', // (don't use if not required)
+  id: '',
+  multiple: 1, // multiple select (don't use if not multiple)
+  options: [{value: '', selected: 1, label: '', class:''}, ..],
+
+  select2: {
+    dropdownCssClass: 'dropdownClass', // adds a class for the select dropdown
+    addAsterisk: defaultValueOfSelectField, // adds a '*' for the default value text 
+    searchable: { // adds a search for the select
+      placeholder: 'hello' // the place holder text of the search
+    }
+  } 
+};
+</code></pre>
+
+<p><strong>Helper Functions:</strong><br />
+  ~~~~~~~~~~~~ </p>
+<p><strong>1- Get and set the special select:</strong>         <br />
+You can simply get and set any special select using jQuery as any normal select tag:  <br />
+<strong>Example:</strong>   </p>
+<pre><code>// GET
+// where the .class is the class applied on the special-select SELECT tag.
+jQuery('.class').val();
+
+// SET
+jQuery('.class').val('option1');
+// to apply the set change simple trigger change
+jQuery('.class').trigger('change');
+</code></pre>
+
+<p><strong>2- Append and Remove new elements to any special select:</strong>           </p>
+<p><code>SBsdk.SBfunctions.select2_action(select_selector, action, array_of_options)</code>    <br />
+<code>action</code> parameter can be <strong>append</strong> or <strong>reset</strong>  <br />
+<em>where:</em>    <br />
+- <strong>append</strong> appends on existing options              <br />
+- <strong>reset</strong> removes old options and adds new options            </p>
+<p>Example:</p>
+<pre><code>// normal options 
+options = [
+{class:'aa', value: 'abcd' , label: 'ra', imageSelect2: 'img-src.png',customHtml: ''},
+{class:'bb', value: 'abcdabcd', selected: 1, label: 'ma', imageSelect2: 'img-src.png',customHtml: 'editme'},
+{class:'cc', value: 'abcdabcdabcd', selected: 1, label: 'fa', imageSelect2: 'img-src.png',customHtml: 'editme'},
+];
+// parm(0) is the select_selector (&quot;class&quot;) ex. &quot;.selector_select&quot;
+// parm(1) is the action which is append..
+// parm(2) is the new options wanted to be appended..
+SBsdk.SBfunctions.select2_action('.selector_select', 'append', options);
+</code></pre>
+
+<hr />
+<h2 id="special-select-image-widget">SPECIAL SELECT IMAGE WIDGET</h2>
+<p><strong>Preview:</strong> <br />
+  ~~~~~~~    <br />
+<img alt="select2-image-widget" src="../../img/select2-image-widget.png" /></p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'select';
+options = {
+  wrapperClass: 'wrapper-class',
+  class: 'class',
+  name: 'name', // required for a multi select
+  Title: 'title',
+  required: '1', // (don't use if not required)
+  id: '',
+  multiple: 1, // multiple select (don't use if not multiple)
+  options: [
+    {
+      value: '',
+      selected: 1,
+      label: '',
+      class:'',
+
+      imageSelect2: 'url', // the image url
+      customHtml: &quot;html&quot;  // some html that is added beside the option Label
+    },
+    ..
+  ],
+
+  select2: {
+    dropdownCssClass: 'dropdownClass', // adds a class for the select dropdown
+    addAsterisk: defaultValueOfSelectField, // adds a '*' for the default value text 
+    searchable: { // adds a search for the select
+      placeholder: 'hello' // the place holder text of the search
+    },
+
+    image: 1
+  }
+};
+</code></pre>
+
+<p><strong>Helper Functions:</strong><br />
+  ~~~~~~~~~~~~ </p>
+<p>Same helper functions of <a href="../../sdk/dom-generation/#special-select">special select</a>       </p>
+<hr />
+<h2 id="special-select-widget">SPECIAL SELECT WIDGET</h2>
+<p><strong>Preview:</strong>   <br />
+ ~~~~~~~<br />
+<img alt="widget" src="../../img/widget.png" /></p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'select';
+options = {
+  wrapperClass: 'wrapper-class',
+  class: 'class',
+  name: 'name', // required for a multi select
+  Title: 'title',
+  required: '1', // (don't use if not required)
+  id: '',
+  multiple: 1, // multiple select (don't use if not multiple)
+  options: [
+    {
+      value: '',
+      selected: 1,
+      label: '',
+      class:'',
+
+      imageSelect2: 'url', // the image url
+      customHtml: &quot;html&quot;  // some html that is added beside the option Label
+    },
+    ..
+  ],
+
+  select2: {
+    dropdownCssClass: 'dropdownClass', // adds a class for the select dropdown
+    image: 1
+  },
+
+  widget: { emptyText: 'no more results found', addButtonClass:'class-to-the-add-btn'} 
+};
+</code></pre>
+
+<p><strong>Helper Functions:</strong><br />
+  ~~~~~~~~~~~~ </p>
+<p>Same helper functions of <a href="../../sdk/dom-generation/#special-select">special select</a> </p>
+<hr />
+<h2 id="upload">UPLOAD</h2>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'upload';
+options = {
+  wrapperClass: 'wrapper-class',
+  class: 'class',
+  name: 'name',
+  value: '',
+  Title: 'title',
+  required: '1', // (don't use if not required)
+  id: '',
+  size: ''
+};
+</code></pre>
+
+<hr />
+<h2 id="textarea">TEXTAREA</h2>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'textarea';
+options = {
+  wrapperClass: 'wrapper-class',
+  class: 'class',
+  name: 'name',
+  value: '',
+  Title: 'title',
+  required: '1', // (don't use if not required)
+  id: '',
+  rows:'',
+  cols:'',
+  placeholder:'',
+  maxlength:''
+};
+</code></pre>
+
+<hr />
+<h2 id="wysiwyg-text-editor">WYSIWYG TEXT EDITOR</h2>
+<p><strong>Preview:</strong>   <br />
+  ~~~~~~
+<img alt="wysiwyg" src="../../img/wysiwyg.png" /></p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'wysiwyg';
+options = {
+  wrapperClass: 'wrapper-class-of-wysiwyg',
+  class: 'class', //(REQUIRED)
+  Title: 'title',
+  required: '1', // (don't use if not required)
+  value: '', //(string contains markup --can be html)
+};
+</code></pre>
+
+<p><strong>Helper Functions:</strong><br />
+  ~~~~~~~~~~~~ </p>
+<p><strong>1- Get or Set the wysiwyg data:</strong>      </p>
+<p><code>var get_data = SBsdk.SBfunctions.wysiwyg_data(class_of_wysiwyg);</code> // gets the data    <br />
+<code>SBsdk.SBfunctions.wysiwyg_data(class_of_wysiwyg, 'set', HTML_data);</code> // set data       </p>
+<p><strong>Example</strong>          </p>
+<pre><code>SBsdk.SBfunctions.wysiwyg_data('.pop-up', 'set', '&lt;p&gt;hello&lt;/p&gt;'); // sets the html inside the wysiwyg           
+var get_data = SBsdk.SBfunctions.wysiwyg_data('.pop-up'); // returns the html inside the wysiwyg that is &lt;p&gt;hello&lt;/p&gt;         
+</code></pre>
+
+<p><strong>2- Configure your wysiwyg:</strong>    </p>
+<p>by default you will have the cofiguration used in Shopbuilder platform that is               </p>
+<pre><code>config = {};
+config.toolbar = [&quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;JustifyLeft&quot;, &quot;JustifyCenter&quot;, &quot;JustifyRight&quot;, &quot;JustifyBlock&quot;, &quot;BidiLtr&quot;, &quot;BidiRtl&quot;, &quot;BulletedList&quot;, &quot;NumberedList&quot;, &quot;Outdent&quot;, &quot;Indent&quot;, &quot;Undo&quot;, &quot;Redo&quot;, &quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;, &quot;Image&quot;, &quot;Cut&quot;, &quot;Copy&quot;, &quot;Paste&quot;, &quot;PasteText&quot;, &quot;PasteFromWord&quot;, &quot;RemoveFormat&quot;, &quot;Format&quot;, &quot;FontSize&quot;, &quot;video_filter&quot;];
+</code></pre>
+
+<p>To change the configuration of all of your wysiwyg use the function:     <br />
+<code>window.SBsdk.SBfunctions.wysiwyg_configuration(config);</code>      </p>
+<p><em>Note that the <code>config</code> parameter can be given the same values as a</em> <strong>ckeditor config</strong>                     </p>
+<p><strong>A) To get all of the supported items in a wysiwyg</strong>       <br />
+<code>config = {};</code>       <br />
+<code>window.SBsdk.SBfunctions.wysiwyg_configuration(config);</code>           </p>
+<p>SET   <br />
+<code>config = {};</code> <br />
+That is equivalent to:</p>
+<pre><code>      config= {};
+      // Toolbar configuration generated automatically by the editor based on config.toolbarGroups.
+      config.toolbar = [
+        { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
+        { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+        { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
+        { name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
+        '/',
+        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] },
+        { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
+        { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+        { name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+        '/',
+        { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+        { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+        { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
+        { name: 'others', items: [ '-' ] },
+        { name: 'about', items: [ 'About' ] }
+      ];
+      // Toolbar groups configuration.
+      config.toolbarGroups = [
+        { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+        { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+        { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ] },
+        { name: 'forms' },
+        '/',
+        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+        { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+        { name: 'links' },
+        { name: 'insert' },
+        '/',
+        { name: 'styles' },
+        { name: 'colors' },
+        { name: 'tools' },
+        { name: 'others' },
+        { name: 'about' }
+      ];
+</code></pre>
+
+<p><strong>B) you can customize your configuration to get the desired wysiwyg</strong>     </p>
+<p><strong>Example</strong>:</p>
+<pre><code>// It be the first function to execute before any wysiwyg injection        
+config= {};`           
+config.toolbar = [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ];                  
+window.SBsdk.SBfunctions.wysiwyg_configuration(config);             
+
+// then insert your wysiwyg               
+dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {&quot;wrapperClass&quot;: 'hello', &quot;class&quot;: 'class-editor' , &quot;Title&quot;: 'title',&quot;required&quot;:1, &quot;value&quot;: '&lt;h2&gt;Hello&lt;/h2&gt;&lt;p&gt;world!&lt;/p&gt;'});     
+
+// to get the value of the inputed                             
+data = SBsdk.SBfunctions.wysiwyg_data('.class-editor');          
+</code></pre>
+
+<hr />
+<h2 id="radio">RADIO</h2>
+<p><strong>Preview:</strong> <br />
+  ~~~~~~   <br />
+<img alt="radios" src="../../img/radios.png" /></p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'radio';
+
+options = {
+  wrapperClass: 'wrapperClass', //(REQUIRED)
+  name: 'common-for-all-radios', //(REQUIRED)
+  disabled: 1,
+  data: [
+    {&quot;Title&quot;:'', &quot;class&quot;:'', &quot;id&quot;: '', &quot;value&quot;: '', &quot;checked&quot; : 1},
+    {&quot;Title&quot;, &quot;class&quot;, &quot;id&quot;, &quot;value&quot;}
+  ]
+};
+</code></pre>
+
+<p><strong>Helper Functions:</strong><br />
+  ~~~~~~~~~~~~ </p>
+<p><strong>- Radios actions: (ie. radio that is generated using generateDom):</strong></p>
+<p><code>SBsdk.SBfunctions.radio_action(inputSelector_wrapperSelector, action);</code>       <br />
+where:  <br />
+- <code>action</code> can be <code>reset, disable, enable or check</code>      <br />
+- for the actions <code>reset, disable, enable</code> the inputSelector_wrapperSelector should be the wrapperClass of the radios          <br />
+- for the action <code>check</code> the inputSelector_wrapperSelector should be the radio input        </p>
+<p><em>note that when radios are disabled you can not check radios</em>              </p>
+<p><strong>Example:</strong>                       </p>
+<pre><code>SBsdk.SBfunctions.radio_action('.shopbuilder-radio', 'reset');
+SBsdk.SBfunctions.radio_action('.shopbuilder-radio', 'disable');
+SBsdk.SBfunctions.radio_action('.shopbuilder-radio', 'enable');
+SBsdk.SBfunctions.radio_action('.shopbuilder-radio input:last', 'check');
+</code></pre>
+
+<hr />
+<h2 id="checkbox">CHECKBOX</h2>
+<p><strong>Preview:</strong>   <br />
+  ~~~~~~ <br />
+<img alt="checkbxes" src="../../img/checkbxes.png" /></p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'checkbox';
+
+options = {
+  wrapperClass: 'wrapperClass',
+  toggle: 1, // to transform it into a switch checkbox
+  data: [
+    {&quot;Title&quot;:'', &quot;class&quot;:'', &quot;id&quot;:'',  &quot;name&quot;:'', &quot;value&quot;:'', &quot;checked&quot;:1, &quot;disabled&quot;:1},
+    {&quot;Title&quot;:'', &quot;class&quot;:'', &quot;id&quot;:'',  &quot;name&quot;:'', &quot;value&quot;:'', &quot;checked&quot;:1, &quot;disabled&quot;:1}
+  ]
+};
+</code></pre>
+
+<p><strong>Helper Functions:</strong><br />
+  ~~~~~~~~~~~~ </p>
+<p><strong>- Checkbox actions: (ie. checkbox that is generated using generateDom):</strong>  <br />
+<code>SBsdk.SBfunctions.checkbox_action(inputSelector, action);</code>                    <br />
+<em>Where:</em>        <br />
+- <strong>inputSelector</strong>: ex "input.input-selector" OR "input#input-selector"                <br />
+- <strong>action</strong>: enable, disable, check, uncheck               <br />
+<strong>Example:</strong>               </p>
+<pre><code>SBsdk.SBfunctions.checkbox_action('.input-selector', 'uncheck');        
+SBsdk.SBfunctions.checkbox_action('.input-selector', 'check');        
+SBsdk.SBfunctions.checkbox_action('.input-selector', 'disable');        
+SBsdk.SBfunctions.checkbox_action('.input-selector', 'enable');        
+</code></pre>
+
+<hr />
+<h2 id="image-widget">IMAGE WIDGET</h2>
+<p><strong>Preview:</strong>   <br />
+   ~~~~~~~
+<img alt="Screenshot_at_2018-01-29_09_11_17" src="../../img/Screenshot_at_2018-01-29_09_11_17.png" /></p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'image_upload';
+
+options = {
+  Title: 'Title',
+  TitleClass: 'TitleClass',
+  wrapperId: 'wrapperId',
+  multiple : 1,
+  inputFileData:{ max, id, name, size, class }, // the input of type file data
+  deleteFileData:{name, id, class}, // the delete btn data
+  uploadFileData:{ name, id, class}, // the upload btn data
+  values : [{..},{..}]
+  // check example to see how to populate this;
+  //note that it can be an array of objs (multple image upload) or an array (single image)
+};
+</code></pre>
+
+<hr />
+<h2 id="link">LINK</h2>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'link';
+options = {
+  wrapperClass: 'wrapper-class',
+  class: 'class', //(REQUIRED)
+  Title: 'title',
+  download : 1, 
+  href: '',
+  id: '',
+  target: '',
+  wrapper: 1, // if you want a link with no wrapper .. remove the wrapper option
+  type:'' // can be &quot;btn&quot;, &quot;delete&quot; or &quot;add&quot;
+};
+</code></pre>
+
+<hr />
+<h2 id="fieldset">FIELDSET</h2>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'fieldset';
+options = {
+  wrapperClass: 'wrapper-class',
+  mainTitle: 'mainTitle',
+  subTitle: 'subTitle',
+  content: dom,
+};
+</code></pre>
+
+<hr />
+<h2 id="button">BUTTON</h2>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'button';
+options = {
+  Title: 'Title',
+  class: 'class',
+  id: 'id',
+};
+</code></pre>
+
+<hr />
+<h2 id="titles">TITLES</h2>
+<p><strong>Preview: (SECTION TITLE)</strong>        <br />
+  ~~~~~~~~~~~~~~~~~~~~                <br />
+<img alt="sectionTitle" src="../../img/sectionTitle.png" />         <br />
+<strong>Parameters: (SECTION TITLE):</strong>  <br />
+  ~~~~~~~~~~~~~~~~~~~~ </p>
+<pre><code>type = 'section_title';
+options = {
+  Title: 'Title',
+};
+</code></pre>
+
+<p><strong>Preview: (SECTION SUBTITLE) :</strong>           <br />
+  ~~~~~~~~~~~~~~~~~~~~~~~~~                <br />
+<img alt="sectionSubtitle" src="../../img/sectionSubtitle.png" />          <br />
+<strong>Parameters: (SECTION SUBTITLE)</strong>  <br />
+  ~~~~~~~~~~~~~~~~~~~~~~~ </p>
+<pre><code>type = 'section_subtitle';
+options = {
+  Title: 'Title',
+};
+</code></pre>
+
+<hr />
+<h4 id="examples">Examples</h4>
+<pre><code>//Ex Radio
+
+window.SBsdk.SBfunctions.generateDom('radio', {
+ &quot;wrapperClass&quot;: 'hellooooo', // wrapper class
+&quot;name&quot; : &quot;name_radios[name_radios]&quot; , // (required) name that is provided for all the radio inputs 
+   data: [ 
+     {&quot;Title&quot;:'ok', &quot;class&quot;: 'ddd', &quot;id&quot;: 'dddff',  &quot;value&quot;:  1, &quot;checked&quot;: 1},
+     {&quot;Title&quot;: 'ok1', &quot;class&quot;: 'aaa', &quot;id&quot;: 'ssd', &quot;value&quot;: 0}
+   ]
+});
+
+
+
+//Ex. checkboxes:
+
+window.SBsdk.SBfunctions.generateDom('checkbox', {
+  &quot;wrapperClass&quot;: 'hellooooo',
+  &quot;toggle&quot;: 1, // optional in case you wanted a toggle like checkbox
+   data: [ 
+     {&quot;Title&quot;:'ok', &quot;class&quot;: 'ddd', &quot;id&quot;: 'dddff',  &quot;value&quot;:  1, &quot;checked&quot;: 1},
+     {&quot;Title&quot;: 'ok1', &quot;class&quot;: 'aaa', &quot;id&quot;: 'ssd', &quot;value&quot;: 0, &quot;disabled&quot;: 1}
+   ]
+});
+
+
+//Ex. text field     
+
+window.SBsdk.SBfunctions.generateDom('textfield', {
+      wrapperClass: 'sb-manage-input',
+      Title: 'Title',
+      required: 1,
+      placeholder: 'placeholder',
+      id: 'i-am-an-id',
+      name: 'hello',
+      size: 60,
+      maxlength: 255,
+      value: 'default value'
+});
+
+// this will generate                  
+// &lt;input class=&quot;text-full form-control form-text  required &quot; placeholder=&quot;placeholder&quot; type=&quot;text&quot; id=&quot;i-am-an-id&quot; name=&quot;hello&quot; value=&quot;default value&quot; size=&quot;60&quot; maxlength=&quot;255&quot;&gt; 
+
+
+//Ex. Fieldsets
+window.SBsdk.SBfunctions.generateDom('fieldset', {
+      wrapperClass: 'fieldset-custom-wrapper', 
+      mainTitle: 'Hello fieldset',
+      subTitle: '&lt;img ..&gt;&lt;img ..&gt;',
+      content: 'fieldset content fieldset content fieldset content '
+});
+
+
+//Ex. normal select      
+
+ window.SBsdk.SBfunctions.generateDom('select', {
+       required:1,
+       Title : 'hello select',
+       wrapperClass: 'select-dummy-wrapper-class',
+       class: 'select-dummy-class',
+       id: 'id-select',
+       options: [
+           {'value': 'one', 'label' : 'one'},
+           {'value': 'two', 'selected' : 'selected' , 'label' : 'two'}
+       ]
+});                                  
+// this will generate                    
+// &lt;div class=&quot;form-item form-type-select form-group select-dummy-wrapper-class &quot;&gt;&lt;label class=&quot;control-label&quot; for=&quot;id-select&quot;&gt;hello select &lt;span class=&quot;form-required&quot; title=&quot;This field is required.&quot;&gt;*&lt;/span&gt; &lt;/label&gt;&lt;select class=&quot; select-dummy-class &quot; id=&quot; id-select &quot;&gt;&lt;option &quot;=&quot;&quot; value=&quot;one&quot;&gt;one&lt;/option&gt;&lt;option &quot;=&quot;&quot; value=&quot;two&quot; selected=&quot;selected&quot;&gt;two&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;           
+
+//Ex. for a select2 library -- select2
+// before to $('select').select2(options) where options = {'dropdownCssClass':'sb-intro-theme-drop'}     
+
+// After:     
+
+window.SBsdk.SBfunctions.generateDom('select', {
+  select2: {'dropdownCssClass':'sb-intro-theme-drop'} ,
+  options: [
+     {'value': 'one', 'label' : 'one'},
+     {'value': 'two', 'selected' : 'selected' , 'label' : 'two'}
+  ]
+});
+
+//if you want a normal select field dont add {{select2}} option   
+// if you want the select2 but you dont have options for it:     select2: {}      
+
+//Ex. Multiple select2
+
+
+window.SBsdk.SBfunctions.generateDom('select', {
+  select2: {} , // Dont include if you want a normal multiple select
+  multiple: 1,
+  name : 'multi[]',
+  options: [
+     {'value': 'one', 'label' : 'one'},
+     {'value': 'two', 'selected' : 'selected' , 'label' : 'two'}
+  ]
+});
+
+//Ex. Multiple select2 widget:
+
+window.SBsdk.SBfunctions.generateDom('select', {
+  select2: {} , // Dont include if you want a normal multiple select
+  multiple: 1,
+  name : 'multi[]',
+  widget: {
+            emptyText: 'Type To Add A new X', 
+            addButtonClass: 'add-x-functionality'
+  },
+  options: [
+     {'value': 'one', 'label' : 'one'},
+     {'value': 'two', 'selected' : 'selected' , 'label' : 'two'}
+  ]
+});
+
+//Ex. Multiple select2 widget:
+
+window.SBsdk.SBfunctions.generateDom('select', {
+  select2: {
+     image:1,
+     dropDownCss: 'drop-down-class',
+  } , // Dont include if you want a normal multiple select
+  multiple: 1,
+  name : 'multi[]',
+  widget: {
+            emptyText: 'Type To Add A new X', 
+            addButtonClass: 'add-x-functionality'
+  },
+  options: [
+     {
+      'value': 'one', 
+      'label' : 'one',
+       class: 'class1',
+       imageSelect2: 'https://../img-url.png',
+       customHtml : '&lt;div&gt;Good bye&lt;/div&gt;'
+     },
+
+     {'value': 'two',
+      'selected' : 'selected' ,
+       class: 'class2',
+      'label' : 'two',
+       imageSelect2: 'https://../img-url.png',
+       customHtml : '&lt;div&gt;Good Morning&lt;/div&gt;'
+     }
+  ]
+});
+
+//Ex. Image upload:
+
+window.SBsdk.SBfunctions.generateDom('image_upload', {
+  Title: Image Upload Section Title , // Title of the upload
+  TitleClass: 'image-upload-section-title-class'  , // class of the title
+  multiple: 1, // if we want to upload multiple images (dont use if you want a single image uploader)
+  wrapperId : 'wrapper-Id-of-the-image-uploader', 
+  inputFileData: { // info needed for the input type file (that uploads the image)
+            name: 'a', 
+            id: 'hello',
+            max: '1234556',
+            size: '1234',
+  },
+  uploadFileData: { // upload button that is clicked automatically after the upload
+            name: 'a1', 
+            id: 'hello1',
+  },             
+  // *values* is used if there are already existing images added         
+  // if multiple image upload then:          
+  values: [
+    {viewImgData:{ width, height, src, alt }, deleteFileData:{ id, name}, muliple:1 },
+    { viewImgData:{ width, height, src, alt }, deleteFileData:{ id, name}, muliple:1},
+    { viewImgData:{ width, height, src, alt }, deleteFileData:{ id, name}, muliple:1 },
+  ]       
+   // if single image upload
+   values: { viewImgData:{ width, height, src, alt }, deleteFileData:{ id, name} }          
+  //(Where viewImgData is all the information for the image)
+  //(and   deleteFileData is all the information for the delete button of the image)
+  // and *multiple* is required for muliple image upload    
+});
+
+wysiwyg example:        
+
+window.SBsdk.SBfunctions.generateDom('wysiwyg', {&quot;wrapperClass&quot;: 'hello', &quot;class&quot;: 'class-editor' , &quot;Title&quot;: 'title',&quot;required&quot;:1, &quot;value&quot;: '&lt;h2&gt;Hello&lt;/h2&gt;&lt;p&gt;world!&lt;/p&gt;'});
+
+</code></pre>
+
+<hr />
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="../callbacks/" class="btn btn-neutral" title="Callbacks"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+	  
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+<div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../callbacks/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+    </span>
+</div>
+
+</body>
+</html>
