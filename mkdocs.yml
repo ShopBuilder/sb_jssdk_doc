@@ -1,5 +1,5 @@
 site_name: Shopbuilder SDK documentation
-
+theme: readthedocs
 pages:
 - Set up: 'index.md'
 - SDK:
@@ -8,4 +8,4 @@ pages:
   - 'Functions': 'sdk/functions.md'
   - "Events": 'sdk/events.md'
   - 'Callbacks': 'sdk/callbacks.md'
-  - 'DOM generation': 'sdk/dom-generation.md'
+  - 'DOM Generation & Management': 'sdk/dom-generation.md'
