@@ -6,7 +6,7 @@ The parameters:
 -**type** is a String      
 -**options** is an obj      
 
-## TEXTFIElD
+## TEXTFIELD
 
 
 **Parameters:**  
