@@ -123,6 +123,9 @@
                 <li class="toctree-l3"><a href="#apply-special-select-effect-on-existing-selects">Apply Special Select Effect On Existing Selects</a></li>
                 
             
+                <li class="toctree-l3"><a href="#back-office-table-component">Back Office Table Component</a></li>
+                
+            
             </ul>
         
     </li>
@@ -676,6 +679,119 @@ and <strong>options</strong>: <code>(optional)</code>               </p>
 });
 
 </code></pre>
+
+<hr />
+<h4 id="back-office-table-component">Back Office Table Component</h4>
+<p><code>SBsdk.SBfunctions.backoffice_table(options);</code> <br />
+<strong>Parameters:</strong>        <br />
+the <code>options</code> parameter has the following structure:    </p>
+<pre><code>options = {
+  prepend_to_selector: '.selector-to-prepend-to' OR '#selector-to-prepend-to',
+  wrapperClass: 'wrapper-class', 
+  class: 'class-class',
+  custom_cols_length : 8,
+  checkboxes : 1, 
+  image: 1,  
+  custom_header: [{index: 2, value: 'title2'}, {index: 1, value: 'title1'}],
+  data: [ {
+            row_id: 'this-row-1', 
+            img_url: 'https://...',
+            custom_columns: [ {index: 1, value: 'index2 text'} , {index: 0, value: 'index0 text'} ] // column data added.
+          },
+          {...},
+          ..
+        ],
+  delete: 'delete_callback',
+};
+</code></pre>
+
+<p><em>Where:</em> <br />
+-<code>prepend_to_selector</code> is the selector to prepend the table to <em>(by default will be appeneded to the <code>body</code>)</em>.     <br />
+-<code>wrapperClass</code> is the wrapper class of the table.      <br />
+-<code>class</code> is the class of the table.        <br />
+-<code>custom_cols_length</code> specify how many custom rows you wish to have other than del, checkbox and image cols.                      <br />
+-<code>checkboxes</code> enables checkboxes.                <br />
+-<code>image</code> enables usage of images.    <br />
+-<code>custom_header</code> add the titles in the header of your table in a specific index.   <br />
+-<code>data</code> is where you start filling the table content.     </p>
+<ul>
+<li><code>row_id</code> is the id of your row</li>
+<li><code>img_url</code> is the image url of this specific row -- image option should be enabled</li>
+<li><code>custom_columns</code> the content of your table in a specific index.     </li>
+</ul>
+<p>-<code>delete</code> enables the delete functionality.      </p>
+<ul>
+<li>Add the name of your <code>delete callback function</code> and dont forget to <code>define it</code>.       </li>
+<li>This function should have an <code>array of row ids</code> as a <code>parameter</code>.         </li>
+<li>It should <code>return true</code> if the deletion of all the row_id where successfull <code>else</code> it should return an object having an error with the error message and an array of all row ids that got deleted successfully <code>{error : 'error-message', deleted_successfully:[row_id1, row_id2 ..]}</code>            </li>
+</ul>
+<p><strong>Return:</strong>
+the return of this function will be of this structure:</p>
+<pre><code>{table_id : 'data-bo-table-name-{{id}}' , dom: 'html-of-the-table-generated'}
+</code></pre>
+
+<p><strong>purpose:</strong>     <br />
+- Generates a table as the one we have in the backoffice     <br />
+- Has the option to add checkboxes to select a row or to select all rows      <br />
+- Has the option to delete a row or to delete multiple rows  <br />
+- Has the option to add an image per row             </p>
+<p><strong>preview:</strong>    <br />
+<img alt="table-component" src="../../img/table-component.png" />    </p>
+<p><strong>Helper functions:</strong>   <br />
+<em>-To get all the checked rows:</em>       <br />
+Returns an array of checked row ids
+<code>SBsdk.SBfunctions.backoffice_table_get_checked_row_ids(table_id);</code>  </p>
+<p><strong>Example:</strong></p>
+<pre><code>// Step 1: define the options you need
+options = {
+  wrapperClass: 'wrapper-class',
+  class: 'class-class',
+  custom_cols_length : 8,
+  checkboxes : 1,
+  image: 1,
+  delete: 'delete_callback',
+  custom_header: [{index: 2, value: 'title2'}, {index: 1, value: 'title1'}],
+  data: [  {
+            row_id: 'this-row-1',
+            img_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4AzTskTQPjEiS7-ZA5Vkv7Jf02JcFelXvl7hDYMwM5eBx2tszMw',
+            custom_columns: [ {index: 1, value: 'index2 text'} , {index: 0, value: 'index0 text'} ]
+           },
+           {
+            row_id: 'this-row-2',
+            img_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4AzTskTQPjEiS7-ZA5Vkv7Jf02JcFelXvl7hDYMwM5eBx2tszMw',
+            custom_columns: [ {index: 1, value: 'index11 text'} , {index: 0, value: 'index00 text'} ]
+           },
+        ],
+};
+// Step 2: define your delete callback function
+window.delete_callback = function(array_of_row_ids_to_be_deleted){
+  //array_of_row_ids_to_be_deleted will be of the following structure
+  // ['this-row-1', 'this-row-2', ..] 
+  // depending on what was selected to be deleted
+  console.log('DELETE');
+
+  // INCASE OF ERROR 
+  // ex1
+  // return {error : 'Couldn't delete all of your rows, deleted_successfully: [] };
+  // ex2
+  // return {error : 'Couldn't delete some of your rows, deleted_successfully: ['this-row-2'] };
+
+
+  // INCASE THE DELETION WAS SUCCESSFUL
+  return true; // successful -- all where deleted
+
+}
+// Step 3: create your table that will be inserted in the page.
+
+var table_info = SBsdk.SBfunctions.backoffice_table(options);
+
+console.log(table_info.table_id); // returns table_id; something like `data-bo-table-name-{{id}}`
+console.log(table_info.dom); // returns the table html that was prepended to the dom.
+
+SBsdk.SBfunctions.backoffice_table_get_checked_row_ids(table_info.table_id);  // returns an array of the checked row_ids
+</code></pre>
+
+<p><strong>Note:</strong> if you are not injecting your table on page load (ex. case of ajax) then call the <a href="../../sdk/functions/#refresh">refresh function</a> afterwards.</p>
               
             </div>
           </div>

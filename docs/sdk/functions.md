@@ -612,3 +612,125 @@ window.SBsdk.SBfunctions.sbsdk_select_style('select#edit-field-gender-und',
 });
 
 ```
+         
+-------------------------------------    
+            
+#### Back Office Table Component
+  
+`SBsdk.SBfunctions.backoffice_table(options);`   
+**Parameters:**          
+the `options` parameter has the following structure:    
+```
+options = {
+  prepend_to_selector: '.selector-to-prepend-to' OR '#selector-to-prepend-to',
+  wrapperClass: 'wrapper-class', 
+  class: 'class-class',
+  custom_cols_length : 8,
+  checkboxes : 1, 
+  image: 1,  
+  custom_header: [{index: 2, value: 'title2'}, {index: 1, value: 'title1'}],
+  data: [ {
+            row_id: 'this-row-1', 
+            img_url: 'https://...',
+            custom_columns: [ {index: 1, value: 'index2 text'} , {index: 0, value: 'index0 text'} ] // column data added.
+          },
+          {...},
+          ..
+        ],
+  delete: 'delete_callback',
+};
+```
+*Where:*   
+-`prepend_to_selector` is the selector to prepend the table to *(by default will be appeneded to the `body`)*.       
+-`wrapperClass` is the wrapper class of the table.        
+-`class` is the class of the table.          
+-`custom_cols_length` specify how many custom rows you wish to have other than del, checkbox and image cols.                        
+-`checkboxes` enables checkboxes.                  
+-`image` enables usage of images.      
+-`custom_header` add the titles in the header of your table in a specific index.     
+-`data` is where you start filling the table content.     
+
+*  `row_id` is the id of your row
+*  `img_url` is the image url of this specific row -- image option should be enabled
+*  `custom_columns` the content of your table in a specific index.     
+
+-`delete` enables the delete functionality.      
+
+*  Add the name of your `delete callback function` and dont forget to `define it`.       
+*  This function should have an `array of row ids` as a `parameter`.         
+*  It should `return true` if the deletion of all the row_id where successfull `else` it should return an object having an error with the error message and an array of all row ids that got deleted successfully `{error : 'error-message', deleted_successfully:[row_id1, row_id2 ..]}`            
+
+
+**Return:**
+the return of this function will be of this structure:
+```
+{table_id : 'data-bo-table-name-{{id}}' , dom: 'html-of-the-table-generated'}
+```
+        
+**purpose:**       
+- Generates a table as the one we have in the backoffice       
+- Has the option to add checkboxes to select a row or to select all rows        
+- Has the option to delete a row or to delete multiple rows    
+- Has the option to add an image per row             
+         
+**preview:**      
+![table-component](/img/table-component.png)    
+      
+**Helper functions:**     
+*-To get all the checked rows:*         
+Returns an array of checked row ids
+`SBsdk.SBfunctions.backoffice_table_get_checked_row_ids(table_id);`  
+                 
+**Example:**
+```
+// Step 1: define the options you need
+options = {
+  wrapperClass: 'wrapper-class',
+  class: 'class-class',
+  custom_cols_length : 8,
+  checkboxes : 1,
+  image: 1,
+  delete: 'delete_callback',
+  custom_header: [{index: 2, value: 'title2'}, {index: 1, value: 'title1'}],
+  data: [  {
+            row_id: 'this-row-1',
+            img_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4AzTskTQPjEiS7-ZA5Vkv7Jf02JcFelXvl7hDYMwM5eBx2tszMw',
+            custom_columns: [ {index: 1, value: 'index2 text'} , {index: 0, value: 'index0 text'} ]
+           },
+           {
+            row_id: 'this-row-2',
+            img_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4AzTskTQPjEiS7-ZA5Vkv7Jf02JcFelXvl7hDYMwM5eBx2tszMw',
+            custom_columns: [ {index: 1, value: 'index11 text'} , {index: 0, value: 'index00 text'} ]
+           },
+        ],
+};
+// Step 2: define your delete callback function
+window.delete_callback = function(array_of_row_ids_to_be_deleted){
+  //array_of_row_ids_to_be_deleted will be of the following structure
+  // ['this-row-1', 'this-row-2', ..] 
+  // depending on what was selected to be deleted
+  console.log('DELETE');
+
+  // INCASE OF ERROR 
+  // ex1
+  // return {error : 'Couldn't delete all of your rows, deleted_successfully: [] };
+  // ex2
+  // return {error : 'Couldn't delete some of your rows, deleted_successfully: ['this-row-2'] };
+  
+
+  // INCASE THE DELETION WAS SUCCESSFUL
+  return true; // successful -- all where deleted
+  
+}
+// Step 3: create your table that will be inserted in the page.
+
+var table_info = SBsdk.SBfunctions.backoffice_table(options);
+
+console.log(table_info.table_id); // returns table_id; something like `data-bo-table-name-{{id}}`
+console.log(table_info.dom); // returns the table html that was prepended to the dom.
+
+SBsdk.SBfunctions.backoffice_table_get_checked_row_ids(table_info.table_id);  // returns an array of the checked row_ids
+```    
+      
+**Note:** if you are not injecting your table on page load (ex. case of ajax) then call the [refresh function](/sdk/functions/#refresh) afterwards.
+
