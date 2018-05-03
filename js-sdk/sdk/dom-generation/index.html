@@ -102,6 +102,18 @@
         
             <ul>
             
+                <li class="toctree-l3"><a href="#bo-titles">BO - TITLES</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#bo-radio">BO - RADIO</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#bo-checkbox">BO - CHECKBOX</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#bo-image-widget">BO - IMAGE WIDGET</a></li>
+                
+            
                 <li class="toctree-l3"><a href="#textfield">TEXTFIELD</a></li>
                 
             
@@ -126,15 +138,6 @@
                 <li class="toctree-l3"><a href="#wysiwyg-text-editor">WYSIWYG TEXT EDITOR</a></li>
                 
             
-                <li class="toctree-l3"><a href="#radio">RADIO</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#checkbox">CHECKBOX</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#image-widget">IMAGE WIDGET</a></li>
-                
-            
                 <li class="toctree-l3"><a href="#link">LINK</a></li>
                 
             
@@ -142,9 +145,6 @@
                 
             
                 <li class="toctree-l3"><a href="#button">BUTTON</a></li>
-                
-            
-                <li class="toctree-l3"><a href="#titles">TITLES</a></li>
                 
                     <li><a class="toctree-l4" href="#examples">Examples</a></li>
                 
@@ -193,11 +193,131 @@
           <div role="main">
             <div class="section">
               
-                <p>For Dom Generation you have the following function.</p>
+                <p><strong>Note that:</strong> <br />
+- The titles prefixed by <strong>BO</strong> means that the type was made specifically for the <strong>Back office pages</strong>          <br />
+- <strong>Otherwise</strong> the function is made to be used for <strong>both</strong>.    </p>
+<p>For Dom Generation you have the following function.</p>
 <p><code>window.SBsdk.SBfunctions.SBmessages.generateDom(type, options);</code>         </p>
 <p>The parameters:      <br />
 -<strong>type</strong> is a String    <br />
--<strong>options</strong> is an obj      </p>
+-<strong>options</strong> is an obj   </p>
+<hr />
+<h2 id="bo-titles">BO - TITLES</h2>
+<p><strong>Preview: (SECTION TITLE)</strong>        <br />
+  ~~~~~~~~~~~~~~~~~~~~                <br />
+<img alt="sectionTitle" src="../../img/sectionTitle.png" />         <br />
+<strong>Parameters: (SECTION TITLE):</strong>  <br />
+  ~~~~~~~~~~~~~~~~~~~~ </p>
+<pre><code>type = 'section_title';
+options = {
+  Title: 'Title',
+};
+</code></pre>
+
+<p><strong>Preview: (SECTION SUBTITLE) :</strong>           <br />
+  ~~~~~~~~~~~~~~~~~~~~~~~~~                <br />
+<img alt="sectionSubtitle" src="../../img/sectionSubtitle.png" />          <br />
+<strong>Parameters: (SECTION SUBTITLE)</strong>  <br />
+  ~~~~~~~~~~~~~~~~~~~~~~~ </p>
+<pre><code>type = 'section_subtitle';
+options = {
+  Title: 'Title',
+};
+</code></pre>
+
+<hr />
+<h2 id="bo-radio">BO - RADIO</h2>
+<p><strong>Preview:</strong> <br />
+  ~~~~~~   <br />
+<img alt="radios" src="../../img/radios.png" /></p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'radio';
+
+options = {
+  wrapperClass: 'wrapperClass', //(REQUIRED)
+  name: 'common-for-all-radios', //(REQUIRED)
+  disabled: 1,
+  data: [
+    {&quot;Title&quot;:'', &quot;class&quot;:'', &quot;id&quot;: '', &quot;value&quot;: '', &quot;checked&quot; : 1},
+    {&quot;Title&quot;, &quot;class&quot;, &quot;id&quot;, &quot;value&quot;}
+  ]
+};
+</code></pre>
+
+<p><strong>Helper Functions:</strong><br />
+  ~~~~~~~~~~~~ </p>
+<p><strong>- Radios actions: (ie. radio that is generated using generateDom):</strong></p>
+<p><code>SBsdk.SBfunctions.radio_action(inputSelector_wrapperSelector, action);</code>       <br />
+where:  <br />
+- <code>action</code> can be <code>reset, disable, enable or check</code>      <br />
+- for the actions <code>reset, disable, enable</code> the inputSelector_wrapperSelector should be the wrapperClass of the radios          <br />
+- for the action <code>check</code> the inputSelector_wrapperSelector should be the radio input        </p>
+<p><em>note that when radios are disabled you can not check radios</em>              </p>
+<p><strong>Example:</strong>                       </p>
+<pre><code>SBsdk.SBfunctions.radio_action('.shopbuilder-radio', 'reset');
+SBsdk.SBfunctions.radio_action('.shopbuilder-radio', 'disable');
+SBsdk.SBfunctions.radio_action('.shopbuilder-radio', 'enable');
+SBsdk.SBfunctions.radio_action('.shopbuilder-radio input:last', 'check');
+</code></pre>
+
+<hr />
+<h2 id="bo-checkbox">BO - CHECKBOX</h2>
+<p><strong>Preview:</strong>   <br />
+  ~~~~~~ <br />
+<img alt="checkbxes" src="../../img/checkbxes.png" /></p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'checkbox';
+
+options = {
+  wrapperClass: 'wrapperClass',
+  toggle: 1, // to transform it into a switch checkbox
+  data: [
+    {&quot;Title&quot;:'', &quot;class&quot;:'', &quot;id&quot;:'',  &quot;name&quot;:'', &quot;value&quot;:'', &quot;checked&quot;:1, &quot;disabled&quot;:1},
+    {&quot;Title&quot;:'', &quot;class&quot;:'', &quot;id&quot;:'',  &quot;name&quot;:'', &quot;value&quot;:'', &quot;checked&quot;:1, &quot;disabled&quot;:1}
+  ]
+};
+</code></pre>
+
+<p><strong>Helper Functions:</strong><br />
+  ~~~~~~~~~~~~ </p>
+<p><strong>- Checkbox actions: (ie. checkbox that is generated using generateDom):</strong>  <br />
+<code>SBsdk.SBfunctions.checkbox_action(inputSelector, action);</code>                    <br />
+<em>Where:</em>        <br />
+- <strong>inputSelector</strong>: ex "input.input-selector" OR "input#input-selector"                <br />
+- <strong>action</strong>: enable, disable, check, uncheck               <br />
+<strong>Example:</strong>               </p>
+<pre><code>SBsdk.SBfunctions.checkbox_action('.input-selector', 'uncheck');        
+SBsdk.SBfunctions.checkbox_action('.input-selector', 'check');        
+SBsdk.SBfunctions.checkbox_action('.input-selector', 'disable');        
+SBsdk.SBfunctions.checkbox_action('.input-selector', 'enable');        
+</code></pre>
+
+<hr />
+<h2 id="bo-image-widget">BO - IMAGE WIDGET</h2>
+<p><strong>Preview:</strong>   <br />
+   ~~~~~~~
+<img alt="Screenshot_at_2018-01-29_09_11_17" src="../../img/Screenshot_at_2018-01-29_09_11_17.png" /></p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'image_upload';
+
+options = {
+  Title: 'Title',
+  TitleClass: 'TitleClass',
+  wrapperId: 'wrapperId',
+  multiple : 1,
+  inputFileData:{ max, id, name, size, class }, // the input of type file data
+  deleteFileData:{name, id, class}, // the delete btn data
+  uploadFileData:{ name, id, class}, // the upload btn data
+  values : [{..},{..}]
+  // check example to see how to populate this;
+  //note that it can be an array of objs (multple image upload) or an array (single image)
+};
+</code></pre>
+
+<hr />
 <h2 id="textfield">TEXTFIELD</h2>
 <p><strong>Parameters:</strong><br />
   ~~~~~~~~~~~~ </p>
@@ -549,98 +669,6 @@ data = SBsdk.SBfunctions.wysiwyg_data('.class-editor');
 </code></pre>
 
 <hr />
-<h2 id="radio">RADIO</h2>
-<p><strong>Preview:</strong> <br />
-  ~~~~~~   <br />
-<img alt="radios" src="../../img/radios.png" /></p>
-<p><strong>Parameters:</strong>  <br />
-  ~~~~~~~~~~~~ </p>
-<pre><code>type = 'radio';
-
-options = {
-  wrapperClass: 'wrapperClass', //(REQUIRED)
-  name: 'common-for-all-radios', //(REQUIRED)
-  disabled: 1,
-  data: [
-    {&quot;Title&quot;:'', &quot;class&quot;:'', &quot;id&quot;: '', &quot;value&quot;: '', &quot;checked&quot; : 1},
-    {&quot;Title&quot;, &quot;class&quot;, &quot;id&quot;, &quot;value&quot;}
-  ]
-};
-</code></pre>
-
-<p><strong>Helper Functions:</strong><br />
-  ~~~~~~~~~~~~ </p>
-<p><strong>- Radios actions: (ie. radio that is generated using generateDom):</strong></p>
-<p><code>SBsdk.SBfunctions.radio_action(inputSelector_wrapperSelector, action);</code>       <br />
-where:  <br />
-- <code>action</code> can be <code>reset, disable, enable or check</code>      <br />
-- for the actions <code>reset, disable, enable</code> the inputSelector_wrapperSelector should be the wrapperClass of the radios          <br />
-- for the action <code>check</code> the inputSelector_wrapperSelector should be the radio input        </p>
-<p><em>note that when radios are disabled you can not check radios</em>              </p>
-<p><strong>Example:</strong>                       </p>
-<pre><code>SBsdk.SBfunctions.radio_action('.shopbuilder-radio', 'reset');
-SBsdk.SBfunctions.radio_action('.shopbuilder-radio', 'disable');
-SBsdk.SBfunctions.radio_action('.shopbuilder-radio', 'enable');
-SBsdk.SBfunctions.radio_action('.shopbuilder-radio input:last', 'check');
-</code></pre>
-
-<hr />
-<h2 id="checkbox">CHECKBOX</h2>
-<p><strong>Preview:</strong>   <br />
-  ~~~~~~ <br />
-<img alt="checkbxes" src="../../img/checkbxes.png" /></p>
-<p><strong>Parameters:</strong>  <br />
-  ~~~~~~~~~~~~ </p>
-<pre><code>type = 'checkbox';
-
-options = {
-  wrapperClass: 'wrapperClass',
-  toggle: 1, // to transform it into a switch checkbox
-  data: [
-    {&quot;Title&quot;:'', &quot;class&quot;:'', &quot;id&quot;:'',  &quot;name&quot;:'', &quot;value&quot;:'', &quot;checked&quot;:1, &quot;disabled&quot;:1},
-    {&quot;Title&quot;:'', &quot;class&quot;:'', &quot;id&quot;:'',  &quot;name&quot;:'', &quot;value&quot;:'', &quot;checked&quot;:1, &quot;disabled&quot;:1}
-  ]
-};
-</code></pre>
-
-<p><strong>Helper Functions:</strong><br />
-  ~~~~~~~~~~~~ </p>
-<p><strong>- Checkbox actions: (ie. checkbox that is generated using generateDom):</strong>  <br />
-<code>SBsdk.SBfunctions.checkbox_action(inputSelector, action);</code>                    <br />
-<em>Where:</em>        <br />
-- <strong>inputSelector</strong>: ex "input.input-selector" OR "input#input-selector"                <br />
-- <strong>action</strong>: enable, disable, check, uncheck               <br />
-<strong>Example:</strong>               </p>
-<pre><code>SBsdk.SBfunctions.checkbox_action('.input-selector', 'uncheck');        
-SBsdk.SBfunctions.checkbox_action('.input-selector', 'check');        
-SBsdk.SBfunctions.checkbox_action('.input-selector', 'disable');        
-SBsdk.SBfunctions.checkbox_action('.input-selector', 'enable');        
-</code></pre>
-
-<hr />
-<h2 id="image-widget">IMAGE WIDGET</h2>
-<p><strong>Preview:</strong>   <br />
-   ~~~~~~~
-<img alt="Screenshot_at_2018-01-29_09_11_17" src="../../img/Screenshot_at_2018-01-29_09_11_17.png" /></p>
-<p><strong>Parameters:</strong>  <br />
-  ~~~~~~~~~~~~ </p>
-<pre><code>type = 'image_upload';
-
-options = {
-  Title: 'Title',
-  TitleClass: 'TitleClass',
-  wrapperId: 'wrapperId',
-  multiple : 1,
-  inputFileData:{ max, id, name, size, class }, // the input of type file data
-  deleteFileData:{name, id, class}, // the delete btn data
-  uploadFileData:{ name, id, class}, // the upload btn data
-  values : [{..},{..}]
-  // check example to see how to populate this;
-  //note that it can be an array of objs (multple image upload) or an array (single image)
-};
-</code></pre>
-
-<hr />
 <h2 id="link">LINK</h2>
 <p><strong>Parameters:</strong>  <br />
   ~~~~~~~~~~~~ </p>
@@ -654,7 +682,7 @@ options = {
   id: '',
   target: '',
   wrapper: 1, // if you want a link with no wrapper .. remove the wrapper option
-  type:'' // can be &quot;btn&quot;, &quot;delete&quot; or &quot;add&quot;
+  type:'' // can be &quot;btn&quot;, &quot;delete&quot; or &quot;add&quot; (this option is for the BO)
 };
 </code></pre>
 
@@ -680,30 +708,6 @@ options = {
   Title: 'Title',
   class: 'class',
   id: 'id',
-};
-</code></pre>
-
-<hr />
-<h2 id="titles">TITLES</h2>
-<p><strong>Preview: (SECTION TITLE)</strong>        <br />
-  ~~~~~~~~~~~~~~~~~~~~                <br />
-<img alt="sectionTitle" src="../../img/sectionTitle.png" />         <br />
-<strong>Parameters: (SECTION TITLE):</strong>  <br />
-  ~~~~~~~~~~~~~~~~~~~~ </p>
-<pre><code>type = 'section_title';
-options = {
-  Title: 'Title',
-};
-</code></pre>
-
-<p><strong>Preview: (SECTION SUBTITLE) :</strong>           <br />
-  ~~~~~~~~~~~~~~~~~~~~~~~~~                <br />
-<img alt="sectionSubtitle" src="../../img/sectionSubtitle.png" />          <br />
-<strong>Parameters: (SECTION SUBTITLE)</strong>  <br />
-  ~~~~~~~~~~~~~~~~~~~~~~~ </p>
-<pre><code>type = 'section_subtitle';
-options = {
-  Title: 'Title',
 };
 </code></pre>
 
