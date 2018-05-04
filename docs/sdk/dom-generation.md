@@ -1,11 +1,165 @@
+**Note that:**   
+- The titles prefixed by **BO** means that the type was made specifically for the **Back office pages**            
+- **Otherwise** the function is made to be used for **both**.    
+
 For Dom Generation you have the following function.
             
 `window.SBsdk.SBfunctions.SBmessages.generateDom(type, options);`         
 
 The parameters:        
 -**type** is a String      
--**options** is an obj      
+-**options** is an obj   
+      
+-----------------
+ 
+## BO - TITLES
 
+**Preview: (SECTION TITLE)**          
+  ~~~~~~~~~~~~~~~~~~~~                  
+![sectionTitle](/img/sectionTitle.png)           
+**Parameters: (SECTION TITLE):**    
+  ~~~~~~~~~~~~~~~~~~~~ 
+
+```
+type = 'section_title';
+options = {
+  Title: 'Title',
+};
+```
+
+**Preview: (SECTION SUBTITLE) :**             
+  ~~~~~~~~~~~~~~~~~~~~~~~~~                  
+![sectionSubtitle](/img/sectionSubtitle.png)            
+**Parameters: (SECTION SUBTITLE)**    
+  ~~~~~~~~~~~~~~~~~~~~~~~ 
+
+```
+type = 'section_subtitle';
+options = {
+  Title: 'Title',
+};
+```
+
+
+--------------
+
+## BO - RADIO
+
+**Preview:**   
+  ~~~~~~     
+![radios](/img/radios.png)
+
+**Parameters:**    
+  ~~~~~~~~~~~~ 
+
+
+```
+type = 'radio';
+
+options = {
+  wrapperClass: 'wrapperClass', //(REQUIRED)
+  name: 'common-for-all-radios', //(REQUIRED)
+  disabled: 1,
+  data: [
+    {"Title":'', "class":'', "id": '', "value": '', "checked" : 1},
+    {"Title", "class", "id", "value"}
+  ]
+};
+```
+
+**Helper Functions:**  
+  ~~~~~~~~~~~~ 
+
+**- Radios actions: (ie. radio that is generated using generateDom):**
+
+`SBsdk.SBfunctions.radio_action(inputSelector_wrapperSelector, action);`         
+where:    
+- `action` can be `reset, disable, enable or check`        
+- for the actions `reset, disable, enable` the inputSelector_wrapperSelector should be the wrapperClass of the radios            
+- for the action `check` the inputSelector_wrapperSelector should be the radio input        
+                 
+*note that when radios are disabled you can not check radios*              
+
+**Example:**                       
+```
+SBsdk.SBfunctions.radio_action('.shopbuilder-radio', 'reset');
+SBsdk.SBfunctions.radio_action('.shopbuilder-radio', 'disable');
+SBsdk.SBfunctions.radio_action('.shopbuilder-radio', 'enable');
+SBsdk.SBfunctions.radio_action('.shopbuilder-radio input:last', 'check');
+```
+
+
+----------------
+         
+## BO - CHECKBOX
+
+**Preview:**     
+  ~~~~~~   
+![checkbxes](/img/checkbxes.png)
+
+**Parameters:**    
+  ~~~~~~~~~~~~ 
+
+```
+type = 'checkbox';
+
+options = {
+  wrapperClass: 'wrapperClass',
+  toggle: 1, // to transform it into a switch checkbox
+  data: [
+    {"Title":'', "class":'', "id":'',  "name":'', "value":'', "checked":1, "disabled":1},
+    {"Title":'', "class":'', "id":'',  "name":'', "value":'', "checked":1, "disabled":1}
+  ]
+};
+```
+ 
+
+**Helper Functions:**  
+  ~~~~~~~~~~~~ 
+
+**- Checkbox actions: (ie. checkbox that is generated using generateDom):**    
+`SBsdk.SBfunctions.checkbox_action(inputSelector, action);`                      
+*Where:*          
+- **inputSelector**: ex "input.input-selector" OR "input#input-selector"                  
+- **action**: enable, disable, check, uncheck                 
+**Example:**               
+```
+SBsdk.SBfunctions.checkbox_action('.input-selector', 'uncheck');        
+SBsdk.SBfunctions.checkbox_action('.input-selector', 'check');        
+SBsdk.SBfunctions.checkbox_action('.input-selector', 'disable');        
+SBsdk.SBfunctions.checkbox_action('.input-selector', 'enable');        
+```
+    
+----------------    
+   
+## BO - IMAGE WIDGET
+
+**Preview:**     
+   ~~~~~~~
+![Screenshot_at_2018-01-29_09_11_17](/img/Screenshot_at_2018-01-29_09_11_17.png)
+
+**Parameters:**    
+  ~~~~~~~~~~~~ 
+
+```
+type = 'image_upload';
+
+options = {
+  Title: 'Title',
+  TitleClass: 'TitleClass',
+  wrapperId: 'wrapperId',
+  multiple : 1,
+  inputFileData:{ max, id, name, size, class }, // the input of type file data
+  deleteFileData:{name, id, class}, // the delete btn data
+  uploadFileData:{ name, id, class}, // the upload btn data
+  values : [{..},{..}]
+  // check example to see how to populate this;
+  //note that it can be an array of objs (multple image upload) or an array (single image)
+};
+```
+
+--------------------   
+      
 ## TEXTFIELD
 
 
@@ -431,127 +585,9 @@ dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {"wrapperClass": 'hello', 
 // to get the value of the inputed                             
 data = SBsdk.SBfunctions.wysiwyg_data('.class-editor');          
 ```
-              
-
---------------
-
-## RADIO
-
-**Preview:**   
-  ~~~~~~     
-![radios](/img/radios.png)
-
-**Parameters:**    
-  ~~~~~~~~~~~~ 
-
-
-```
-type = 'radio';
-
-options = {
-  wrapperClass: 'wrapperClass', //(REQUIRED)
-  name: 'common-for-all-radios', //(REQUIRED)
-  disabled: 1,
-  data: [
-    {"Title":'', "class":'', "id": '', "value": '', "checked" : 1},
-    {"Title", "class", "id", "value"}
-  ]
-};
-```
-
-**Helper Functions:**  
-  ~~~~~~~~~~~~ 
-
-**- Radios actions: (ie. radio that is generated using generateDom):**
-
-`SBsdk.SBfunctions.radio_action(inputSelector_wrapperSelector, action);`         
-where:    
-- `action` can be `reset, disable, enable or check`        
-- for the actions `reset, disable, enable` the inputSelector_wrapperSelector should be the wrapperClass of the radios            
-- for the action `check` the inputSelector_wrapperSelector should be the radio input        
-                 
-*note that when radios are disabled you can not check radios*              
-
-**Example:**                       
-```
-SBsdk.SBfunctions.radio_action('.shopbuilder-radio', 'reset');
-SBsdk.SBfunctions.radio_action('.shopbuilder-radio', 'disable');
-SBsdk.SBfunctions.radio_action('.shopbuilder-radio', 'enable');
-SBsdk.SBfunctions.radio_action('.shopbuilder-radio input:last', 'check');
-```
-
-
-----------------
-         
-## CHECKBOX
-
-**Preview:**     
-  ~~~~~~   
-![checkbxes](/img/checkbxes.png)
-
-**Parameters:**    
-  ~~~~~~~~~~~~ 
-
-```
-type = 'checkbox';
-
-options = {
-  wrapperClass: 'wrapperClass',
-  toggle: 1, // to transform it into a switch checkbox
-  data: [
-    {"Title":'', "class":'', "id":'',  "name":'', "value":'', "checked":1, "disabled":1},
-    {"Title":'', "class":'', "id":'',  "name":'', "value":'', "checked":1, "disabled":1}
-  ]
-};
-```
- 
-
-**Helper Functions:**  
-  ~~~~~~~~~~~~ 
-
-**- Checkbox actions: (ie. checkbox that is generated using generateDom):**    
-`SBsdk.SBfunctions.checkbox_action(inputSelector, action);`                      
-*Where:*          
-- **inputSelector**: ex "input.input-selector" OR "input#input-selector"                  
-- **action**: enable, disable, check, uncheck                 
-**Example:**               
-```
-SBsdk.SBfunctions.checkbox_action('.input-selector', 'uncheck');        
-SBsdk.SBfunctions.checkbox_action('.input-selector', 'check');        
-SBsdk.SBfunctions.checkbox_action('.input-selector', 'disable');        
-SBsdk.SBfunctions.checkbox_action('.input-selector', 'enable');        
-```
      
-----------------    
-
-## IMAGE WIDGET
-
-**Preview:**     
-   ~~~~~~~
-![Screenshot_at_2018-01-29_09_11_17](/img/Screenshot_at_2018-01-29_09_11_17.png)
-
-**Parameters:**    
-  ~~~~~~~~~~~~ 
-
-```
-type = 'image_upload';
-
-options = {
-  Title: 'Title',
-  TitleClass: 'TitleClass',
-  wrapperId: 'wrapperId',
-  multiple : 1,
-  inputFileData:{ max, id, name, size, class }, // the input of type file data
-  deleteFileData:{name, id, class}, // the delete btn data
-  uploadFileData:{ name, id, class}, // the upload btn data
-  values : [{..},{..}]
-  // check example to see how to populate this;
-  //note that it can be an array of objs (multple image upload) or an array (single image)
-};
-```
-        
 ----------------
-          
+            
 ## LINK
 **Parameters:**    
   ~~~~~~~~~~~~ 
@@ -567,7 +603,7 @@ options = {
   id: '',
   target: '',
   wrapper: 1, // if you want a link with no wrapper .. remove the wrapper option
-  type:'' // can be "btn", "delete" or "add"
+  type:'' // can be "btn", "delete" or "add" (this option is for the BO)
 };
 ```
           
@@ -600,38 +636,7 @@ options = {
   class: 'class',
   id: 'id',
 };
-```
-
------------------
- 
-## TITLES
-
-**Preview: (SECTION TITLE)**          
-  ~~~~~~~~~~~~~~~~~~~~                  
-![sectionTitle](/img/sectionTitle.png)           
-**Parameters: (SECTION TITLE):**    
-  ~~~~~~~~~~~~~~~~~~~~ 
-
-```
-type = 'section_title';
-options = {
-  Title: 'Title',
-};
-```
-
-**Preview: (SECTION SUBTITLE) :**             
-  ~~~~~~~~~~~~~~~~~~~~~~~~~                  
-![sectionSubtitle](/img/sectionSubtitle.png)            
-**Parameters: (SECTION SUBTITLE)**    
-  ~~~~~~~~~~~~~~~~~~~~~~~ 
-
-```
-type = 'section_subtitle';
-options = {
-  Title: 'Title',
-};
-```
-        
+```      
 ----------------
 
 #### Examples  

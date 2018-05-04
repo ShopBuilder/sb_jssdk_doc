@@ -1,13 +1,287 @@
-the **functions** are found in  `window.SBsdk.SBfunctions`              
+**Note that:**   
+- The titles prefixed by **BO** means that the function was made specifically for the **Back office pages**        
+- The titles prefixed by **FO** means that the function was made specifically for the **Front office pages**   
+- **Otherwise** the function is made to be used for **both**.     
+        
+
+**Functions** are found in  `window.SBsdk.SBfunctions`              
               
 To see all of the functions available:         
 - open your shopbuilder website       
 - open the console and type `console.log(window.SBsdk.SBfunctions)`       
+
+---------------------------------
+    
+            
+#### BO - Table Component
+  
+`SBsdk.SBfunctions.backoffice_table(options);`   
+**Parameters:**          
+the `options` parameter has the following structure:    
+```
+options = {
+  prepend_to_selector: '.selector-to-prepend-to' OR '#selector-to-prepend-to',
+  wrapperClass: 'wrapper-class', 
+  class: 'class-class',
+  custom_cols_length : 8,
+  checkboxes : 1, 
+  image: 1,  
+  custom_header: [{index: 2, value: 'title2'}, {index: 1, value: 'title1'}],
+  data: [ {
+            row_id: 'this-row-1', 
+            img_url: 'https://...',
+            custom_columns: [ {index: 1, value: 'index2 text'} , {index: 0, value: 'index0 text'} ] // column data added.
+          },
+          {...},
+          ..
+        ],
+  delete: 'delete_callback',
+};
+```
+*Where:*   
+-`prepend_to_selector` is the selector to prepend the table to *(by default will be appeneded to the `body`)*.       
+-`wrapperClass` is the wrapper class of the table.        
+-`class` is the class of the table.          
+-`custom_cols_length` specify how many custom rows you wish to have other than del, checkbox and image cols.                        
+-`checkboxes` enables checkboxes.                  
+-`image` enables usage of images.      
+-`custom_header` add the titles in the header of your table in a specific index.     
+-`data` is where you start filling the table content.     
+
+*  `row_id` is the id of your row
+*  `img_url` is the image url of this specific row -- image option should be enabled
+*  `custom_columns` the content of your table in a specific index.     
+
+-`delete` enables the delete functionality.      
+
+*  Add the name of your `delete callback function` and dont forget to `define it`.       
+*  This function should have an `array of row ids` as a `parameter`.         
+*  It should `return true` if the deletion of all the row_id where successfull `else` it should return an object having an error with the error message and an array of all row ids that got deleted successfully `{error : 'error-message', deleted_successfully:[row_id1, row_id2 ..]}`            
+
+
+**Return:**
+the return of this function will be of this structure:
+```
+{table_id : 'data-bo-table-name-{{id}}' , dom: 'html-of-the-table-generated'}
+```
+        
+**purpose:**       
+- Generates a table as the one we have in the backoffice       
+- Has the option to add checkboxes to select a row or to select all rows        
+- Has the option to delete a row or to delete multiple rows    
+- Has the option to add an image per row             
+         
+**preview:**      
+![table-component](/img/table-component.png)    
       
+**Helper functions:**     
+*-To get all the checked rows:*         
+Returns an array of checked row ids
+`SBsdk.SBfunctions.backoffice_table_get_checked_row_ids(table_id);`  
+                 
+**Example:**
+```
+// Step 1: define the options you need
+options = {
+  wrapperClass: 'wrapper-class',
+  class: 'class-class',
+  custom_cols_length : 8,
+  checkboxes : 1,
+  image: 1,
+  delete: 'delete_callback',
+  custom_header: [{index: 2, value: 'title2'}, {index: 1, value: 'title1'}],
+  data: [  {
+            row_id: 'this-row-1',
+            img_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4AzTskTQPjEiS7-ZA5Vkv7Jf02JcFelXvl7hDYMwM5eBx2tszMw',
+            custom_columns: [ {index: 1, value: 'index2 text'} , {index: 0, value: 'index0 text'} ]
+           },
+           {
+            row_id: 'this-row-2',
+            img_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4AzTskTQPjEiS7-ZA5Vkv7Jf02JcFelXvl7hDYMwM5eBx2tszMw',
+            custom_columns: [ {index: 1, value: 'index11 text'} , {index: 0, value: 'index00 text'} ]
+           },
+        ],
+};
+// Step 2: define your delete callback function
+window.delete_callback = function(array_of_row_ids_to_be_deleted){
+  //array_of_row_ids_to_be_deleted will be of the following structure
+  // ['this-row-1', 'this-row-2', ..] 
+  // depending on what was selected to be deleted
+  console.log('DELETE');
+
+  // INCASE OF ERROR 
+  // ex1
+  // return {error : 'Couldn't delete all of your rows, deleted_successfully: [] };
+  // ex2
+  // return {error : 'Couldn't delete some of your rows, deleted_successfully: ['this-row-2'] };
+  
+
+  // INCASE THE DELETION WAS SUCCESSFUL
+  return true; // successful -- all where deleted
+  
+}
+// Step 3: create your table that will be inserted in the page.
+
+var table_info = SBsdk.SBfunctions.backoffice_table(options);
+
+console.log(table_info.table_id); // returns table_id; something like `data-bo-table-name-{{id}}`
+console.log(table_info.dom); // returns the table html that was prepended to the dom.
+
+SBsdk.SBfunctions.backoffice_table_get_checked_row_ids(table_info.table_id);  // returns an array of the checked row_ids
+```    
+      
+**Note:** if you are not injecting your table on page load (ex. case of ajax) then call the [refresh function](/sdk/functions/#refresh) afterwards.
+       
+----------------------------------
+         
+                
+-------------------------
+
+#### BO - Top Action Button        
+
+Generates a top action button in the **back office** pages.   
+   
+`window.SBsdk.SBfunctions.add_top_action_button(options);`        
+The parameter options has the following structure:              
+```
+options = {
+  class: 'class',  // class of the btn
+  id: 'idddsss', // id of the btn
+  name: 'naaameeee', // name of the btn
+  Title: 'Titleeee' // title of the btn
+} 
+```      
+![top_action_btn_](/img/top_action_btn_.png)
+
+--------------------
+
+             
+#### FO - Throbber / Loader
+
+to add a throbber to the page.    
+call `SBsdk.SBfunctions.loader(action, time_in_ms);`               
+         
+**Note:**   
+1- `SBsdk.SBfunctions.loader()` // add a throbber to the page      
+2- `SBsdk.SBfunctions.loader('remove')` // removes a throbber from the page         
+3- `SBsdk.SBfunctions.loader('remove', 100)` // removes a throbber from the page after 100 ms                  
+4- the throbber is in the following markup: `<div class="ajax-progress ajax-progress-throbber sdk-throbber"></div>` (Given for styling purposes)                 
+              
+**Note:**   
+```                    
+// @Code
+// Consider the following senario
+
+//**app1 calls:**         
+SBsdk.SBfunctions.loader();
+
+//**app2 calls:**         
+SBsdk.SBfunctions.loader();
+SBsdk.SBfunctions.loader('remove');
+
+// @Result
+// In this case the Throbber/Loader Will not be removed from the page
+// Unless all apps that registered the throbber calls the `remove` action.
+// Thus, to remove the throbber app1 has to call `SBsdk.SBfunctions.loader('remove');`     
+```
+
+--------------------
+
+#### FO - Apply Special Select Effect On Existing Selects
+        
+To transform existing select found in the website to a [special select](/sdk/dom-generation/#special-select) use the function of `window.SBsdk.SBfunctions.sbsdk_select_style (selector, options)`;   
+         
+*where*:                     
+**Selector** is your select field selector ex: `#selector` or `.selector`       
+and **options**: `(optional)`               
+> `options = {`         
+>   `dropdownCssClass: 'class',` // class that is added for the dropdown     
+>   `addAsterisk: defaultValueOfSelectField,` // adding astericks for the default value     
+>   `searchable: {placeholder: 'hello'},` // adding a search field with an optional placeholder          
+> `}`              
+                 
+*Note 1: If you want to call this library for a select **after ajax call** this function in [page_event_{{appd}}](/sdk/callbacks/#page-ajax-events)*             
+           
+*Note 2: If you want to generate a special select, check [here](/sdk/dom-generation/#special-select).*          
+      
+**Example:**   
+```       
+window.SBsdk.SBfunctions.sbsdk_select_style('select#edit-field-gender-und',
+{
+  dropdownCssClass: 'hello-dropdown-css-class',
+  addAsterisk:  '_none',
+  searchable: {placeholder: 'hello'}
+});
+
+```
+
+
+--------------------------------------------      
+
+#### FO - Get Resource - Rendered Raw HTML
+
+In general **get resource** is a way to get the html with its functionality as it is in the shopbuilder platform.        
+**Usage**:     
+```
+window.SBsdk.SBfunctions.get_resource(resource_type, resource_data, function (result) {
+  // returns the html of the needed resouce and functionality in (result) var
+});
+``` 
+           
+**Available Resources**:           
+~~~~~~~~~~~~~~~~~~       
+              
+-**view_product**      
+          
+-This resouce gets the **product view html** with its functionality. You can place this HTML where you want, for you have full control of it.                              
+-Product node ID is used in the request. {base_url}/sb/product_view/{prodId}          
+**Usage:**               
+``` 
+window.SBsdk.SBfunctions.get_resource('view_product', {'id': prodId}, function (result) {
+  // The html of the product and functionality are all in (result) var
+});
+```
+
+         
       
 ---------------------------------
-                  
-                                
+            
+   
+#### Create Custom Page       
+            
+**A)** *To create a **front office** page use the url of **/app_page/**:*          
+                         
+**/app_page/{name of page}/{query string 1}/{query string 2}/**
+                           
+**Steps:**   
+
+1-  [inject a new menu title **Or** Update a menu title url](/sdk/functions/#menu-titles); This **menu title** should have the **url** of your new page `/   app_page/{name of your page}/`                        
+
+2- now to get your page information check `window.SBsdk.SBdata.page`        
+- you will find the name of your page in `window.SBsdk.SBdata.page.id`        
+- you will find the querystrings of your page in `window.SBsdk.SBdata.page.query_strings`       
+- you can know the type of your page using `window.SBsdk.SBdata.page.type` in this case it will be **custom-front**    
+
+3-  use the pages info (window.SBsdk.SBdata.page) to inject your data and enjoy      
+              
+
+**B)** *To create a **back office** page use the url of **/admin/app_page/**:*          
+                         
+**/admin/app_page/{name of page}/{query string 1}/{query string 2}/**
+                           
+**Steps:**   
+
+1-  [inject a new menu title **Or** Update a menu title url](/sdk/functions/#menu-titles); This **menu title** should have the **url** of your new page `/admin/app_page/{name of your page}/`                        
+
+2- now to get your page information check `window.SBsdk.SBdata.page`        
+- you will find the name of your page in `window.SBsdk.SBdata.page.id`        
+- you will find the querystrings of your page in `window.SBsdk.SBdata.page.query_strings`       
+- you can know the type of your page using `window.SBsdk.SBdata.page.type` in this case it will be **custom-front**    
+
+3-  use the pages info (window.SBsdk.SBdata.page) to inject your data and enjoy   
+
+------------------------------------------
+
 #### Refresh
          
 The refresh function attaches all the libraries again on the selectors if not attached before.
@@ -212,43 +486,7 @@ var menuLinksData = [
 window.SBsdk.SBfunctions.inject_menu_links (menuLinksData);
 ```
 
-         
-      
----------------------------------
-            
-   
-#### Create Custom Page       
-            
-**A)** *To create a **front office** page use the url of **/app_page/**:*          
-                         
-**/app_page/{name of page}/{query string 1}/{query string 2}/**
-                           
-**Steps:**   
 
-1-  [inject a new menu title **Or** Update a menu title url](/sdk/functions/#menu-titles); This **menu title** should have the **url** of your new page `/   app_page/{name of your page}/`                        
-
-2- now to get your page information check `window.SBsdk.SBdata.page`        
-- you will find the name of your page in `window.SBsdk.SBdata.page.id`        
-- you will find the querystrings of your page in `window.SBsdk.SBdata.page.query_strings`       
-- you can know the type of your page using `window.SBsdk.SBdata.page.type` in this case it will be **custom-front**    
-
-3-  use the pages info (window.SBsdk.SBdata.page) to inject your data and enjoy      
-              
-
-**B)** *To create a **back office** page use the url of **/admin/app_page/**:*          
-                         
-**/admin/app_page/{name of page}/{query string 1}/{query string 2}/**
-                           
-**Steps:**   
-
-1-  [inject a new menu title **Or** Update a menu title url](/sdk/functions/#menu-titles); This **menu title** should have the **url** of your new page `/admin/app_page/{name of your page}/`                        
-
-2- now to get your page information check `window.SBsdk.SBdata.page`        
-- you will find the name of your page in `window.SBsdk.SBdata.page.id`        
-- you will find the querystrings of your page in `window.SBsdk.SBdata.page.query_strings`       
-- you can know the type of your page using `window.SBsdk.SBdata.page.type` in this case it will be **custom-front**    
-
-3-  use the pages info (window.SBsdk.SBdata.page) to inject your data and enjoy   
        
 ---------------------------------
       
@@ -400,37 +638,6 @@ SBsdk.SBfunctions.dialog_actions();
 // To close all dialogs but not the locked dialogs          
 SBsdk.SBfunctions.dialog_actions('.sbsdkDialog:not(.dialog-locked)');         
 ```
-          
----------------
-             
-#### Throbber / Loader
-
-to add a throbber to the page.    
-call `SBsdk.SBfunctions.loader(action, time_in_ms);`               
-         
-**Note:**   
-1- `SBsdk.SBfunctions.loader()` // add a throbber to the page      
-2- `SBsdk.SBfunctions.loader('remove')` // removes a throbber from the page         
-3- `SBsdk.SBfunctions.loader('remove', 100)` // removes a throbber from the page after 100 ms                  
-4- the throbber is in the following markup: `<div class="ajax-progress ajax-progress-throbber sdk-throbber"></div>` (Given for styling purposes)                 
-              
-**Note:**   
-```                    
-// @Code
-// Consider the following senario
-
-//**app1 calls:**         
-SBsdk.SBfunctions.loader();
-
-//**app2 calls:**         
-SBsdk.SBfunctions.loader();
-SBsdk.SBfunctions.loader('remove');
-
-// @Result
-// In this case the Throbber/Loader Will not be removed from the page
-// Unless all apps that registered the throbber calls the `remove` action.
-// Thus, to remove the throbber app1 has to call `SBsdk.SBfunctions.loader('remove');`     
-```
 
 ---------------
                         
@@ -529,51 +736,6 @@ options = {
             
 **Preview**:        
 ![screen_shot](/img/screen_shot.png)      
-                
--------------------------
-
-#### Top-Action Button        
-
-Generates a top action button in the **back office** pages.   
-   
-`window.SBsdk.SBfunctions.add_top_action_button(options);`        
-The parameter options has the following structure:              
-```
-options = {
-  class: 'class',  // class of the btn
-  id: 'idddsss', // id of the btn
-  name: 'naaameeee', // name of the btn
-  Title: 'Titleeee' // title of the btn
-} 
-```      
-![top_action_btn_](/img/top_action_btn_.png)
-
---------------------------------------------      
-
-#### Get Resource - Rendered Raw HTML
-
-In general **get resource** is a way to get the html with its functionality as it is in the shopbuilder platform.        
-**Usage**:     
-```
-window.SBsdk.SBfunctions.get_resource(resource_type, resource_data, function (result) {
-  // returns the html of the needed resouce and functionality in (result) var
-});
-``` 
-           
-**Available Resources**:           
-~~~~~~~~~~~~~~~~~~       
-              
--**view_product**      
-          
--This resouce gets the **product view html** with its functionality. You can place this HTML where you want, for you have full control of it.                              
--Product node ID is used in the request. {base_url}/sb/product_view/{prodId}          
-**Usage:**               
-``` 
-window.SBsdk.SBfunctions.get_resource('view_product', {'id': prodId}, function (result) {
-  // The html of the product and functionality are all in (result) var
-});
-```
-
 
 -----------------------------------------
 
@@ -582,155 +744,5 @@ window.SBsdk.SBfunctions.get_resource('view_product', {'id': prodId}, function (
 To generate dom use: `window.SBsdk.SBfunctions.SBmessages.generateDom(type, options);`         
 
 For all this function details click [here](/sdk/dom-generation)
-           
---------------------
-
-#### Apply Special Select Effect On Existing Selects
-        
-To transform existing select found in the website to a [special select](/sdk/dom-generation/#special-select) use the function of `window.SBsdk.SBfunctions.sbsdk_select_style (selector, options)`;   
-         
-*where*:                     
-**Selector** is your select field selector ex: `#selector` or `.selector`       
-and **options**: `(optional)`               
-> `options = {`         
->   `dropdownCssClass: 'class',` // class that is added for the dropdown     
->   `addAsterisk: defaultValueOfSelectField,` // adding astericks for the default value     
->   `searchable: {placeholder: 'hello'},` // adding a search field with an optional placeholder          
-> `}`              
-                 
-*Note 1: If you want to call this library for a select **after ajax call** this function in [page_event_{{appd}}](/sdk/callbacks/#page-ajax-events)*             
-           
-*Note 2: If you want to generate a special select, check [here](/sdk/dom-generation/#special-select).*          
-      
-**Example:**   
-```       
-window.SBsdk.SBfunctions.sbsdk_select_style('select#edit-field-gender-und',
-{
-  dropdownCssClass: 'hello-dropdown-css-class',
-  addAsterisk:  '_none',
-  searchable: {placeholder: 'hello'}
-});
-
-```
          
 -------------------------------------    
-            
-#### Back Office Table Component
-  
-`SBsdk.SBfunctions.backoffice_table(options);`   
-**Parameters:**          
-the `options` parameter has the following structure:    
-```
-options = {
-  prepend_to_selector: '.selector-to-prepend-to' OR '#selector-to-prepend-to',
-  wrapperClass: 'wrapper-class', 
-  class: 'class-class',
-  custom_cols_length : 8,
-  checkboxes : 1, 
-  image: 1,  
-  custom_header: [{index: 2, value: 'title2'}, {index: 1, value: 'title1'}],
-  data: [ {
-            row_id: 'this-row-1', 
-            img_url: 'https://...',
-            custom_columns: [ {index: 1, value: 'index2 text'} , {index: 0, value: 'index0 text'} ] // column data added.
-          },
-          {...},
-          ..
-        ],
-  delete: 'delete_callback',
-};
-```
-*Where:*   
--`prepend_to_selector` is the selector to prepend the table to *(by default will be appeneded to the `body`)*.       
--`wrapperClass` is the wrapper class of the table.        
--`class` is the class of the table.          
--`custom_cols_length` specify how many custom rows you wish to have other than del, checkbox and image cols.                        
--`checkboxes` enables checkboxes.                  
--`image` enables usage of images.      
--`custom_header` add the titles in the header of your table in a specific index.     
--`data` is where you start filling the table content.     
-
-*  `row_id` is the id of your row
-*  `img_url` is the image url of this specific row -- image option should be enabled
-*  `custom_columns` the content of your table in a specific index.     
-
--`delete` enables the delete functionality.      
-
-*  Add the name of your `delete callback function` and dont forget to `define it`.       
-*  This function should have an `array of row ids` as a `parameter`.         
-*  It should `return true` if the deletion of all the row_id where successfull `else` it should return an object having an error with the error message and an array of all row ids that got deleted successfully `{error : 'error-message', deleted_successfully:[row_id1, row_id2 ..]}`            
-
-
-**Return:**
-the return of this function will be of this structure:
-```
-{table_id : 'data-bo-table-name-{{id}}' , dom: 'html-of-the-table-generated'}
-```
-        
-**purpose:**       
-- Generates a table as the one we have in the backoffice       
-- Has the option to add checkboxes to select a row or to select all rows        
-- Has the option to delete a row or to delete multiple rows    
-- Has the option to add an image per row             
-         
-**preview:**      
-![table-component](/img/table-component.png)    
-      
-**Helper functions:**     
-*-To get all the checked rows:*         
-Returns an array of checked row ids
-`SBsdk.SBfunctions.backoffice_table_get_checked_row_ids(table_id);`  
-                 
-**Example:**
-```
-// Step 1: define the options you need
-options = {
-  wrapperClass: 'wrapper-class',
-  class: 'class-class',
-  custom_cols_length : 8,
-  checkboxes : 1,
-  image: 1,
-  delete: 'delete_callback',
-  custom_header: [{index: 2, value: 'title2'}, {index: 1, value: 'title1'}],
-  data: [  {
-            row_id: 'this-row-1',
-            img_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4AzTskTQPjEiS7-ZA5Vkv7Jf02JcFelXvl7hDYMwM5eBx2tszMw',
-            custom_columns: [ {index: 1, value: 'index2 text'} , {index: 0, value: 'index0 text'} ]
-           },
-           {
-            row_id: 'this-row-2',
-            img_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4AzTskTQPjEiS7-ZA5Vkv7Jf02JcFelXvl7hDYMwM5eBx2tszMw',
-            custom_columns: [ {index: 1, value: 'index11 text'} , {index: 0, value: 'index00 text'} ]
-           },
-        ],
-};
-// Step 2: define your delete callback function
-window.delete_callback = function(array_of_row_ids_to_be_deleted){
-  //array_of_row_ids_to_be_deleted will be of the following structure
-  // ['this-row-1', 'this-row-2', ..] 
-  // depending on what was selected to be deleted
-  console.log('DELETE');
-
-  // INCASE OF ERROR 
-  // ex1
-  // return {error : 'Couldn't delete all of your rows, deleted_successfully: [] };
-  // ex2
-  // return {error : 'Couldn't delete some of your rows, deleted_successfully: ['this-row-2'] };
-  
-
-  // INCASE THE DELETION WAS SUCCESSFUL
-  return true; // successful -- all where deleted
-  
-}
-// Step 3: create your table that will be inserted in the page.
-
-var table_info = SBsdk.SBfunctions.backoffice_table(options);
-
-console.log(table_info.table_id); // returns table_id; something like `data-bo-table-name-{{id}}`
-console.log(table_info.dom); // returns the table html that was prepended to the dom.
-
-SBsdk.SBfunctions.backoffice_table_get_checked_row_ids(table_info.table_id);  // returns an array of the checked row_ids
-```    
-      
-**Note:** if you are not injecting your table on page load (ex. case of ajax) then call the [refresh function](/sdk/functions/#refresh) afterwards.
-
