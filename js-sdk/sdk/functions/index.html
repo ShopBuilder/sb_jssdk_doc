@@ -210,17 +210,19 @@ the <code>options</code> parameter has the following structure:    </p>
   class: 'class-class',
   custom_cols_length : 8,
   checkboxes : 1, 
-  image: 1,  
+  image: 1,
   custom_header: [{index: 2, value: 'title2'}, {index: 1, value: 'title1'}],
   data: [ {
+            class: '',
             row_id: 'this-row-1', 
             img_url: 'https://...',
-            custom_columns: [ {index: 1, value: 'index2 text'} , {index: 0, value: 'index0 text'} ] // column data added.
+            custom_columns: [ {index: 1, value: 'index2 text', class: ''} , {index: 0, value: 'index0 text', class: ''} ] // column data added.
           },
           {...},
           ..
         ],
   delete: 'delete_callback',
+  search:  {class: '', wrapperClass:'', callback: 'search_callback'},
 };
 </code></pre>
 
@@ -241,9 +243,32 @@ the <code>options</code> parameter has the following structure:    </p>
 <p>-<code>delete</code> enables the delete functionality.      </p>
 <ul>
 <li>Add the name of your <code>delete callback function</code> and dont forget to <code>define it</code>.       </li>
-<li>This function should have an <code>array of row ids</code> as a <code>parameter</code>.         </li>
-<li>It should <code>return true</code> if the deletion of all the row_id where successfull <code>else</code> it should return an object having an error with the error message and an array of all row ids that got deleted successfully <code>{error : 'error-message', deleted_successfully:[row_id1, row_id2 ..]}</code>            </li>
+<li>This function will be given a <code>table_id</code> and <code>array of row ids</code> as a <code>parameter</code>.   </li>
+<li>It should <code>return wait</code> so that it waits for the data to be fetched        </li>
+<li>When your data is fetched call the function <code>SBsdk.SBfunctions.backoffice_table_delete_done(table_id, result);</code> <br />
+-- <em>Where</em> <strong>result</strong> is of the following format:<br />
+if error : <code>{error : 'error-message', deleted_successfully:[row_id1, row_id2 ..]}</code>          <br />
+if success : <code>{deleted_successfully:[row_id1, row_id2 ..]}</code>            </li>
 </ul>
+<p>-<code>search</code> enables the search functionality.      </p>
+<ul>
+<li>Add the name of your <code>search callback function</code> and dont forget to <code>define it</code>.       </li>
+<li>This function will be given a <code>table_id</code> and the search <code>text</code> as a <code>parameter</code>.         </li>
+<li>It should <code>return wait</code> so that it waits for the data to be fetched      </li>
+<li>When your data is fetched call the function <code>SBsdk.SBfunctions.backoffice_table_search_done(table_id, newdata);</code> <br />
+-- <em>Where</em> <strong>newdata</strong> is of the following format:   </li>
+</ul>
+<pre><code>var newdata = [ {
+    class: '',
+    row_id: 'this-row-1', 
+    img_url: 'https://...',
+    custom_columns: [ {index: 1, value: 'index2 text', class: ''} , {index: 0, value: 'index0 text', class: ''} ] // column data added.
+  },
+  {...},
+  ..
+],
+</code></pre>
+
 <p><strong>Return:</strong>
 the return of this function will be of this structure:</p>
 <pre><code>{table_id : 'data-bo-table-name-{{id}}' , dom: 'html-of-the-table-generated'}
@@ -263,6 +288,7 @@ Returns an array of checked row ids
 <p><strong>Example:</strong></p>
 <pre><code>// Step 1: define the options you need
 options = {
+  search: {class: 'testing-class', wrapperClass:'hello', callback: 'search_me'},
   wrapperClass: 'wrapper-class',
   class: 'class-class',
   custom_cols_length : 8,
@@ -271,9 +297,10 @@ options = {
   delete: 'delete_callback',
   custom_header: [{index: 2, value: 'title2'}, {index: 1, value: 'title1'}],
   data: [  {
+            class: 'class111111',
             row_id: 'this-row-1',
             img_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4AzTskTQPjEiS7-ZA5Vkv7Jf02JcFelXvl7hDYMwM5eBx2tszMw',
-            custom_columns: [ {index: 1, value: 'index2 text'} , {index: 0, value: 'index0 text'} ]
+            custom_columns: [ {index: 1, value: 'index2 text', class: 'lalalalal'} , {index: 0, value: 'index0 text'} ]
            },
            {
             row_id: 'this-row-2',
@@ -283,26 +310,39 @@ options = {
         ],
 };
 // Step 2: define your delete callback function
-window.delete_callback = function(array_of_row_ids_to_be_deleted){
-  //array_of_row_ids_to_be_deleted will be of the following structure
-  // ['this-row-1', 'this-row-2', ..] 
-  // depending on what was selected to be deleted
-  console.log('DELETE');
-
-  // INCASE OF ERROR 
-  // ex1
-  // return {error : 'Couldn't delete all of your rows, deleted_successfully: [] };
-  // ex2
-  // return {error : 'Couldn't delete some of your rows, deleted_successfully: ['this-row-2'] };
-
-
-  // INCASE THE DELETION WAS SUCCESSFUL
-  return true; // successful -- all where deleted
+window.delete_callback = function(table_id, array_of_row_ids_to_be_deleted){
+  // process your data
+  // fetch  your data
+  jQuery.ajax({
+    url: ...,
+    success: function(result){
+      - Call the function to end the wait and to notify that the result came back
+      SBsdk.SBfunctions.backoffice_table_search_done(table_info.table_id, {deleted_successfully:['row_id1', 'row_id2']});
+    }
+  });
+return 'wait';
 
 }
+
 // Step 3: create your table that will be inserted in the page.
 
 var table_info = SBsdk.SBfunctions.backoffice_table(options);
+
+
+// Step 4: defined your search callback function
+window.search_me = function(table_id, text){
+  // process your data
+  // fetch  your data
+  jQuery.ajax({
+    url: ...,
+    success: function(result){
+      // 1- process the result
+      // 2- Call the function to end the wait and to notify that the result came back
+      SBsdk.SBfunctions.backoffice_table_search_done(table_info.table_id, result);
+    }
+  });
+  return 'wait';
+};
 
 console.log(table_info.table_id); // returns table_id; something like `data-bo-table-name-{{id}}`
 console.log(table_info.dom); // returns the table html that was prepended to the dom.
