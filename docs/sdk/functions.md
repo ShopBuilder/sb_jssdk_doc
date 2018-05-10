@@ -57,13 +57,17 @@ options = {
 -`delete` enables the delete functionality.      
 
 *  Add the name of your `delete callback function` and dont forget to `define it`.       
-*  This function will be given an `array of row ids` as a `parameter`.         
-*  It should `return true` if the deletion of all the row_id where successfull `else` it should return an object having an error with the error message and an array of all row ids that got deleted successfully `{error : 'error-message', deleted_successfully:[row_id1, row_id2 ..]}`            
+*  This function will be given a `table_id` and `array of row ids` as a `parameter`.   
+*  It should `return wait` so that it waits for the data to be fetched        
+*  When your data is fetched call the function `SBsdk.SBfunctions.backoffice_table_delete_done(table_id, result);`   
+-- *Where* **result** is of the following format:  
+if error : `{error : 'error-message', deleted_successfully:[row_id1, row_id2 ..]}`            
+if success : `{deleted_successfully:[row_id1, row_id2 ..]}`            
 
 -`search` enables the search functionality.      
 
 *  Add the name of your `search callback function` and dont forget to `define it`.       
-*  This function should will be given a `table_id` and the search `text` as a `parameter`.         
+*  This function will be given a `table_id` and the search `text` as a `parameter`.         
 *  It should `return wait` so that it waits for the data to be fetched      
 *  When your data is fetched call the function `SBsdk.SBfunctions.backoffice_table_search_done(table_id, newdata);`   
 -- *Where* **newdata** is of the following format:   
@@ -126,21 +130,17 @@ options = {
         ],
 };
 // Step 2: define your delete callback function
-window.delete_callback = function(array_of_row_ids_to_be_deleted){
-  //array_of_row_ids_to_be_deleted will be of the following structure
-  // ['this-row-1', 'this-row-2', ..] 
-  // depending on what was selected to be deleted
-  console.log('DELETE');
-
-  // INCASE OF ERROR 
-  // ex1
-  // return {error : 'Couldn't delete all of your rows, deleted_successfully: [] };
-  // ex2
-  // return {error : 'Couldn't delete some of your rows, deleted_successfully: ['this-row-2'] };
-  
-
-  // INCASE THE DELETION WAS SUCCESSFUL
-  return true; // successful -- all where deleted
+window.delete_callback = function(table_id, array_of_row_ids_to_be_deleted){
+  // process your data
+  // fetch  your data
+  jQuery.ajax({
+    url: ...,
+    success: function(result){
+      - Call the function to end the wait and to notify that the result came back
+      SBsdk.SBfunctions.backoffice_table_search_done(table_info.table_id, {deleted_successfully:['row_id1', 'row_id2']});
+    }
+  });
+return 'wait';
   
 }
 
