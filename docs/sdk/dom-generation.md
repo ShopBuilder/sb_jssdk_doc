@@ -207,7 +207,7 @@ options = {
 type = 'textfield';
 options = {
   wrapperClass: 'wrapper-class',
-  type: password' or 'date', // if type is text dont put it
+  type: 'password' or 'date' or 'search'("search" is BO specifc - to take the design of a search field), // if type is text dont put type option
   class: 'class',
   name: 'name',
   value: 'value',

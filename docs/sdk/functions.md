@@ -25,17 +25,19 @@ options = {
   class: 'class-class',
   custom_cols_length : 8,
   checkboxes : 1, 
-  image: 1,  
+  image: 1,
   custom_header: [{index: 2, value: 'title2'}, {index: 1, value: 'title1'}],
   data: [ {
+            class: '',
             row_id: 'this-row-1', 
             img_url: 'https://...',
-            custom_columns: [ {index: 1, value: 'index2 text'} , {index: 0, value: 'index0 text'} ] // column data added.
+            custom_columns: [ {index: 1, value: 'index2 text', class: ''} , {index: 0, value: 'index0 text', class: ''} ] // column data added.
           },
           {...},
           ..
         ],
   delete: 'delete_callback',
+  search:  {class: '', wrapperClass:'', callback: 'search_callback'},
 };
 ```
 *Where:*   
@@ -55,9 +57,28 @@ options = {
 -`delete` enables the delete functionality.      
 
 *  Add the name of your `delete callback function` and dont forget to `define it`.       
-*  This function should have an `array of row ids` as a `parameter`.         
+*  This function will be given an `array of row ids` as a `parameter`.         
 *  It should `return true` if the deletion of all the row_id where successfull `else` it should return an object having an error with the error message and an array of all row ids that got deleted successfully `{error : 'error-message', deleted_successfully:[row_id1, row_id2 ..]}`            
 
+-`search` enables the search functionality.      
+
+*  Add the name of your `search callback function` and dont forget to `define it`.       
+*  This function should will be given a `table_id` and the search `text` as a `parameter`.         
+*  It should `return wait` so that it waits for the data to be fetched      
+*  When your data is fetched call the function `SBsdk.SBfunctions.backoffice_table_search_done(table_id, newdata);`   
+-- *Where* **newdata** is of the following format:   
+
+```
+var newdata = [ {
+    class: '',
+    row_id: 'this-row-1', 
+    img_url: 'https://...',
+    custom_columns: [ {index: 1, value: 'index2 text', class: ''} , {index: 0, value: 'index0 text', class: ''} ] // column data added.
+  },
+  {...},
+  ..
+],
+```      
 
 **Return:**
 the return of this function will be of this structure:
@@ -83,6 +104,7 @@ Returns an array of checked row ids
 ```
 // Step 1: define the options you need
 options = {
+  search: {class: 'testing-class', wrapperClass:'hello', callback: 'search_me'},
   wrapperClass: 'wrapper-class',
   class: 'class-class',
   custom_cols_length : 8,
@@ -91,9 +113,10 @@ options = {
   delete: 'delete_callback',
   custom_header: [{index: 2, value: 'title2'}, {index: 1, value: 'title1'}],
   data: [  {
+            class: 'class111111',
             row_id: 'this-row-1',
             img_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4AzTskTQPjEiS7-ZA5Vkv7Jf02JcFelXvl7hDYMwM5eBx2tszMw',
-            custom_columns: [ {index: 1, value: 'index2 text'} , {index: 0, value: 'index0 text'} ]
+            custom_columns: [ {index: 1, value: 'index2 text', class: 'lalalalal'} , {index: 0, value: 'index0 text'} ]
            },
            {
             row_id: 'this-row-2',
@@ -120,9 +143,26 @@ window.delete_callback = function(array_of_row_ids_to_be_deleted){
   return true; // successful -- all where deleted
   
 }
+
 // Step 3: create your table that will be inserted in the page.
 
 var table_info = SBsdk.SBfunctions.backoffice_table(options);
+
+
+// Step 4: defined your search callback function
+window.search_me = function(table_id, text){
+  // process your data
+  // fetch  your data
+  jQuery.ajax({
+    url: ...,
+    success: function(result){
+      // 1- process the result
+      // 2- Call the function to end the wait and to notify that the result came back
+      SBsdk.SBfunctions.backoffice_table_search_done(table_info.table_id, result);
+    }
+  });
+  return 'wait';
+};
 
 console.log(table_info.table_id); // returns table_id; something like `data-bo-table-name-{{id}}`
 console.log(table_info.dom); // returns the table html that was prepended to the dom.
