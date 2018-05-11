@@ -36,6 +36,7 @@ options = {
           {...},
           ..
         ],
+  pagination: {wrapperClass:'', itemsTotal: '', itemsPerPage: '', callback: ''},
   delete: 'delete_callback',
   search:  {class: '', wrapperClass:'', callback: 'search_callback'},
 };
@@ -54,23 +55,50 @@ options = {
 *  `img_url` is the image url of this specific row -- image option should be enabled
 *  `custom_columns` the content of your table in a specific index.     
 
+-`pagination` enables the pagination functionality.      
+
+*  Add the number of items per page `itemsPerPage` and the total number of results in `itemsTotal`.       
+*  If `itemsTotal` <=  `itemsPerPage`, there will be no pagination.       
+*  Add the name of your `pagination callback function` and don't forget to `define it`.       
+*  This function will be called when paginating and given a `parameter` of `table_id` and `page number`.         
+*  It should `return wait` so that it waits for the data to be fetched      
+*  When your data is fetched call the function `SBsdk.SBfunctions.backoffice_table_paginate_done(table_id, newdata);`   
+-- *Where*     
+-**newdata** is of the following format:   
+
+```
+var newdata = [ {
+    class: '',
+    row_id: 'this-row-1', 
+    img_url: 'https://...',
+    custom_columns: [ {index: 1, value: 'index2 text', class: ''} , {index: 0, value: 'index0 text', class: ''} ] // column data added.
+  },
+  {...},
+  ..
+],
+```      
+
 -`delete` enables the delete functionality.      
 
-*  Add the name of your `delete callback function` and dont forget to `define it`.       
+*  Add the name of your `delete callback function` and don't forget to `define it`.       
 *  This function will be given a `table_id` and `array of row ids` as a `parameter`.   
 *  It should `return wait` so that it waits for the data to be fetched        
-*  When your data is fetched call the function `SBsdk.SBfunctions.backoffice_table_delete_done(table_id, result);`   
--- *Where* **result** is of the following format:  
-if error : `{error : 'error-message', deleted_successfully:[row_id1, row_id2 ..]}`            
-if success : `{deleted_successfully:[row_id1, row_id2 ..]}`            
+*  When your data is fetched call the function `SBsdk.SBfunctions.backoffice_table_delete_done(table_id, result, pagination_total_items);`   
+-- *Where*        
+-**result** is of the following format:  
+if error : `{error : 'error-message', deleted_successfully:[row_id1, row_id2 ..], 10}`            
+if success : `{deleted_successfully:[row_id1, row_id2 ..], 10}`  
+-**pagination_total_items** (optional) in case of pagination -- specify the new total number of records after the deletion  
 
 -`search` enables the search functionality.      
 
-*  Add the name of your `search callback function` and dont forget to `define it`.       
+*  Add the name of your `search callback function` and don't forget to `define it`.       
 *  This function will be given a `table_id` and the search `text` as a `parameter`.         
 *  It should `return wait` so that it waits for the data to be fetched      
-*  When your data is fetched call the function `SBsdk.SBfunctions.backoffice_table_search_done(table_id, newdata);`   
--- *Where* **newdata** is of the following format:   
+*  When your data is fetched call the function `SBsdk.SBfunctions.backoffice_table_search_done(table_id, newdata, pagination_total_items);`   
+-- *Where*     
+-**pagination_total_items** (optional) in case of pagination -- specify the new total number of records after the search  
+-**newdata** is of the following format:   
 
 ```
 var newdata = [ {

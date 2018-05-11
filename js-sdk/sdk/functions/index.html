@@ -221,6 +221,7 @@ the <code>options</code> parameter has the following structure:    </p>
           {...},
           ..
         ],
+  pagination: {wrapperClass:'', itemsTotal: '', itemsPerPage: '', callback: ''},
   delete: 'delete_callback',
   search:  {class: '', wrapperClass:'', callback: 'search_callback'},
 };
@@ -240,23 +241,49 @@ the <code>options</code> parameter has the following structure:    </p>
 <li><code>img_url</code> is the image url of this specific row -- image option should be enabled</li>
 <li><code>custom_columns</code> the content of your table in a specific index.     </li>
 </ul>
+<p>-<code>pagination</code> enables the pagination functionality.      </p>
+<ul>
+<li>Add the number of items per page <code>itemsPerPage</code> and the total number of results in <code>itemsTotal</code>.       </li>
+<li>If <code>itemsTotal</code> &lt;=  <code>itemsPerPage</code>, there will be no pagination.       </li>
+<li>Add the name of your <code>pagination callback function</code> and don't forget to <code>define it</code>.       </li>
+<li>This function will be called when paginating and given a <code>parameter</code> of <code>table_id</code> and <code>page number</code>.         </li>
+<li>It should <code>return wait</code> so that it waits for the data to be fetched      </li>
+<li>When your data is fetched call the function <code>SBsdk.SBfunctions.backoffice_table_paginate_done(table_id, newdata);</code> <br />
+-- <em>Where</em>   <br />
+-<strong>newdata</strong> is of the following format:   </li>
+</ul>
+<pre><code>var newdata = [ {
+    class: '',
+    row_id: 'this-row-1', 
+    img_url: 'https://...',
+    custom_columns: [ {index: 1, value: 'index2 text', class: ''} , {index: 0, value: 'index0 text', class: ''} ] // column data added.
+  },
+  {...},
+  ..
+],
+</code></pre>
+
 <p>-<code>delete</code> enables the delete functionality.      </p>
 <ul>
-<li>Add the name of your <code>delete callback function</code> and dont forget to <code>define it</code>.       </li>
+<li>Add the name of your <code>delete callback function</code> and don't forget to <code>define it</code>.       </li>
 <li>This function will be given a <code>table_id</code> and <code>array of row ids</code> as a <code>parameter</code>.   </li>
 <li>It should <code>return wait</code> so that it waits for the data to be fetched        </li>
-<li>When your data is fetched call the function <code>SBsdk.SBfunctions.backoffice_table_delete_done(table_id, result);</code> <br />
--- <em>Where</em> <strong>result</strong> is of the following format:<br />
-if error : <code>{error : 'error-message', deleted_successfully:[row_id1, row_id2 ..]}</code>          <br />
-if success : <code>{deleted_successfully:[row_id1, row_id2 ..]}</code>            </li>
+<li>When your data is fetched call the function <code>SBsdk.SBfunctions.backoffice_table_delete_done(table_id, result, pagination_total_items);</code> <br />
+-- <em>Where</em>      <br />
+-<strong>result</strong> is of the following format:<br />
+if error : <code>{error : 'error-message', deleted_successfully:[row_id1, row_id2 ..], 10}</code>          <br />
+if success : <code>{deleted_successfully:[row_id1, row_id2 ..], 10}</code><br />
+-<strong>pagination_total_items</strong> (optional) in case of pagination -- specify the new total number of records after the deletion  </li>
 </ul>
 <p>-<code>search</code> enables the search functionality.      </p>
 <ul>
-<li>Add the name of your <code>search callback function</code> and dont forget to <code>define it</code>.       </li>
+<li>Add the name of your <code>search callback function</code> and don't forget to <code>define it</code>.       </li>
 <li>This function will be given a <code>table_id</code> and the search <code>text</code> as a <code>parameter</code>.         </li>
 <li>It should <code>return wait</code> so that it waits for the data to be fetched      </li>
-<li>When your data is fetched call the function <code>SBsdk.SBfunctions.backoffice_table_search_done(table_id, newdata);</code> <br />
--- <em>Where</em> <strong>newdata</strong> is of the following format:   </li>
+<li>When your data is fetched call the function <code>SBsdk.SBfunctions.backoffice_table_search_done(table_id, newdata, pagination_total_items);</code> <br />
+-- <em>Where</em>   <br />
+-<strong>pagination_total_items</strong> (optional) in case of pagination -- specify the new total number of records after the search<br />
+-<strong>newdata</strong> is of the following format:   </li>
 </ul>
 <pre><code>var newdata = [ {
     class: '',
