@@ -25,17 +25,20 @@ options = {
   class: 'class-class',
   custom_cols_length : 8,
   checkboxes : 1, 
-  image: 1,  
+  image: 1,
   custom_header: [{index: 2, value: 'title2'}, {index: 1, value: 'title1'}],
   data: [ {
+            class: '',
             row_id: 'this-row-1', 
             img_url: 'https://...',
-            custom_columns: [ {index: 1, value: 'index2 text'} , {index: 0, value: 'index0 text'} ] // column data added.
+            custom_columns: [ {index: 1, value: 'index2 text', class: ''} , {index: 0, value: 'index0 text', class: ''} ] // column data added.
           },
           {...},
           ..
         ],
+  pagination: {wrapperClass:'', itemsTotal: '', itemsPerPage: '', callback: ''},
   delete: 'delete_callback',
+  search:  {class: '', wrapperClass:'', callback: 'search_callback'},
 };
 ```
 *Where:*   
@@ -52,12 +55,62 @@ options = {
 *  `img_url` is the image url of this specific row -- image option should be enabled
 *  `custom_columns` the content of your table in a specific index.     
 
+-`pagination` enables the pagination functionality.      
+
+*  Add the number of items per page `itemsPerPage` and the total number of results in `itemsTotal`.       
+*  If `itemsTotal` <=  `itemsPerPage`, there will be no pagination.       
+*  Add the name of your `pagination callback function` and don't forget to `define it`.       
+*  This function will be called when paginating and given a `parameter` of `table_id` and `page number`.         
+*  It should `return wait` so that it waits for the data to be fetched      
+*  When your data is fetched call the function `SBsdk.SBfunctions.backoffice_table_paginate_done(table_id, newdata);`   
+-- *Where*     
+-**newdata** is of the following format:   
+
+```
+var newdata = [ {
+    class: '',
+    row_id: 'this-row-1', 
+    img_url: 'https://...',
+    custom_columns: [ {index: 1, value: 'index2 text', class: ''} , {index: 0, value: 'index0 text', class: ''} ] // column data added.
+  },
+  {...},
+  ..
+],
+```      
+
 -`delete` enables the delete functionality.      
 
-*  Add the name of your `delete callback function` and dont forget to `define it`.       
-*  This function should have an `array of row ids` as a `parameter`.         
-*  It should `return true` if the deletion of all the row_id where successfull `else` it should return an object having an error with the error message and an array of all row ids that got deleted successfully `{error : 'error-message', deleted_successfully:[row_id1, row_id2 ..]}`            
+*  Add the name of your `delete callback function` and don't forget to `define it`.       
+*  This function will be given a `table_id` and `array of row ids` as a `parameter`.   
+*  It should `return wait` so that it waits for the data to be fetched        
+*  When your data is fetched call the function `SBsdk.SBfunctions.backoffice_table_delete_done(table_id, result, pagination_total_items);`   
+-- *Where*        
+-**result** is of the following format:  
+if error : `{error : 'error-message', deleted_successfully:[row_id1, row_id2 ..], 10}`            
+if success : `{deleted_successfully:[row_id1, row_id2 ..], 10}`  
+-**pagination_total_items** (optional) in case of pagination -- specify the new total number of records after the deletion  
 
+-`search` enables the search functionality.      
+
+*  Add the name of your `search callback function` and don't forget to `define it`.       
+*  This function will be given a `table_id` and the search `text` as a `parameter`.         
+*  It should `return wait` so that it waits for the data to be fetched      
+*  When your data is fetched call the function `SBsdk.SBfunctions.backoffice_table_search_done(table_id, newdata, pagination_total_items);`   
+-- *Where*     
+-**pagination_total_items** (optional) in case of pagination -- specify the new total number of records after the search  
+-**newdata** is of the following format:   
+
+```
+var newdata = [ {
+    class: '',
+    row_id: 'this-row-1', 
+    img_url: 'https://...',
+    custom_columns: [ {index: 1, value: 'index2 text', class: ''} , {index: 0, value: 'index0 text', class: ''} ] // column data added.
+  },
+  {...},
+  ..
+],
+```      
 
 **Return:**
 the return of this function will be of this structure:
@@ -83,6 +136,8 @@ Returns an array of checked row ids
 ```
 // Step 1: define the options you need
 options = {
+  search: {class: 'testing-class', wrapperClass:'hello', callback: 'search_me'},
+  pagination: {wrapperClass:'hello', itemsTotal: '20', itemsPerPage: '5', callback: 'paginate_to_page'},
   wrapperClass: 'wrapper-class',
   class: 'class-class',
   custom_cols_length : 8,
@@ -91,9 +146,10 @@ options = {
   delete: 'delete_callback',
   custom_header: [{index: 2, value: 'title2'}, {index: 1, value: 'title1'}],
   data: [  {
+            class: 'class111111',
             row_id: 'this-row-1',
             img_url: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4AzTskTQPjEiS7-ZA5Vkv7Jf02JcFelXvl7hDYMwM5eBx2tszMw',
-            custom_columns: [ {index: 1, value: 'index2 text'} , {index: 0, value: 'index0 text'} ]
+            custom_columns: [ {index: 1, value: 'index2 text', class: 'lalalalal'} , {index: 0, value: 'index0 text'} ]
            },
            {
             row_id: 'this-row-2',
@@ -103,26 +159,56 @@ options = {
         ],
 };
 // Step 2: define your delete callback function
-window.delete_callback = function(array_of_row_ids_to_be_deleted){
-  //array_of_row_ids_to_be_deleted will be of the following structure
-  // ['this-row-1', 'this-row-2', ..] 
-  // depending on what was selected to be deleted
-  console.log('DELETE');
-
-  // INCASE OF ERROR 
-  // ex1
-  // return {error : 'Couldn't delete all of your rows, deleted_successfully: [] };
-  // ex2
-  // return {error : 'Couldn't delete some of your rows, deleted_successfully: ['this-row-2'] };
-  
-
-  // INCASE THE DELETION WAS SUCCESSFUL
-  return true; // successful -- all where deleted
+window.delete_callback = function(table_id, array_of_row_ids_to_be_deleted){
+  // process your data
+  // fetch  your data
+  jQuery.ajax({
+    url: ...,
+    success: function(result){
+      - Call the function to end the wait and to notify that the result came back
+      SBsdk.SBfunctions.backoffice_table_search_done(table_info.table_id, {deleted_successfully:['row_id1', 'row_id2']});
+    }
+  });
+return 'wait';
   
 }
-// Step 3: create your table that will be inserted in the page.
+
+
+// Step 3: define your pagination callback function.
+window.paginate_to_page = function(table_id, pg_nb){
+  console.log(table_id, pg_nb);
+  // process your data
+  // fetch  your data
+  jQuery.ajax({
+    url: ...,
+    success: function(result){
+      // 1- process the result
+      // 2- Call the function to end the wait and to notify that the result came back
+      SBsdk.SBfunctions.backoffice_table_paginate_done(table_info.table_id, result);
+    }
+  });
+  return 'wait';
+}
+
+
+// Step 4: create your table that will be inserted in the page.
 
 var table_info = SBsdk.SBfunctions.backoffice_table(options);
+
+// Step 5: define your search callback function
+window.search_me = function(table_id, text){
+  // process your data
+  // fetch  your data
+  jQuery.ajax({
+    url: ...,
+    success: function(result){
+      // 1- process the result
+      // 2- Call the function to end the wait and to notify that the result came back
+      SBsdk.SBfunctions.backoffice_table_search_done(table_info.table_id, result);
+    }
+  });
+  return 'wait';
+};
 
 console.log(table_info.table_id); // returns table_id; something like `data-bo-table-name-{{id}}`
 console.log(table_info.dom); // returns the table html that was prepended to the dom.

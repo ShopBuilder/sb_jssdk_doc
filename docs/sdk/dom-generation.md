@@ -43,6 +43,43 @@ options = {
 
 --------------
 
+## BO - STICKY ACTION BUTTONS
+
+**Preview:**   
+  ~~~~~~     
+![radios](/img/stickyButton.png)
+
+**Parameters:**    
+  ~~~~~~~~~~~~ 
+
+
+```
+type = 'sticky_action_buttons';
+
+options = [
+  {type: '', class: '', id: '', Title: ''},
+  ...
+];
+```    
+ *where:*      
+- **type** can be `btn`, `del-btn` or `cancel`                
+- **notes:**      
+--  type `cancel` is a *link* by default it will have **CANCEL title**.               
+--  type `del-btn` by default will have **Delete title**. It doesnt have an id option, the first delete button added will have a delete widget to confirm deletion.
+         
+**Example:** 
+```
+window.SBsdk.SBfunctions.generateDom('sticky_action_buttons', [
+  {type: 'btn', class: 'class-1', id: 'id-1', Title: 'save-1'},
+  {type: 'btn', class: 'class-2', id: 'id-2', Title: 'save-2'},
+  {type: 'del-btn', class: 'class-del-1'}, // titles for del btns are optional   |||   no ids for del
+  {type: 'del-btn', class: 'class-del-1'}, // titles for del btns are optional   |||   no ids for del
+  {type: 'cancel', class: 'class-link-1' , id: 'idddd', Title: 'ssss'} // titles for cancels are optional
+]);
+```
+            
+----------------
+
 ## BO - RADIO
 
 **Preview:**   
@@ -170,7 +207,7 @@ options = {
 type = 'textfield';
 options = {
   wrapperClass: 'wrapper-class',
-  type: password' or 'date', // if type is text dont put it
+  type: 'password' or 'date' or 'search'("search" is BO specifc - to take the design of a search field), // if type is text dont put type option
   class: 'class',
   name: 'name',
   value: 'value',
@@ -624,7 +661,7 @@ options = {
 ``` 
 
 ---------------------
-          
+        
 ## BUTTON
 **Parameters:**    
   ~~~~~~~~~~~~ 
@@ -636,7 +673,8 @@ options = {
   class: 'class',
   id: 'id',
 };
-```      
+```  
+
 ----------------
 
 #### Examples  

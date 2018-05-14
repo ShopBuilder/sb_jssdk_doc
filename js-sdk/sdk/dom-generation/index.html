@@ -105,6 +105,9 @@
                 <li class="toctree-l3"><a href="#bo-titles">BO - TITLES</a></li>
                 
             
+                <li class="toctree-l3"><a href="#bo-sticky-action-buttons">BO - STICKY ACTION BUTTONS</a></li>
+                
+            
                 <li class="toctree-l3"><a href="#bo-radio">BO - RADIO</a></li>
                 
             
@@ -226,6 +229,36 @@ options = {
 </code></pre>
 
 <hr />
+<h2 id="bo-sticky-action-buttons">BO - STICKY ACTION BUTTONS</h2>
+<p><strong>Preview:</strong> <br />
+  ~~~~~~   <br />
+<img alt="radios" src="../../img/stickyButton.png" /></p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'sticky_action_buttons';
+
+options = [
+  {type: '', class: '', id: '', Title: ''},
+  ...
+];
+</code></pre>
+
+<p><em>where:</em>    <br />
+- <strong>type</strong> can be <code>btn</code>, <code>del-btn</code> or <code>cancel</code>              <br />
+- <strong>notes:</strong>    <br />
+--  type <code>cancel</code> is a <em>link</em> by default it will have <strong>CANCEL title</strong>.             <br />
+--  type <code>del-btn</code> by default will have <strong>Delete title</strong>. It doesnt have an id option, the first delete button added will have a delete widget to confirm deletion.</p>
+<p><strong>Example:</strong> </p>
+<pre><code>window.SBsdk.SBfunctions.generateDom('sticky_action_buttons', [
+  {type: 'btn', class: 'class-1', id: 'id-1', Title: 'save-1'},
+  {type: 'btn', class: 'class-2', id: 'id-2', Title: 'save-2'},
+  {type: 'del-btn', class: 'class-del-1'}, // titles for del btns are optional   |||   no ids for del
+  {type: 'del-btn', class: 'class-del-1'}, // titles for del btns are optional   |||   no ids for del
+  {type: 'cancel', class: 'class-link-1' , id: 'idddd', Title: 'ssss'} // titles for cancels are optional
+]);
+</code></pre>
+
+<hr />
 <h2 id="bo-radio">BO - RADIO</h2>
 <p><strong>Preview:</strong> <br />
   ~~~~~~   <br />
@@ -324,7 +357,7 @@ options = {
 <pre><code>type = 'textfield';
 options = {
   wrapperClass: 'wrapper-class',
-  type: password' or 'date', // if type is text dont put it
+  type: 'password' or 'date' or 'search'(&quot;search&quot; is BO specifc - to take the design of a search field), // if type is text dont put type option
   class: 'class',
   name: 'name',
   value: 'value',
