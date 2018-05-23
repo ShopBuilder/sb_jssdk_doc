@@ -248,7 +248,7 @@ the <code>options</code> parameter has the following structure:    </p>
 <li>Add the name of your <code>pagination callback function</code> and don't forget to <code>define it</code>.       </li>
 <li>This function will be called when paginating and given a <code>parameter</code> of <code>table_id</code> and <code>page number</code>.         </li>
 <li>It should <code>return wait</code> so that it waits for the data to be fetched      </li>
-<li>When your data is fetched call the function <code>SBsdk.SBfunctions.backoffice_table_paginate_done(table_id, newdata);</code> <br />
+<li>When your data is fetched call the function <code>SBsdk.SBfunctions.backoffice_table_paginate_done(table_id, newdata, number_of_page_requested);</code> <br />
 -- <em>Where</em>   <br />
 -<strong>newdata</strong> is of the following format:   </li>
 </ul>
@@ -363,7 +363,7 @@ window.paginate_to_page = function(table_id, pg_nb){
     success: function(result){
       // 1- process the result
       // 2- Call the function to end the wait and to notify that the result came back
-      SBsdk.SBfunctions.backoffice_table_paginate_done(table_info.table_id, result);
+      SBsdk.SBfunctions.backoffice_table_paginate_done(table_info.table_id, result, pg_nb);
     }
   });
   return 'wait';
