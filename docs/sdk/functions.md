@@ -62,7 +62,7 @@ options = {
 *  Add the name of your `pagination callback function` and don't forget to `define it`.       
 *  This function will be called when paginating and given a `parameter` of `table_id` and `page number`.         
 *  It should `return wait` so that it waits for the data to be fetched      
-*  When your data is fetched call the function `SBsdk.SBfunctions.backoffice_table_paginate_done(table_id, newdata);`   
+*  When your data is fetched call the function `SBsdk.SBfunctions.backoffice_table_paginate_done(table_id, newdata, number_of_page_requested);`   
 -- *Where*     
 -**newdata** is of the following format:   
 
@@ -184,7 +184,7 @@ window.paginate_to_page = function(table_id, pg_nb){
     success: function(result){
       // 1- process the result
       // 2- Call the function to end the wait and to notify that the result came back
-      SBsdk.SBfunctions.backoffice_table_paginate_done(table_info.table_id, result);
+      SBsdk.SBfunctions.backoffice_table_paginate_done(table_info.table_id, result, pg_nb);
     }
   });
   return 'wait';
