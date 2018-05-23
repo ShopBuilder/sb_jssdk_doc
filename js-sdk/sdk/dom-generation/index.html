@@ -636,7 +636,7 @@ var get_data = SBsdk.SBfunctions.wysiwyg_data('.pop-up'); // returns the html in
 <p><strong>2- Configure your wysiwyg:</strong>    </p>
 <p>by default you will have the cofiguration used in Shopbuilder platform that is               </p>
 <pre><code>config = {};
-config.toolbar = [&quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;JustifyLeft&quot;, &quot;JustifyCenter&quot;, &quot;JustifyRight&quot;, &quot;JustifyBlock&quot;, &quot;BidiLtr&quot;, &quot;BidiRtl&quot;, &quot;BulletedList&quot;, &quot;NumberedList&quot;, &quot;Outdent&quot;, &quot;Indent&quot;, &quot;Undo&quot;, &quot;Redo&quot;, &quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;, &quot;Image&quot;, &quot;Cut&quot;, &quot;Copy&quot;, &quot;Paste&quot;, &quot;PasteText&quot;, &quot;PasteFromWord&quot;, &quot;RemoveFormat&quot;, &quot;Format&quot;, &quot;FontSize&quot;, &quot;video_filter&quot;];
+config.toolbar = [&quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;JustifyLeft&quot;, &quot;JustifyCenter&quot;, &quot;JustifyRight&quot;, &quot;JustifyBlock&quot;, &quot;BidiLtr&quot;, &quot;BidiRtl&quot;, &quot;BulletedList&quot;, &quot;NumberedList&quot;, &quot;Outdent&quot;, &quot;Indent&quot;, &quot;Undo&quot;, &quot;Redo&quot;, &quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;, &quot;base64image&quot;, &quot;Cut&quot;, &quot;Copy&quot;, &quot;Paste&quot;, &quot;PasteText&quot;, &quot;PasteFromWord&quot;, &quot;RemoveFormat&quot;, &quot;Format&quot;, &quot;FontSize&quot;, &quot;video_filter&quot;];
 </code></pre>
 
 <p>To change the configuration of all of your wysiwyg use the function:     <br />
@@ -659,7 +659,7 @@ That is equivalent to:</p>
         { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] },
         { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
         { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
-        { name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+        { name: 'insert', items: [ 'Image', base64image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
         '/',
         { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
         { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
@@ -687,6 +687,7 @@ That is equivalent to:</p>
       ];
 </code></pre>
 
+<p>note that to use an image plugin you can use either: <code>base64image</code> or <code>Image</code>           </p>
 <p><strong>B) you can customize your configuration to get the desired wysiwyg</strong>     </p>
 <p><strong>Example</strong>:</p>
 <pre><code>// It be the first function to execute before any wysiwyg injection        
