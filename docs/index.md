@@ -26,7 +26,7 @@
                              
 *  Then head into the developers website and <a href="https://developers.shopbuilder.me/admin/apps" target="_blank">create a new app</a>, pick if you are creating a theme or a feature. A theme is used to provide a new design to a store and essentially manipulates the dom/css/js, a feature can also amend the dom but usually also need to make use of the API to access data of the store.        
               
-*  When creating an app that have an impact on the front end of the store you'll do that buy injecting Javascript/CSS files from your app directly into the store. To achieve that, every app has a widget section that allows you to inject some Javascript.          
+*  When creating an app that have an impact on the front end of the store you'll do that by injecting *Javascript/CSS* files from your app directly into the store. To achieve that, every app has a widget section that allows you to inject some **Javascript**. Note that only theme apps has a section where you can add your **External CSS link** that is the link of the main/global css file for your app theme.          
              
 *  Whenever the app is installed on a store, this piece of Javascript is injected into the store as is. Yet this injection is not dynamic so if you need to update this piece of code your users will have to re-install your app (pending we handle app versions). For now to overcome this limitation and to also have a better code structure we advise to use this area of code to inject a loader script.             
                 

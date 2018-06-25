@@ -6,7 +6,7 @@ To insert Dom implement:
 **Return** (obj)       
 
 -**Return** should be of the following structure:               
-*case 1)* I have my dom. so generate your dom and returned it directly.      
+*case 1)* I can generate my dom and returned it directly.      
 ```
 ret = {
   'data' : [
@@ -17,6 +17,28 @@ ret = {
   // if you have injected fields (custom text fields etc etc) that you need to validate upon submission of the page
   // give the html id of the form with the corresponding validation function name. 
   'submitHandler': {'formId1': 'submitHandler1', 'formId2': 'submitHandler2'}
+};
+```    
+*case 2)* I dont have the dom yet, still waiting for it; The DOM is being generated from another (scope) js code **asyncrounously**.    
+```
+ret = { 'wait' : {{appId}} }
+```
+
+
+**FOR THEME APPS (better performance - speed)**          
+use this function instead `function theme_inject_custom_data_{{appId}}(){}`         
+**parameters** : no parameters provided               
+**Return** (obj)       
+
+-**Return** should be of the following structure:               
+*case 1)* I can generate my dom and returned it directly.      
+```
+ret = {
+  'data' : [
+    {'id': id1, 'dom': dom1}, // descriptive unique id should be given for the dom you want to inject
+    {'id': id2, 'dom': dom2},
+    {'id': id3, 'dom': dom3}
+  ]
 };
 ```    
 *case 2)* I dont have the dom yet, still waiting for it; The DOM is being generated from another (scope) js code **asyncrounously**.    
@@ -217,7 +239,12 @@ To position DOM implement:
   };
 
 ```   
-              
+      
+
+**FOR THEME APPS (better performance - speed)**    
+`function theme_inject_position_data_{{app_id}}(appId, appId_dom_data){}`      
+// same as `function inject_position_data_{{appId}}(appId, appId_dom_data){}`
+
 ------------------
 
 
