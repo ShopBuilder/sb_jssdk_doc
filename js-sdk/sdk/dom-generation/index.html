@@ -117,6 +117,9 @@
                 <li class="toctree-l3"><a href="#bo-image-widget">BO - IMAGE WIDGET</a></li>
                 
             
+                <li class="toctree-l3"><a href="#bo-mini-table-image-uploader">BO - MINI TABLE IMAGE UPLOADER</a></li>
+                
+            
                 <li class="toctree-l3"><a href="#textfield">TEXTFIELD</a></li>
                 
             
@@ -348,6 +351,134 @@ options = {
   // check example to see how to populate this;
   //note that it can be an array of objs (multple image upload) or an array (single image)
 };
+</code></pre>
+
+<hr />
+<h2 id="bo-mini-table-image-uploader">BO - MINI TABLE IMAGE UPLOADER</h2>
+<p><strong>Preview:</strong>         <br />
+   ~~~~~~~ </p>
+<p><img alt="Screenshot_at_2018-01-29_09_11_17" src="../../img/collapsed.png" />   </p>
+<p><img alt="Screenshot_at_2018-01-29_09_11_17" src="../../img/uncollapsed.png" /></p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'mini_multi_image_uploader';
+
+options = {&quot;wrapperId&quot;: 'id', &quot;wrapperClass&quot;: 'class', // class and id of the main container of the widget
+ saveSpaceForImages : 1, // option to be able to collapse images or else they will be uploaded one after the other
+ inputFileData:{class: 'input-class', id :'input-id', size: '' }, // the class id and size for the input of type file
+ values : [ // if there are already images that have been uploaded and wanted to display them on page load 
+    { 
+      wrapperClass: '', // wrapper class of the image
+      viewImgData:{ width, height, src, alt, fid, class}, // data of the image
+      deleteFileData:{class} // class of the delete button
+    }, // 1st image
+    { 
+      wrapperClass: '', // wrapper class of the image
+      viewImgData:{ width, height, src, alt, fid, class}, // data of the image
+      deleteFileData:{class} // class of the delete button
+    }, // 2nd image
+    { 
+      wrapperClass: '', // wrapper class of the image
+      viewImgData:{ width, height, src, alt, fid, class}, // data of the image
+      deleteFileData:{class} // class of the delete button
+    }, // 3rd image
+    ...
+  ],
+};
+
+</code></pre>
+
+<p><strong>Helper Events:</strong>     <br />
+  ~~~~~~~~~~~~ </p>
+<p><strong>- mini_image_uploader EVENT:</strong>     <br />
+This event is used to allow 3rd party apps to respond to the uploaded file</p>
+<pre><code>$(document).on(&quot;mini_image_uploader&quot;,function(event) {
+  // you will find the following data
+  console.log(event.action); // upload
+  console.log(event.error);  // the error message - incase upload is of an unallowed extension
+  console.log(event.success); // incase of success of the upload ie. {'filename': filename.extension, 'file': base64Url, wrapperSelector: wrapperOfImage}
+});
+</code></pre>
+
+<p><strong>Helper Functions:</strong><br />
+  ~~~~~~~~~~~~ </p>
+<p><strong>- Mini uploader actions:</strong>  <br />
+<code>SBsdk.SBfunctions.mini_multi_image_uploader_actions(wrapperSelector, action, data);</code>                    <br />
+<em>Parameters:</em>  <br />
+- <strong>action</strong> can be <code>add_image</code> or <code>del_image</code>         <br />
+- <strong>wrapperSelector</strong>: if <code>action = add_image</code> then <code>wrapperSelector</code> is the <em>main wrapper of the whole image widget</em> else if <code>action = del_image</code> then it is the <em>wrapper of the image being deleted</em>       <br />
+- <strong>data</strong>: if <code>action = add_image</code> then data is the data of the images to be added</p>
+<pre><code>data : [
+  { 
+    wrapperClass: '', // wrapper class of the image
+    viewImgData:{ width, height, src, alt, fid, class}, // data of the image
+    deleteFileData:{class} // class of the delete button
+  }, // 1st image
+  { 
+    wrapperClass: '', // wrapper class of the image
+    viewImgData:{ width, height, src, alt, fid, class}, // data of the image
+    deleteFileData:{class} // class of the delete button
+  }, // 2nd image
+  { 
+    wrapperClass: '', // wrapper class of the image
+    viewImgData:{ width, height, src, alt, fid, class}, // data of the image
+    deleteFileData:{class} // class of the delete button
+  }, // 3rd image
+  ...
+]  
+</code></pre>
+
+<p>else if <code>action = del_image</code> then data can be <code>'success'</code> or <code>'fail'</code> to be able to remove the image being deleted or remove the throbber effect on it             </p>
+<p><strong>Example:</strong>               </p>
+<pre><code>// step1 add the image widget to the dom.
+output = window.SBsdk.SBfunctions.generateDom('mini_multi_image_uploader', options);
+$('body').append(output);
+// if it doesnt work out of the box .. you should refresh the sdk libraries or use them in the sdk callbacks
+// step2 refresh
+SBsdk.SBfunctions.refresh();
+// step3 act on upload to save your file
+$(document).on(&quot;mini_image_uploader&quot;,function(event) {
+  // you will find the following data
+  console.log(event.action); // upload
+  console.log(event.error);  // the error message - incase upload is of an unallowed extension
+  console.log(event.success); // incase of success of the upload ie. {'filename': filename.extension, 'file': base64Url, wrapperSelector: wrapperOfImage}
+  if(event.action == 'upload'){
+    if(typeof event.error !== 'undefined'){
+      // do something incase of error (maybe display the message)
+      alert(event.error);
+    }
+    if(typeof event.success !== 'undefined'){
+      // save the file in your files in case of success
+      //you will have
+      // file name being uploaded event.success.filename
+      // file base64url event.success.file
+      // referance of the wrapper of the whole image widget event.success.wrapperSelector
+      if(you_have_saved_it_successfully(event.success)){
+        // APPEND YOUR IMG
+        new_img_data = [
+          { 
+            wrapperClass: 'new-img',
+            viewImgData:{src: img_src},
+            deleteFileData:{class: 'delete-btn-class'} // class of the delete button
+          }
+        ]  
+        window.SBsdk.SBfunctions.mini_multi_image_uploader_actions( event.success.wrapperSelector, 'add_image', new_img_data);
+      }
+    }
+  }
+});
+// step4 act on delete to del your file
+$(document).on('click', &quot;.delete-btn-class&quot;,function(event) {
+  // DELETE YOUR IMAGE 
+
+  // if failed
+  //window.SBsdk.SBfunctions.mini_multi_image_uploader_actions($(this).closest('.image-wrapper'), 'del_image', 'fail');
+
+  // if success
+  window.SBsdk.SBfunctions.mini_multi_image_uploader_actions($(this).closest('.image-wrapper'), 'del_image', 'success');
+
+});
+
 </code></pre>
 
 <hr />
