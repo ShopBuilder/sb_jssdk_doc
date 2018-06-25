@@ -195,6 +195,150 @@ options = {
 };
 ```
 
+
+----------------
+         
+## BO - MINI TABLE IMAGE UPLOADER
+
+**Preview:**           
+   ~~~~~~~ 
+
+![Screenshot_at_2018-01-29_09_11_17](/img/collapsed.png)   
+
+![Screenshot_at_2018-01-29_09_11_17](/img/uncollapsed.png)
+
+**Parameters:**    
+  ~~~~~~~~~~~~ 
+
+```
+type = 'mini_multi_image_uploader';
+
+options = {"wrapperId": 'id', "wrapperClass": 'class', // class and id of the main container of the widget
+ saveSpaceForImages : 1, // option to be able to collapse images or else they will be uploaded one after the other
+ inputFileData:{class: 'input-class', id :'input-id', size: '' }, // the class id and size for the input of type file
+ values : [ // if there are already images that have been uploaded and wanted to display them on page load 
+    { 
+      wrapperClass: '', // wrapper class of the image
+      viewImgData:{ width, height, src, alt, fid, class}, // data of the image
+      deleteFileData:{class} // class of the delete button
+    }, // 1st image
+    { 
+      wrapperClass: '', // wrapper class of the image
+      viewImgData:{ width, height, src, alt, fid, class}, // data of the image
+      deleteFileData:{class} // class of the delete button
+    }, // 2nd image
+    { 
+      wrapperClass: '', // wrapper class of the image
+      viewImgData:{ width, height, src, alt, fid, class}, // data of the image
+      deleteFileData:{class} // class of the delete button
+    }, // 3rd image
+    ...
+  ],
+};
+
+```
+
+**Helper Events:**       
+  ~~~~~~~~~~~~ 
+
+**- mini_image_uploader EVENT:**       
+This event is used to allow 3rd party apps to respond to the uploaded file
+
+
+```
+$(document).on("mini_image_uploader",function(event) {
+  // you will find the following data
+  console.log(event.action); // upload
+  console.log(event.error);  // the error message - incase upload is of an unallowed extension
+  console.log(event.success); // incase of success of the upload ie. {'filename': filename.extension, 'file': base64Url, wrapperSelector: wrapperOfImage}
+});
+```    
+
+**Helper Functions:**  
+  ~~~~~~~~~~~~ 
+
+**- Mini uploader actions:**    
+`SBsdk.SBfunctions.mini_multi_image_uploader_actions(wrapperSelector, action, data);`                      
+*Parameters:*    
+- **action** can be `add_image` or `del_image`           
+- **wrapperSelector**: if `action = add_image` then `wrapperSelector` is the *main wrapper of the whole image widget* else if `action = del_image` then it is the *wrapper of the image being deleted*         
+- **data**: if `action = add_image` then data is the data of the images to be added
+```
+data : [
+  { 
+    wrapperClass: '', // wrapper class of the image
+    viewImgData:{ width, height, src, alt, fid, class}, // data of the image
+    deleteFileData:{class} // class of the delete button
+  }, // 1st image
+  { 
+    wrapperClass: '', // wrapper class of the image
+    viewImgData:{ width, height, src, alt, fid, class}, // data of the image
+    deleteFileData:{class} // class of the delete button
+  }, // 2nd image
+  { 
+    wrapperClass: '', // wrapper class of the image
+    viewImgData:{ width, height, src, alt, fid, class}, // data of the image
+    deleteFileData:{class} // class of the delete button
+  }, // 3rd image
+  ...
+]  
+```   
+
+else if `action = del_image` then data can be `'success'` or `'fail'` to be able to remove the image being deleted or remove the throbber effect on it             
+
+**Example:**               
+```
+// step1 add the image widget to the dom.
+output = window.SBsdk.SBfunctions.generateDom('mini_multi_image_uploader', options);
+$('body').append(output);
+// if it doesnt work out of the box .. you should refresh the sdk libraries or use them in the sdk callbacks
+// step2 refresh
+SBsdk.SBfunctions.refresh();
+// step3 act on upload to save your file
+$(document).on("mini_image_uploader",function(event) {
+  // you will find the following data
+  console.log(event.action); // upload
+  console.log(event.error);  // the error message - incase upload is of an unallowed extension
+  console.log(event.success); // incase of success of the upload ie. {'filename': filename.extension, 'file': base64Url, wrapperSelector: wrapperOfImage}
+  if(event.action == 'upload'){
+    if(typeof event.error !== 'undefined'){
+      // do something incase of error (maybe display the message)
+      alert(event.error);
+    }
+    if(typeof event.success !== 'undefined'){
+      // save the file in your files in case of success
+      //you will have
+      // file name being uploaded event.success.filename
+      // file base64url event.success.file
+      // referance of the wrapper of the whole image widget event.success.wrapperSelector
+      if(you_have_saved_it_successfully(event.success)){
+        // APPEND YOUR IMG
+        new_img_data = [
+          { 
+            wrapperClass: 'new-img',
+            viewImgData:{src: img_src},
+            deleteFileData:{class: 'delete-btn-class'} // class of the delete button
+          }
+        ]  
+        window.SBsdk.SBfunctions.mini_multi_image_uploader_actions( event.success.wrapperSelector, 'add_image', new_img_data);
+      }
+    }
+  }
+});
+// step4 act on delete to del your file
+$(document).on('click', ".delete-btn-class",function(event) {
+  // DELETE YOUR IMAGE 
+
+  // if failed
+  //window.SBsdk.SBfunctions.mini_multi_image_uploader_actions($(this).closest('.image-wrapper'), 'del_image', 'fail');
+
+  // if success
+  window.SBsdk.SBfunctions.mini_multi_image_uploader_actions($(this).closest('.image-wrapper'), 'del_image', 'success');
+  
+});
+
+```
+
 --------------------   
       
 ## TEXTFIELD
@@ -866,3 +1010,4 @@ window.SBsdk.SBfunctions.generateDom('wysiwyg', {"wrapperClass": 'hello', "class
 ```      
 
 --------------------------------
+
