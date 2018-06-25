@@ -167,7 +167,7 @@
 <strong>parameters</strong> : no parameters provided             <br />
 <strong>Return</strong> (obj)       </p>
 <p>-<strong>Return</strong> should be of the following structure:             <br />
-<em>case 1)</em> I have my dom. so generate your dom and returned it directly.      </p>
+<em>case 1)</em> I can generate my dom and returned it directly.      </p>
 <pre><code>ret = {
   'data' : [
     {'id': id1, 'dom': dom1}, // descriptive unique id should be given for the dom you want to inject
@@ -177,6 +177,25 @@
   // if you have injected fields (custom text fields etc etc) that you need to validate upon submission of the page
   // give the html id of the form with the corresponding validation function name. 
   'submitHandler': {'formId1': 'submitHandler1', 'formId2': 'submitHandler2'}
+};
+</code></pre>
+
+<p><em>case 2)</em> I dont have the dom yet, still waiting for it; The DOM is being generated from another (scope) js code <strong>asyncrounously</strong>.    </p>
+<pre><code>ret = { 'wait' : {{appId}} }
+</code></pre>
+
+<p><strong>FOR THEME APPS (better performance - speed)</strong>        <br />
+use this function instead <code>function theme_inject_custom_data_{{appId}}(){}</code>       <br />
+<strong>parameters</strong> : no parameters provided             <br />
+<strong>Return</strong> (obj)       </p>
+<p>-<strong>Return</strong> should be of the following structure:             <br />
+<em>case 1)</em> I can generate my dom and returned it directly.      </p>
+<pre><code>ret = {
+  'data' : [
+    {'id': id1, 'dom': dom1}, // descriptive unique id should be given for the dom you want to inject
+    {'id': id2, 'dom': dom2},
+    {'id': id3, 'dom': dom3}
+  ]
 };
 </code></pre>
 
@@ -362,6 +381,9 @@ window.page_events_4705647385 = function(data){
 
 </code></pre>
 
+<p><strong>FOR THEME APPS (better performance - speed)</strong>  <br />
+<code>function theme_inject_position_data_{{app_id}}(appId, appId_dom_data){}</code>    <br />
+// same as <code>function inject_position_data_{{appId}}(appId, appId_dom_data){}</code></p>
 <hr />
 <h4 id="inject-css">Inject CSS</h4>
 <p>To inject custom css implement:              <br />
