@@ -785,7 +785,64 @@ var carousel_options = {
   window.SBsdk.SBfunctions.magnific_popup_carousel('.field-name-field-image-product  .mfp-gallery-image', carousel_options);
 ```
 
-                
+---------------
+                        
+#### Parallax
+           
+call the function:   
+`window.SBsdk.SBfunctions.parallax (wrapper_selector, speed)`;       
+
+The parameters:        
+-**wrapper_selector** is the wrapper of the section where you should give it your **bg image** that will make the parallax effect in css    
+-**speed** is the speed of the effect; by default it is 0.5     
+                   
+**Example:**          
+          
+in css: `.wrapper-bg-parallax-image{ background-image: url(..); }`        
+in js: `window.SBsdk.SBfunctions.magnific_popup_carousel('.wrapper-bg-parallax-image');`        
+           
+---------------    
+                         
+#### Color Picker
+           
+call the function:   
+`window.SBsdk.SBfunctions.color_picker(input_selector, options)`;       
+
+The parameters:        
+-**input_selector** is the text input field where the picker will set the hex code of the color chosen      
+-**options:**
+```
+// The values given for the options below are the default values
+options = {
+  color: "#f00", // default value of the color input field
+  allowEmpty:true, // if the input field is allowed to be empty
+  showAlpha: true, // allows alpha transparency selection
+  disabled: true, //  to disable the color picker or not
+  clickoutFiresChange: true, //clicking outside of color picker would trigger the change if set to true
+  chooseText: "Alright", // change the okay btn text of the color picker
+  cancelText: "No way", // change the cancel btn text of the color picker
+  showButtons: false, // removes the buttons of color picker and triggers a change on the clickout of the picker
+  containerClassName: 'awesome', // add an additional class name to the container of the color picker popup
+  replacerClassName: 'awesome', // add an additional class name to the color picker
+}
+```    
+                   
+**Example:**          
+``` 
+var options = {
+  allowEmpty: true
+}
+  window.SBsdk.SBfunctions.magnific_popup_carousel('input.color-picker', options);
+```     
+            
+**Preview**:         
+
+before initialize function: ![screen_shot](/img/text-input-field.png)        
+
+after initialize function: ![screen_shot](/img/after-initialize-color-picker.png)           
+
+if opened the color picker: ![screen_shot](/img/color-picker-popup.png)          
+                      
 -------------------------
              
 #### Messages

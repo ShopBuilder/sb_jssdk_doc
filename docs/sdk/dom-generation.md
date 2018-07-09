@@ -194,7 +194,22 @@ options = {
   //note that it can be an array of objs (multple image upload) or an array (single image)
 };
 ```
+         
+**Helper Events:**       
+  ~~~~~~~~~~~~ 
 
+**- `image_uploader` EVENT:**       
+This event is used to allow 3rd party apps to respond to the uploaded file
+
+
+```
+$(document).on("image_uploader",function(event) {
+  // you will find the following data
+  console.log(event.input_file_selector); // the input dom reference of the file input.
+  console.log(event.image_correct_base64);  // returns the correct orientation of image using its exif data.
+  console.log(event.fileObj); // the file object.
+});
+```    
 
 ----------------
          
@@ -241,7 +256,7 @@ options = {"wrapperId": 'id', "wrapperClass": 'class', // class and id of the ma
 **Helper Events:**       
   ~~~~~~~~~~~~ 
 
-**- mini_image_uploader EVENT:**       
+**- `mini_image_uploader` EVENT:**       
 This event is used to allow 3rd party apps to respond to the uploaded file
 
 

@@ -353,6 +353,18 @@ options = {
 };
 </code></pre>
 
+<p><strong>Helper Events:</strong>     <br />
+  ~~~~~~~~~~~~ </p>
+<p><strong>- <code>image_uploader</code> EVENT:</strong>     <br />
+This event is used to allow 3rd party apps to respond to the uploaded file</p>
+<pre><code>$(document).on(&quot;image_uploader&quot;,function(event) {
+  // you will find the following data
+  console.log(event.input_file_selector); // the input dom reference of the file input.
+  console.log(event.image_correct_base64);  // returns the correct orientation of image using its exif data.
+  console.log(event.fileObj); // the file object.
+});
+</code></pre>
+
 <hr />
 <h2 id="bo-mini-table-image-uploader">BO - MINI TABLE IMAGE UPLOADER</h2>
 <p><strong>Preview:</strong>         <br />
@@ -390,7 +402,7 @@ options = {&quot;wrapperId&quot;: 'id', &quot;wrapperClass&quot;: 'class', // cl
 
 <p><strong>Helper Events:</strong>     <br />
   ~~~~~~~~~~~~ </p>
-<p><strong>- mini_image_uploader EVENT:</strong>     <br />
+<p><strong>- <code>mini_image_uploader</code> EVENT:</strong>     <br />
 This event is used to allow 3rd party apps to respond to the uploaded file</p>
 <pre><code>$(document).on(&quot;mini_image_uploader&quot;,function(event) {
   // you will find the following data
