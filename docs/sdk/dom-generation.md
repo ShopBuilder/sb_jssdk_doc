@@ -819,6 +819,7 @@ options = {
   mainTitle: 'mainTitle',
   subTitle: 'subTitle',
   content: dom,
+  opensManyAtaTime: 1, // dont put this option if what was wanted is to open one fieldset at a time
 };
 ``` 
 
