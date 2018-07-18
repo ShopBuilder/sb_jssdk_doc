@@ -265,6 +265,43 @@ found in <code>window.SBsdk.SBdata.page.init_event</code>               </p>
 }
 </code></pre>
 
+<p>5- Panels page events    </p>
+<p>a) Event triggered after the ajax of Design my page button.</p>
+<pre><code>{       
+  'id' =&gt; 'panels_ipe_edit_control_form',
+  'type' =&gt;  'panels',
+  'action' =&gt; 'start-design'
+}
+
+</code></pre>
+
+<p>b) Event triggered after saving the designed page</p>
+<pre><code>{
+  'id' =&gt; 'panels_ipe_edit_control_form',
+  'type' =&gt;  'panels',
+  'action' =&gt; 'save-design',
+}
+
+</code></pre>
+
+<p>c) Event triggered after updating or adding a box of a panel pane</p>
+<pre><code>{
+  'id' =&gt; 'panels_ipe_edit_control_form',
+  'type' =&gt;  'panels',
+  'action' =&gt; 'save-design',
+}
+
+</code></pre>
+
+<p>d) Event triggered after saving the style of a panel pane</p>
+<pre><code>{
+  'id' =&gt; '{{form_id}}',
+  'type' =&gt;  'panels-pane',
+  'action' =&gt; 'styles-save-pane',
+}
+
+</code></pre>
+
 <hr />
               
             </div>

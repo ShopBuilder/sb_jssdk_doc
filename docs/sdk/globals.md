@@ -136,7 +136,45 @@ Cases where we have this page data event:
     query_strings: '" . $query_strings_text . "'
 }
 ```
+     
+5- Panels page events    
 
+a) Event triggered after the ajax of Design my page button.
+```
+{       
+  'id' => 'panels_ipe_edit_control_form',
+  'type' =>  'panels',
+  'action' => 'start-design'
+}
+
+```
+b) Event triggered after saving the designed page
+```
+{
+  'id' => 'panels_ipe_edit_control_form',
+  'type' =>  'panels',
+  'action' => 'save-design',
+}
+
+```
+c) Event triggered after updating or adding a box of a panel pane
+```
+{
+  'id' => 'panels_ipe_edit_control_form',
+  'type' =>  'panels',
+  'action' => 'save-design',
+}
+
+```
+d) Event triggered after saving the style of a panel pane
+```
+{
+  'id' => '{{form_id}}',
+  'type' =>  'panels-pane',
+  'action' => 'styles-save-pane',
+}
+
+```
              
 ------------------
              
