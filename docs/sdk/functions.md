@@ -790,16 +790,35 @@ var carousel_options = {
 #### Parallax
            
 call the function:   
-`window.SBsdk.SBfunctions.parallax (wrapper_selector, speed)`;       
+`window.SBsdk.SBfunctions.parallax (wrapper_selector, options)`;       
 
 The parameters:        
--**wrapper_selector** is the wrapper of the section where you should give it your **bg image** that will make the parallax effect in css    
--**speed** is the speed of the effect; by default it is 0.5     
-                   
+-**wrapper_selector** is the wrapper of the section where you should give it your **bg image** that will make the parallax effect in css         
+-**options:** 
+
+1- *option* **name**: `imageSrc` **REQUIRED**         
+   *option* **type**: `path`         
+   *option* **description**: You must provide a path to the image you wish to apply to the parallax effect.        
+      
+2- *option* **name**: `speed`          
+   *option* **type**: `float`         
+   *option* **description**: The speed at which the parallax effect runs. 0.0 means the image will appear fixed in place, and 1.0 the image will flow at the same speed as the page content. `default value (0.2)`.        
+      
+3- *option* **name**: `bleed`          
+   *option* **type**: `number`         
+   *option* **description**: You can optionally set the parallax mirror element to extend a few pixels above and below the mirrored element. This can hide slow or stuttering scroll events in certain browsers. `default value (0)`.        
+      
+                
 **Example:**          
-          
-in css: `.wrapper-bg-parallax-image{ background-image: url(..); }`        
-in js: `window.SBsdk.SBfunctions.magnific_popup_carousel('.wrapper-bg-parallax-image');`        
+   
+```
+var wrapper_selector = '.wrapper-bg-parallax-image'; // or jQuery('.wrapper-bg-parallax-image')
+var options = {
+  'imageSrc': 'https://aaa/b/image.png',
+  'speed' : 0.1
+};
+window.SBsdk.SBfunctions.parallax(wrapper_selector, options);
+```               
            
 ---------------    
                          
