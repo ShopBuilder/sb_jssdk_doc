@@ -857,13 +857,28 @@ options = {
 <hr />
 <h4 id="parallax">Parallax</h4>
 <p>call the function: <br />
-<code>window.SBsdk.SBfunctions.parallax (wrapper_selector, speed)</code>;       </p>
+<code>window.SBsdk.SBfunctions.parallax (wrapper_selector, options)</code>;       </p>
 <p>The parameters:      <br />
--<strong>wrapper_selector</strong> is the wrapper of the section where you should give it your <strong>bg image</strong> that will make the parallax effect in css  <br />
--<strong>speed</strong> is the speed of the effect; by default it is 0.5     </p>
+-<strong>wrapper_selector</strong> is the wrapper of the section where you should give it your <strong>bg image</strong> that will make the parallax effect in css       <br />
+-<strong>options:</strong> </p>
+<p>1- <em>option</em> <strong>name</strong>: <code>imageSrc</code> <strong>REQUIRED</strong>       <br />
+<em>option</em> <strong>type</strong>: <code>path</code>       <br />
+<em>option</em> <strong>description</strong>: You must provide a path to the image you wish to apply to the parallax effect.        </p>
+<p>2- <em>option</em> <strong>name</strong>: <code>speed</code>        <br />
+<em>option</em> <strong>type</strong>: <code>float</code>       <br />
+<em>option</em> <strong>description</strong>: The speed at which the parallax effect runs. 0.0 means the image will appear fixed in place, and 1.0 the image will flow at the same speed as the page content. <code>default value (0.2)</code>.        </p>
+<p>3- <em>option</em> <strong>name</strong>: <code>bleed</code>        <br />
+<em>option</em> <strong>type</strong>: <code>number</code>       <br />
+<em>option</em> <strong>description</strong>: You can optionally set the parallax mirror element to extend a few pixels above and below the mirrored element. This can hide slow or stuttering scroll events in certain browsers. <code>default value (0)</code>.        </p>
 <p><strong>Example:</strong>          </p>
-<p>in css: <code>.wrapper-bg-parallax-image{ background-image: url(..); }</code>      <br />
-in js: <code>window.SBsdk.SBfunctions.magnific_popup_carousel('.wrapper-bg-parallax-image');</code>        </p>
+<pre><code>var wrapper_selector = '.wrapper-bg-parallax-image'; // or jQuery('.wrapper-bg-parallax-image')
+var options = {
+  'imageSrc': 'https://aaa/b/image.png',
+  'speed' : 0.1
+};
+window.SBsdk.SBfunctions.parallax(wrapper_selector, options);
+</code></pre>
+
 <hr />
 <h4 id="color-picker">Color Picker</h4>
 <p>call the function: <br />
