@@ -126,6 +126,9 @@
                 <li class="toctree-l3"><a href="#color-picker">Color Picker</a></li>
                 
             
+                <li class="toctree-l3"><a href="#drag-ability">Drag Ability</a></li>
+                
+            
                 <li class="toctree-l3"><a href="#messages">Messages</a></li>
                 
             
@@ -912,6 +915,37 @@ options = {
 <p>before initialize function: <img alt="screen_shot" src="../../img/text-input-field.png" />        </p>
 <p>after initialize function: <img alt="screen_shot" src="../../img/after-initialize-color-picker.png" />           </p>
 <p>if opened the color picker: <img alt="screen_shot" src="../../img/color-picker-popup.png" />          </p>
+<hr />
+<h4 id="drag-ability">Drag Ability</h4>
+<p>call the function: <br />
+<code>window.SBsdk.SBfunctions.dragula(id_selector, options)</code>;       </p>
+<p>The parameters:      <br />
+-<strong>id_selector</strong> is the id of the wrapper of elements to be dragged ex. suppose <code>&lt;div id="wrapper"&gt;&lt;span&gt;1&lt;/span&gt;&lt;span&gt;2&lt;/span&gt;&lt;/div&gt;</code> then <code>id_selector = wrapper</code>                        <br />
+-<strong>options:</strong> (optional)                 </p>
+<pre><code>options = {
+  direction: &quot;&quot;, // could be &quot;vertical&quot; or &quot;horizontal&quot;
+  moves: &quot;&quot;, // className of what should move the draggable item
+}
+</code></pre>
+
+<p><strong>Example:</strong>                    </p>
+<pre><code>//  Suppose we have the following structure:
+//  &lt;table&gt;
+//  &lt;tbody id=&quot;table-body&quot;&gt;
+//  &lt;tr&gt;  &lt;span class=&quot;handle-class&quot;&gt;drag to move me&lt;/span&gt;  &lt;span class=&quot;row-data&quot;&gt; ... &lt;/span&gt;  &lt;/tr&gt;
+//  &lt;tr&gt;  &lt;span class=&quot;handle-class&quot;&gt;drag to move me&lt;/span&gt;  &lt;span class=&quot;row-data&quot;&gt; ... &lt;/span&gt;  &lt;/tr&gt;
+//  ...
+//  &lt;/tbody&gt;
+//  &lt;/table&gt;
+
+var id_selector = 'table-body';
+var options = {
+  direction: 'vertical', // i want to move the rows vertically
+  moves: 'handle-class' // i want to be able to drag the rows through the handle 
+}
+window.SBsdk.SBfunctions.dragula(id_selector, options);
+</code></pre>
+
 <hr />
 <h4 id="messages">Messages</h4>
 <p>list all the functions that can be used to print a message <code>window.SBsdk.SBfunctions.SBmessages</code>      </p>
