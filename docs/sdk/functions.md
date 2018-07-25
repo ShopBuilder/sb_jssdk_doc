@@ -862,6 +862,43 @@ after initialize function: ![screen_shot](/img/after-initialize-color-picker.png
 
 if opened the color picker: ![screen_shot](/img/color-picker-popup.png)          
                       
+           
+---------------    
+                         
+#### Drag Ability
+           
+call the function:   
+`window.SBsdk.SBfunctions.dragula(id_selector, options)`;       
+
+The parameters:        
+-**id_selector** is the id of the wrapper of elements to be dragged ex. suppose `<div id="wrapper"><span>1</span><span>2</span></div>` then `id_selector = wrapper`                          
+-**options:** (optional)                 
+```        
+options = {
+  direction: "", // could be "vertical" or "horizontal"
+  moves: "", // className of what should move the draggable item
+}
+```    
+                   
+**Example:**                    
+``` 
+//  Suppose we have the following structure:
+//  <table>
+//  <tbody id="table-body">
+//  <tr>  <span class="handle-class">drag to move me</span>  <span class="row-data"> ... </span>  </tr>
+//  <tr>  <span class="handle-class">drag to move me</span>  <span class="row-data"> ... </span>  </tr>
+//  ...
+//  </tbody>
+//  </table>
+
+var id_selector = 'table-body';
+var options = {
+  direction: 'vertical', // i want to move the rows vertically
+  moves: 'handle-class' // i want to be able to drag the rows through the handle 
+}
+window.SBsdk.SBfunctions.dragula(id_selector, options);
+```     
+
 -------------------------
              
 #### Messages
