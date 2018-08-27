@@ -213,7 +213,9 @@ console.log(window.SBsdk.SBdata.page);
 
 <hr />
 <h4 id="website-data">Website Data</h4>
-<p>Website Data gives information about your website <code>window.SBsdk.SBdata.SBwebsite_data</code>    </p>
+<ul>
+<li>Website Data gives information about your website <code>window.SBsdk.SBdata.SBwebsite_data</code>    </li>
+</ul>
 <pre><code>// @Code       
 console.log(window.SBsdk.SBdata.SBwebsite_data);      
 // @Result 
@@ -221,9 +223,18 @@ console.log(window.SBsdk.SBdata.SBwebsite_data);
   website_id //This is gona be the website id ex.1234568789
   user_id //id of user that is currently logged ex. 30       
   user_role //Array of user roles ex. [&quot;Authenticated&quot;, &quot;merchant&quot;]                
+  map_marker //Array of user roles ex. [&quot;Authenticated&quot;, &quot;merchant&quot;]                
 }
 </code></pre>
 
+<ul>
+<li><strong>Google Map Marker information:</strong></li>
+</ul>
+<blockquote>
+<p>1- To access the marker information being used by the theme use: <code>window.SBsdk.SBdata.SBwebsite_data.map_marker.theme</code>.                <br />
+ 2- To customize your marker (ie. change the default theme) <a href="../../sdk/callbacks/#google-map-marker-callback">click here</a>         <br />
+ 3- To access the customized marker information that was set by an app use:  <code>window.SBsdk.SBdata.SBwebsite_data.map_marker.custom</code>.           </p>
+</blockquote>
 <hr />
 <h4 id="page-data-events">Page Data Events</h4>
 <p>Page data events are information of events that are executed on page load:       <br />
