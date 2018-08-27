@@ -110,6 +110,9 @@
                 <li class="toctree-l3"><a href="#page-ajax-events">Page Ajax Events</a></li>
                 
             
+                <li class="toctree-l3"><a href="#google-map-marker-callback">Google Map Marker Callback</a></li>
+                
+            
             </ul>
         
     </li>
@@ -574,6 +577,49 @@ you can get information after an ajax about the following events:               
 </code></pre>
 
 <hr />
+<h4 id="google-map-marker-callback">Google Map Marker Callback</h4>
+<ul>
+<li>To alter the icon of the google marker, use <code>theme_app_map_marker_{{appId}}</code>.                     </li>
+<li>This callback function should be defined as soon as your js file loads. Thus you have to define it globally.</li>
+<li>You can always access the google map data. <a href="../../sdk/globals/#website-data">click here for more information</a></li>
+</ul>
+<pre><code>// in your js file 
+// as you can notice in the definition of this function.. it is not wrapped inside any function (it is defined globally).
+window.theme_app_map_marker_{{appId}} = function(){
+  options = {
+    image_url : '', // absolute url (REQUIRED)
+    scale: { 
+      width: 50, // default value if was not set
+      height: 50 // default value if was not set
+    }, // (Optional)
+    origin:{
+      width: 0, // default value if was not set
+      height: 0 // default value if was not set
+    }, // (Optional)
+    anchor:{
+      width: 0, // default value if was not set
+      height: 0 // default value if was not set
+    }, // (Optional)
+  }
+  return options;
+}
+
+document.addEventListener(&quot;DOMContentLoaded&quot;, function(event) {
+ ... 
+});
+</code></pre>
+
+<p><strong>Example:</strong> </p>
+<pre><code>// suppose the app id of my theme is 123123123, then
+
+window.theme_app_map_marke_123123123 = function(){
+  options = {
+    image_url : 'https://openclipart.org/image/2400px/svg_to_png/192591/map-marker.png',
+  }
+  return options; 
+};
+// then you will be able to see the image marker that you have set with image of dimension 50x50 
+</code></pre>
               
             </div>
           </div>

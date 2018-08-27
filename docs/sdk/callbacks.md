@@ -475,3 +475,54 @@ d) Event triggered after saving the style of a panel pane
 
 ----------------------
                
+
+
+          
+#### Google Map Marker Callback
+
+- To alter the icon of the google marker, use `theme_app_map_marker_{{appId}}`.                     
+- This callback function should be defined as soon as your js file loads. Thus you have to define it globally.
+- You can always access the google map data. [click here for more information](/sdk/globals/#website-data)
+
+
+```
+// in your js file 
+// as you can notice in the definition of this function.. it is not wrapped inside any function (it is defined globally).
+window.theme_app_map_marker_{{appId}} = function(){
+  options = {
+    image_url : '', // absolute url (REQUIRED)
+    scale: { 
+      width: 50, // default value if was not set
+      height: 50 // default value if was not set
+    }, // (Optional)
+    origin:{
+      width: 0, // default value if was not set
+      height: 0 // default value if was not set
+    }, // (Optional)
+    anchor:{
+      width: 0, // default value if was not set
+      height: 0 // default value if was not set
+    }, // (Optional)
+  }
+  return options;
+}
+
+document.addEventListener("DOMContentLoaded", function(event) {
+ ... 
+});
+```
+
+       
+**Example:** 
+```
+// suppose the app id of my theme is 123123123, then
+
+window.theme_app_map_marke_123123123 = function(){
+  options = {
+    image_url : 'https://openclipart.org/image/2400px/svg_to_png/192591/map-marker.png',
+  }
+  return options; 
+};
+// then you will be able to see the image marker that you have set with image of dimension 50x50 
+```  
+

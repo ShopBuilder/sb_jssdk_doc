@@ -71,7 +71,7 @@ console.log(window.SBsdk.SBdata.page);
       
 #### Website Data    
 
-Website Data gives information about your website `window.SBsdk.SBdata.SBwebsite_data`    
+- Website Data gives information about your website `window.SBsdk.SBdata.SBwebsite_data`    
 
 ```  
 // @Code       
@@ -81,8 +81,16 @@ console.log(window.SBsdk.SBdata.SBwebsite_data);
   website_id //This is gona be the website id ex.1234568789
   user_id //id of user that is currently logged ex. 30       
   user_role //Array of user roles ex. ["Authenticated", "merchant"]                
+  map_marker //Array of user roles ex. ["Authenticated", "merchant"]                
 }
 ```
+     
+
+- **Google Map Marker information:**
+ 
+>  1- To access the marker information being used by the theme use: `window.SBsdk.SBdata.SBwebsite_data.map_marker.theme`.                  
+>  2- To customize your marker (ie. change the default theme) [click here](/sdk/callbacks/#google-map-marker-callback)           
+>  3- To access the customized marker information that was set by an app use:  `window.SBsdk.SBdata.SBwebsite_data.map_marker.custom`.           
 
 ---------------------------------
       
