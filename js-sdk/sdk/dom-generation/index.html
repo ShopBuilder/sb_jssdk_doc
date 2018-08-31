@@ -777,17 +777,31 @@ var get_data = SBsdk.SBfunctions.wysiwyg_data('.pop-up'); // returns the html in
 </code></pre>
 
 <p><strong>2- Configure your wysiwyg:</strong>    </p>
-<p>by default you will have the cofiguration used in Shopbuilder platform that is               </p>
-<pre><code>config = {};
-config.toolbar = [&quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;JustifyLeft&quot;, &quot;JustifyCenter&quot;, &quot;JustifyRight&quot;, &quot;JustifyBlock&quot;, &quot;BidiLtr&quot;, &quot;BidiRtl&quot;, &quot;BulletedList&quot;, &quot;NumberedList&quot;, &quot;Outdent&quot;, &quot;Indent&quot;, &quot;Undo&quot;, &quot;Redo&quot;, &quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;, &quot;base64image&quot;, &quot;Cut&quot;, &quot;Copy&quot;, &quot;Paste&quot;, &quot;PasteText&quot;, &quot;PasteFromWord&quot;, &quot;RemoveFormat&quot;, &quot;Format&quot;, &quot;FontSize&quot;, &quot;video_filter&quot;];
+<ul>
+<li>To change the configuration of all of your wysiwyg use the function:     <br />
+<code>window.SBsdk.SBfunctions.wysiwyg_configuration(config);</code>        </li>
+</ul>
+<p>A) by default you will have the configuration used in Shopbuilder platform that is               </p>
+<pre><code>config.toolbar = [[&quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;JustifyLeft&quot;, &quot;JustifyCenter&quot;, &quot;JustifyRight&quot;, &quot;JustifyBlock&quot;, &quot;BidiLtr&quot;, &quot;BidiRtl&quot;, &quot;BulletedList&quot;, &quot;NumberedList&quot;, &quot;Outdent&quot;, &quot;Indent&quot;, &quot;Undo&quot;, &quot;Redo&quot;, &quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;, &quot;base64image&quot;, &quot;Cut&quot;, &quot;Copy&quot;, &quot;Paste&quot;, &quot;PasteText&quot;, &quot;PasteFromWord&quot;, &quot;RemoveFormat&quot;, &quot;Format&quot;, &quot;FontSize&quot;, &quot;video_filter&quot;]];
 </code></pre>
 
-<p>To change the configuration of all of your wysiwyg use the function:     <br />
-<code>window.SBsdk.SBfunctions.wysiwyg_configuration(config);</code>      </p>
-<p><em>Note that the <code>config</code> parameter can be given the same values as a</em> <strong>ckeditor config</strong>                     </p>
-<p><strong>A) To get all of the supported items in a wysiwyg</strong>       <br />
+<p>To get the SB config simply use:           <br />
+<code>config = '';</code>       <br />
+<code>window.SBsdk.SBfunctions.wysiwyg_configuration(config);</code>  </p>
+<p>Ex. Let's try it out together .. copy the following code into the console and voilà.         </p>
+<pre><code>config = ''; // gets the configurations of sb
+// set the configuration
+window.SBsdk.SBfunctions.wysiwyg_configuration(config);
+// then insert your wysiwyg
+dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {&quot;wrapperClass&quot;: 'hello', &quot;class&quot;: 'class-editor' , &quot;Title&quot;: 'title',&quot;required&quot;:1, &quot;value&quot;: '&lt;h2&gt;Hello&lt;/h2&gt;&lt;p&gt;world!&lt;/p&gt;'});
+jQuery('body').append(dom);
+SBsdk.SBfunctions.refresh();
+
+</code></pre>
+
+<p><strong>B) To get ALL of the supported items in a wysiwyg</strong>       <br />
 <code>config = {};</code>       <br />
-<code>window.SBsdk.SBfunctions.wysiwyg_configuration(config);</code>           </p>
+<code>window.SBsdk.SBfunctions.wysiwyg_configuration(config);</code>               </p>
 <p>SET   <br />
 <code>config = {};</code> <br />
 That is equivalent to:</p>
@@ -831,18 +845,66 @@ That is equivalent to:</p>
 </code></pre>
 
 <p>note that to use an image plugin you can use either: <code>base64image</code> or <code>Image</code>           </p>
-<p><strong>B) you can customize your configuration to get the desired wysiwyg</strong>     </p>
+<p><strong>C) you can customize your configuration to get the desired wysiwyg</strong>     </p>
+<ul>
+<li>choose the items from the Supported items of the wysiwyg mentioned above in part (B)</li>
+</ul>
 <p><strong>Example</strong>:</p>
-<pre><code>// It be the first function to execute before any wysiwyg injection        
-config= {};`           
-config.toolbar = [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ];                  
+<pre><code>// It should be the first function to execute before any wysiwyg injection        
+config= {};           
+config.toolbar = [[ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ]];                  
 window.SBsdk.SBfunctions.wysiwyg_configuration(config);             
 
-// then insert your wysiwyg               
-dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {&quot;wrapperClass&quot;: 'hello', &quot;class&quot;: 'class-editor' , &quot;Title&quot;: 'title',&quot;required&quot;:1, &quot;value&quot;: '&lt;h2&gt;Hello&lt;/h2&gt;&lt;p&gt;world!&lt;/p&gt;'});     
+// then insert your wysiwyg
+dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {&quot;wrapperClass&quot;: 'hello', &quot;class&quot;: 'class-editor' , &quot;Title&quot;: 'title',&quot;required&quot;:1, &quot;value&quot;: '&lt;h2&gt;Hello&lt;/h2&gt;&lt;p&gt;world!&lt;/p&gt;'});
+jQuery('body').append(dom);
+SBsdk.SBfunctions.refresh();       
+</code></pre>
 
-// to get the value of the inputed                             
-data = SBsdk.SBfunctions.wysiwyg_data('.class-editor');          
+<ul>
+<li>To add a seperator between an item and another we use  '-':</li>
+</ul>
+<p><strong>Example</strong>: Try it out with us</p>
+<pre><code>// It should be the first function to execute before any wysiwyg injection        
+config= {};           
+config.toolbar = [[ 'Cut', 'Copy', '-', 'Undo', 'Redo' ]];                  
+window.SBsdk.SBfunctions.wysiwyg_configuration(config);             
+
+// then insert your wysiwyg
+dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {&quot;wrapperClass&quot;: 'hello', &quot;class&quot;: 'class-editor' , &quot;Title&quot;: 'title',&quot;required&quot;:1, &quot;value&quot;: '&lt;h2&gt;Hello&lt;/h2&gt;&lt;p&gt;world!&lt;/p&gt;'});
+jQuery('body').append(dom);
+SBsdk.SBfunctions.refresh();       
+</code></pre>
+
+<ul>
+<li>to group your items and devide them on lines: note that '/' will make add your items on a new line</li>
+</ul>
+<p><strong>Example:</strong> Try it out</p>
+<pre><code>config= {};
+
+// create your groups
+
+config.toolbarGroups = [
+  { name: 'clipboard'},   // a clipboard group
+  '/',                    // new line
+  { name: 'basicstyles'}, // basicstyles group
+  { name: 'paragraph'}  // paragraph group
+];
+
+// add the items of each group
+config.toolbar = [
+  { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] }, // for clipboard group the following items.
+  '/',  // new line
+  { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] }, // for the basic styles
+  { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight'] } // for the paragraph
+];
+
+window.SBsdk.SBfunctions.wysiwyg_configuration(config);             
+
+// then insert your wysiwyg
+dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {&quot;wrapperClass&quot;: 'hello', &quot;class&quot;: 'class-editor' , &quot;Title&quot;: 'title',&quot;required&quot;:1, &quot;value&quot;: '&lt;h2&gt;Hello&lt;/h2&gt;&lt;p&gt;world!&lt;/p&gt;'});
+jQuery('body').append(dom);
+SBsdk.SBfunctions.refresh();      
 </code></pre>
 
 <hr />

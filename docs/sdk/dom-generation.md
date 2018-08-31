@@ -706,22 +706,37 @@ var get_data = SBsdk.SBfunctions.wysiwyg_data('.pop-up'); // returns the html in
    
 **2- Configure your wysiwyg:**    
 
-                 
-by default you will have the cofiguration used in Shopbuilder platform that is               
+
+-  To change the configuration of all of your wysiwyg use the function:       
+`window.SBsdk.SBfunctions.wysiwyg_configuration(config);`        
+
+                         
+A) by default you will have the configuration used in Shopbuilder platform that is               
 ```
-config = {};
-config.toolbar = ["Bold", "Italic", "Underline", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock", "BidiLtr", "BidiRtl", "BulletedList", "NumberedList", "Outdent", "Indent", "Undo", "Redo", "Link", "Unlink", "Anchor", "base64image", "Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "RemoveFormat", "Format", "FontSize", "video_filter"];
+config.toolbar = [["Bold", "Italic", "Underline", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock", "BidiLtr", "BidiRtl", "BulletedList", "NumberedList", "Outdent", "Indent", "Undo", "Redo", "Link", "Unlink", "Anchor", "base64image", "Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "RemoveFormat", "Format", "FontSize", "video_filter"]];
 ```
-                          
-To change the configuration of all of your wysiwyg use the function:       
-`window.SBsdk.SBfunctions.wysiwyg_configuration(config);`      
+
+To get the SB config simply use:             
+`config = '';`         
+`window.SBsdk.SBfunctions.wysiwyg_configuration(config);`  
+
+Ex. Let's try it out together .. copy the following code into the console and voilà.         
+
+```
+config = ''; // gets the configurations of sb
+// set the configuration
+window.SBsdk.SBfunctions.wysiwyg_configuration(config);
+// then insert your wysiwyg
+dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {"wrapperClass": 'hello', "class": 'class-editor' , "Title": 'title',"required":1, "value": '<h2>Hello</h2><p>world!</p>'});
+jQuery('body').append(dom);
+SBsdk.SBfunctions.refresh();
+
+```   
                  
-         
-*Note that the `config` parameter can be given the same values as a* **ckeditor config**                     
   
-**A) To get all of the supported items in a wysiwyg**         
+**B) To get ALL of the supported items in a wysiwyg**         
 `config = {};`         
-`window.SBsdk.SBfunctions.wysiwyg_configuration(config);`           
+`window.SBsdk.SBfunctions.wysiwyg_configuration(config);`               
          
 SET     
 `config = {};`   
@@ -769,22 +784,74 @@ That is equivalent to:
 note that to use an image plugin you can use either: `base64image` or `Image`           
 
                   
-**B) you can customize your configuration to get the desired wysiwyg**     
+**C) you can customize your configuration to get the desired wysiwyg**     
                
+- choose the items from the Supported items of the wysiwyg mentioned above in part (B)
+
 **Example**:
 ```                      
-// It be the first function to execute before any wysiwyg injection        
-config= {};`           
-config.toolbar = [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ];                  
+// It should be the first function to execute before any wysiwyg injection        
+config= {};          
+config.toolbar = [[ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ]];                  
 window.SBsdk.SBfunctions.wysiwyg_configuration(config);             
                
-// then insert your wysiwyg               
-dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {"wrapperClass": 'hello', "class": 'class-editor' , "Title": 'title',"required":1, "value": '<h2>Hello</h2><p>world!</p>'});     
-                                 
-// to get the value of the inputed                             
-data = SBsdk.SBfunctions.wysiwyg_data('.class-editor');          
+// then insert your wysiwyg
+dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {"wrapperClass": 'hello', "class": 'class-editor' , "Title": 'title',"required":1, "value": '<h2>Hello</h2><p>world!</p>'});
+jQuery('body').append(dom);
+SBsdk.SBfunctions.refresh();       
 ```
      
+- To add a seperator between an item and another we use  '-':
+
+**Example**: Try it out with us
+
+```                      
+// It should be the first function to execute before any wysiwyg injection        
+config= {};           
+config.toolbar = [[ 'Cut', 'Copy', '-', 'Undo', 'Redo' ]];                  
+window.SBsdk.SBfunctions.wysiwyg_configuration(config);             
+               
+// then insert your wysiwyg
+dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {"wrapperClass": 'hello', "class": 'class-editor' , "Title": 'title',"required":1, "value": '<h2>Hello</h2><p>world!</p>'});
+jQuery('body').append(dom);
+SBsdk.SBfunctions.refresh();       
+```
+
+- to group your items and devide them on lines: note that '/' will make add your items on a new line
+
+
+**Example:** Try it out
+
+```
+config= {};
+
+// create your groups
+
+config.toolbarGroups = [
+  { name: 'clipboard'},   // a clipboard group
+  '/',                    // new line
+  { name: 'basicstyles'}, // basicstyles group
+  { name: 'paragraph'}  // paragraph group
+];
+
+// add the items of each group
+config.toolbar = [
+  { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] }, // for clipboard group the following items.
+  '/',  // new line
+  { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] }, // for the basic styles
+  { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight'] } // for the paragraph
+];
+
+window.SBsdk.SBfunctions.wysiwyg_configuration(config);             
+               
+// then insert your wysiwyg
+dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {"wrapperClass": 'hello', "class": 'class-editor' , "Title": 'title',"required":1, "value": '<h2>Hello</h2><p>world!</p>'});
+jQuery('body').append(dom);
+SBsdk.SBfunctions.refresh();      
+```   
+
+
+
 ----------------
             
 ## LINK
