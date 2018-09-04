@@ -41,6 +41,14 @@ console.log(window.SBsdk.SBdata.page);
 *In some pages, you might find other extra information in the page data*            
                    
 ```
+ { // In the home page
+   type:"homepage",
+   action:"view",
+   cart_uuid:"..",
+   id:"",
+   products_on_sale: { [[product_article_id]]: true or false}, // States what products are on sale; this variable only appears if the user added product(s) through panels ex {node-22: true} 
+   query_strings:""
+ }
  { // In the checkout complete page
   type: 'checkout',
   action: 'complete',
