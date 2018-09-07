@@ -738,12 +738,14 @@ The parameters:
 -**options:**
 ```
 // The values given for the options below are the default values
+// please dont add  the option for the one you do not need
 options = {
   dots: false,
   speed: 300,
   slidesToShow: 1,
   slidesToScroll: 1,
   variableWidth: false,
+  infinite: false,
   centerMode: false,
   adaptiveHeight: false,
   prevArrow: '', //html of prev elt
@@ -763,7 +765,8 @@ options = {
 options = { 
   dots: false,
   speed: 300, 
-  slidesToShow: 1, 
+  slidesToShow: 1,
+  infinite: true, 
   slidesToScroll: 1, 
   variableWidth: false, 
   centerMode: false, 
