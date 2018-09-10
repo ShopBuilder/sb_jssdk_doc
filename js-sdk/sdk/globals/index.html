@@ -239,9 +239,9 @@ console.log(window.SBsdk.SBdata.SBwebsite_data);
 <li><strong>Google Map Marker information:</strong></li>
 </ul>
 <blockquote>
-<p>1- To access the marker information being used by the theme use: <code>window.SBsdk.SBdata.SBwebsite_data.map_marker.theme</code>.                <br />
- 2- To customize your marker (ie. change the default theme) <a href="../../sdk/callbacks/#google-map-marker-callback">click here</a>         <br />
- 3- To access the customized marker information that was set by an app use:  <code>window.SBsdk.SBdata.SBwebsite_data.map_marker.custom</code>.           </p>
+<p>1- To access the marker image being used by the SB platform or a theme app use: <code>window.SBsdk.SBdata.SBwebsite_data.map_marker.theme</code>.                <br />
+ 2- To customize your marker using a theme app (ie. overides the one being used in the SB platform) <a href="../../sdk/callbacks/#google-map-marker-callback">click here</a> <br />
+ 3- To set an active marker image url using a 3rd party app, please do set it in the following variable and fetch it from here: <code>window.SBsdk.SBdata.SBwebsite_data.map_marker.active</code>.           </p>
 </blockquote>
 <hr />
 <h4 id="page-data-events">Page Data Events</h4>

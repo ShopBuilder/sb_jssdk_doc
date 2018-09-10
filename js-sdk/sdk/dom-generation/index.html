@@ -927,6 +927,8 @@ options = {
 
 <hr />
 <h2 id="fieldset">FIELDSET</h2>
+<p>We have 2 kinds of fieldsets: (Styled only for BO)          </p>
+<p>1.Section Fieldset:     </p>
 <p><strong>Parameters:</strong>  <br />
   ~~~~~~~~~~~~ </p>
 <pre><code>type = 'fieldset';
@@ -936,9 +938,59 @@ options = {
   subTitle: 'subTitle',
   content: dom,
   opensManyAtaTime: 1, // dont put this option if what was wanted is to open one fieldset at a time
+  opened_by_default: '1', // dont put this option if what was wanted is to have the fieldset closed
 };
 </code></pre>
 
+<p><strong>Preview :</strong>           <br />
+  ~~~~~~~~~~~~~~~~~~~~~~~~~                  </p>
+<p>Closed Fieldset</p>
+<p><img alt="fieldset" src="../../img/closed-fieldset.png" />    </p>
+<p>Opened Fieldset       </p>
+<p><img alt="fieldset" src="../../img/opened-fieldset.png" />    </p>
+<p><strong>Example :</strong> Let's try it together, open your console           <br />
+  ~~~~~~~~~~~~~~~~~~~~~~~~~                               </p>
+<p><code>type = 'fieldset';
+  options = {
+   wrapperClass: 'wrapper-class',
+   mainTitle: 'mainTitle',
+   subTitle: 'subTitle',
+   content:'dom',
+  };
+  jQuery('body').append(SBsdk.SBfunctions.generateDom(type, options));
+  // window.SBsdk_init.SBsdk_fieldsets(); // if not loaded on page load</code>         </p>
+<p>2.Normal Fieldset:     </p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'fieldset';
+options = {
+  wrapperClass: 'wrapper-class',
+  mainTitle: 'mainTitle',
+  subTitle: 'subTitle',
+  content: dom,
+  type: 'fieldset',
+  opened_by_default: '1', // dont put this option if what was wanted is to have the fieldset closed
+};
+</code></pre>
+
+<p><strong>Preview :</strong>           <br />
+  ~~~~~~~~~~~~~~~~~~~~~~~~~                  </p>
+<p>Closed Fieldset</p>
+<p><img alt="fieldset" src="../../img/closed--fieldset.png" />    </p>
+<p>Opened Fieldset       </p>
+<p><img alt="fieldset" src="../../img/opened--fieldset.png" />    </p>
+<p><strong>Example :</strong> Let's try it together, open your console           <br />
+  ~~~~~~~~~~~~~~~~~~~~~~~~~                               </p>
+<p><code>type = 'fieldset';
+  options = {
+   wrapperClass: 'wrapper-class',
+   mainTitle: 'mainTitle',
+   subTitle: 'subTitle',
+   content:'dom',
+   type: 'fieldset',
+  };
+  jQuery('body').append(SBsdk.SBfunctions.generateDom(type, options));
+  // window.SBsdk_init.SBsdk_fieldsets(); // if not loaded on page load</code>         </p>
 <hr />
 <h2 id="button">BUTTON</h2>
 <p><strong>Parameters:</strong>  <br />
