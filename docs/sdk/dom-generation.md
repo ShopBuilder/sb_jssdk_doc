@@ -875,7 +875,12 @@ options = {
           
 -------------
 
-## FIELDSET
+## FIELDSET     
+          
+We have 2 kinds of fieldsets: (Styled only for BO)          
+          
+1.Section Fieldset:     
+     
 **Parameters:**    
   ~~~~~~~~~~~~ 
 
@@ -887,8 +892,87 @@ options = {
   subTitle: 'subTitle',
   content: dom,
   opensManyAtaTime: 1, // dont put this option if what was wanted is to open one fieldset at a time
+  opened_by_default: '1', // dont put this option if what was wanted is to have the fieldset closed
 };
 ``` 
+
+
+**Preview :**             
+  ~~~~~~~~~~~~~~~~~~~~~~~~~                  
+
+  Closed Fieldset
+
+  ![fieldset](/img/closed-fieldset.png)    
+
+  Opened Fieldset       
+
+  ![fieldset](/img/opened-fieldset.png)    
+
+
+**Example :** Let's try it together, open your console             
+  ~~~~~~~~~~~~~~~~~~~~~~~~~                               
+                               
+               
+  ```            
+  type = 'fieldset';
+  options = {
+   wrapperClass: 'wrapper-class',
+   mainTitle: 'mainTitle',
+   subTitle: 'subTitle',
+   content:'dom',
+  };
+  jQuery('body').append(SBsdk.SBfunctions.generateDom(type, options));
+  // window.SBsdk_init.SBsdk_fieldsets(); // if not loaded on page load
+  ```         
+
+          
+2.Normal Fieldset:     
+     
+**Parameters:**    
+  ~~~~~~~~~~~~ 
+
+```
+type = 'fieldset';
+options = {
+  wrapperClass: 'wrapper-class',
+  mainTitle: 'mainTitle',
+  subTitle: 'subTitle',
+  content: dom,
+  type: 'fieldset',
+  opened_by_default: '1', // dont put this option if what was wanted is to have the fieldset closed
+};
+``` 
+
+
+**Preview :**             
+  ~~~~~~~~~~~~~~~~~~~~~~~~~                  
+
+  Closed Fieldset
+
+  ![fieldset](/img/closed--fieldset.png)    
+
+  Opened Fieldset       
+
+  ![fieldset](/img/opened--fieldset.png)    
+
+
+**Example :** Let's try it together, open your console             
+  ~~~~~~~~~~~~~~~~~~~~~~~~~                               
+                               
+               
+  ```            
+  type = 'fieldset';
+  options = {
+   wrapperClass: 'wrapper-class',
+   mainTitle: 'mainTitle',
+   subTitle: 'subTitle',
+   content:'dom',
+   type: 'fieldset',
+  };
+  jQuery('body').append(SBsdk.SBfunctions.generateDom(type, options));
+  // window.SBsdk_init.SBsdk_fieldsets(); // if not loaded on page load
+  ```         
+
 
 ---------------------
         

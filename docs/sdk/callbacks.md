@@ -517,7 +517,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
 ```
 // suppose the app id of my theme is 123123123, then
 
-window.theme_app_map_marke_123123123 = function(){
+window.theme_app_map_marker_123123123 = function(){
   options = {
     image_url : 'https://openclipart.org/image/2400px/svg_to_png/192591/map-marker.png',
   }
