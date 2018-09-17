@@ -434,6 +434,17 @@ you can get information after an ajax about the following events:
   }
 ```
       
+
+-When in address page we switch the customer country.
+
+```
+ {
+    'id' => isset($profile->profile_id) ? $profile->uuid : '',
+    'type' =>  'shipping-customer-address || billing-customer-address',
+    'action' => 'switched-customer-address-country',
+    'query_strings' => $query_strings_text
+  }
+```
      
 -Panels page events    
 
@@ -503,6 +514,13 @@ window.theme_app_map_marker_{{appId}} = function(){
       width: 0, // default value if was not set
       height: 0 // default value if was not set
     }, // (Optional)
+    on_marker_click : { // (optional) the image to be displayed on click of marker
+      image_url : dataUrl + 'images/marker-white.png',
+      scale : {
+        width: 25,
+        height: 40
+      },
+    }
   }
   return options;
 }
@@ -519,7 +537,10 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
 window.theme_app_map_marker_123123123 = function(){
   options = {
-    image_url : 'https://openclipart.org/image/2400px/svg_to_png/192591/map-marker.png',
+    image_url : 'https://openclipart.org/image/2400px/svg_to_png/192591/map-marker.png', // (theme) 
+    on_marker_click : { // (optional) the image to be displayed on click of marker (active)
+      image_url : 'http://i1.wp.com/iconshow.me/media/images/Mixed/small-n-flat-icon/png/512/map-marker.png' 
+    }
   }
   return options; 
 };
