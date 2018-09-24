@@ -123,6 +123,41 @@
                 <li class="toctree-l3"><a href="#tabs">TABS</a></li>
                 
             
+                <li class="toctree-l3"><a href="#textfield">TEXTFIELD</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#select">SELECT</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#special-select">SPECIAL SELECT</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#special-select-image-widget">SPECIAL SELECT IMAGE WIDGET</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#special-select-widget">SPECIAL SELECT WIDGET</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#upload">UPLOAD</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#textarea">TEXTAREA</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#wysiwyg-text-editor">WYSIWYG TEXT EDITOR</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#link">LINK</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#fieldset">FIELDSET</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#button">BUTTON</a></li>
+                
+                    <li><a class="toctree-l4" href="#examples">Examples</a></li>
+                
+            
             </ul>
         
     </li>
@@ -508,23 +543,16 @@ This event is used to allow 3rd party apps to respond to the click of an item of
   console.log(data.tabs_data.id); // the id of the list item clicked
   console.log(data.tabs_data.tabs_wrapper_selector); // the selector object reference of the tab wrapper .. 
 });
-
-
-
---------------------   
-
-## TEXTFIELD
-
-
-**Parameters:**  
-  ~~~~~~~~~~~~ 
-
 </code></pre>
 
-<p>type = 'textfield';
+<hr />
+<h2 id="textfield">TEXTFIELD</h2>
+<p><strong>Parameters:</strong><br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'textfield';
 options = {
   wrapperClass: 'wrapper-class',
-  type: 'password' or 'date' or 'search'("search" is BO specifc - to take the design of a search field), // if type is text dont put type option
+  type: 'password' or 'date' or 'search'(&quot;search&quot; is BO specifc - to take the design of a search field), // if type is text dont put type option
   class: 'class',
   name: 'name',
   value: 'value',
@@ -534,26 +562,22 @@ options = {
   id: '',
   size: '',
   maxleng: ''
-};</p>
-<pre><code>
-**Helper Functions:**  
-  ~~~~~~~~~~~~ 
+};
 
-**- The textfield type is date:**
-
-The following function will help you get or set the value in the date picker
-
-`function SBsdk.SBfunctions.date_actions(selector, action, value)`        
-
-&gt; **Selector** ex `Selector = '#inputSelector'` || `Selector = '#inputSelector'`           
-&gt; **action** can be 'set' || 'get'             
-&gt; **value** use in case of `action = 'set'` ex. `value= '12/13/2018'`    
-
-
-**Example:**                     
 </code></pre>
 
-<p>jQuery('body').append(window.SBsdk.SBfunctions.generateDom('textfield', {
+<p><strong>Helper Functions:</strong><br />
+  ~~~~~~~~~~~~ </p>
+<p><strong>- The textfield type is date:</strong></p>
+<p>The following function will help you get or set the value in the date picker</p>
+<p><code>function SBsdk.SBfunctions.date_actions(selector, action, value)</code>        </p>
+<blockquote>
+<p><strong>Selector</strong> ex <code>Selector = '#inputSelector'</code> || <code>Selector = '#inputSelector'</code>         <br />
+<strong>action</strong> can be 'set' || 'get'           <br />
+<strong>value</strong> use in case of <code>action = 'set'</code> ex. <code>value= '12/13/2018'</code>    </p>
+</blockquote>
+<p><strong>Example:</strong>                     </p>
+<pre><code>jQuery('body').append(window.SBsdk.SBfunctions.generateDom('textfield', {
       wrapperClass: 'wrapper-date',
       Title: 'Title',
       type: 'date',
@@ -564,28 +588,20 @@ The following function will help you get or set the value in the date picker
 );
 SBsdk.SBfunctions.refresh();
 SBsdk.SBfunctions.date_actions('#datee', 'set', '5/30/1994');
-console.log(SBsdk.SBfunctions.date_actions('#datee', 'get'));</p>
-<pre><code>
-------------------------------
-
-## SELECT
-
-**Preview:**      
- ~~~~~~
-
-
--single select:      
-![normal_select](/img/normal_select.png)       
-
--multiple select:          
-![multipleSelect](/img/multipleSelect.png)              
-
-**Parameters:**    
-  ~~~~~~~~~~~~ 
-
+console.log(SBsdk.SBfunctions.date_actions('#datee', 'get'));
 </code></pre>
 
-<p>type = 'select';
+<hr />
+<h2 id="select">SELECT</h2>
+<p><strong>Preview:</strong>    <br />
+ ~~~~~~</p>
+<p>-single select:    <br />
+<img alt="normal_select" src="../../img/normal_select.png" />       </p>
+<p>-multiple select:        <br />
+<img alt="multipleSelect" src="../../img/multipleSelect.png" />              </p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'select';
 options = {
   wrapperClass: 'wrapper-class',
   class: 'class',
@@ -595,27 +611,20 @@ options = {
   id: '',
   multiple: 1, // multiple select (don't use if not multiple)
   options: [{value: '', selected: 1, label: '', class:''}, ..],
-};</p>
-<pre><code>
---------------------------
-
-## SPECIAL SELECT
-
-**Preview:**   
- ~~~~~~~
-
--single select:      
-![singleSelect2](/img/singleSelect2.png)  
-
--multi select:      
-![multipleselect2](/img/multipleselect2.png)  
-
-**Parameters:**       
-  ~~~~~~~~~~~~ 
-
+};
 </code></pre>
 
-<p>type = 'select';
+<hr />
+<h2 id="special-select">SPECIAL SELECT</h2>
+<p><strong>Preview:</strong> <br />
+ ~~~~~~~</p>
+<p>-single select:    <br />
+<img alt="singleSelect2" src="../../img/singleSelect2.png" />  </p>
+<p>-multi select:    <br />
+<img alt="multipleselect2" src="../../img/multipleselect2.png" />  </p>
+<p><strong>Parameters:</strong>     <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'select';
 options = {
   wrapperClass: 'wrapper-class',
   class: 'class',
@@ -624,70 +633,60 @@ options = {
   required: '1', // (don't use if not required)
   id: '',
   multiple: 1, // multiple select (don't use if not multiple)
-  options: [{value: '', selected: 1, label: '', class:''}, ..],</p>
-<p>select2: {
+  options: [{value: '', selected: 1, label: '', class:''}, ..],
+  default_value: &quot;default_value&quot;, // this can be used only in single select (not &quot;multiple&quot;) this will overide any use of &quot;selected&quot; option
+  select2: {
     dropdownCssClass: 'dropdownClass', // adds a class for the select dropdown
     addAsterisk: defaultValueOfSelectField, // adds a '*' for the default value text 
     searchable: { // adds a search for the select
       placeholder: 'hello' // the place holder text of the search
     }
   } 
-};</p>
-<pre><code>
-**Helper Functions:**  
-  ~~~~~~~~~~~~ 
-
-**1- Get and set the special select:**           
-You can simply get and set any special select using jQuery as any normal select tag:    
-**Example:**   
+};
 </code></pre>
 
-<p>// GET
+<p><strong>Helper Functions:</strong><br />
+  ~~~~~~~~~~~~ </p>
+<p><strong>1- Get and set the special select:</strong>         <br />
+You can simply get and set any special select using jQuery as any normal select tag:  <br />
+<strong>Example:</strong>   </p>
+<pre><code>// GET
 // where the .class is the class applied on the special-select SELECT tag.
-jQuery('.class').val();</p>
-<p>// SET
+jQuery('.class').val();
+
+// SET
 jQuery('.class').val('option1');
 // to apply the set change simple trigger change
-jQuery('.class').trigger('change');</p>
-<pre><code>
-
-**2- Append and Remove new elements to any special select:**           
-
-`SBsdk.SBfunctions.select2_action(select_selector, action, array_of_options)`      
- `action` parameter can be **append** or **reset**    
- *where:*      
-- **append** appends on existing options                
-- **reset** removes old options and adds new options            
-
-Example:
+jQuery('.class').trigger('change');
 </code></pre>
 
-<p>// normal options 
+<p><strong>2- Append and Remove new elements to any special select:</strong>           </p>
+<p><code>SBsdk.SBfunctions.select2_action(select_selector, action, array_of_options)</code>    <br />
+<code>action</code> parameter can be <strong>append</strong> or <strong>reset</strong>  <br />
+<em>where:</em>    <br />
+- <strong>append</strong> appends on existing options              <br />
+- <strong>reset</strong> removes old options and adds new options            </p>
+<p>Example:</p>
+<pre><code>// normal options 
 options = [
 {class:'aa', value: 'abcd' , label: 'ra', imageSelect2: 'img-src.png',customHtml: ''},
 {class:'bb', value: 'abcdabcd', selected: 1, label: 'ma', imageSelect2: 'img-src.png',customHtml: 'editme'},
 {class:'cc', value: 'abcdabcdabcd', selected: 1, label: 'fa', imageSelect2: 'img-src.png',customHtml: 'editme'},
 ];
-// parm(0) is the select_selector ("class") ex. ".selector_select"
+// parm(0) is the select_selector (&quot;class&quot;) ex. &quot;.selector_select&quot;
 // parm(1) is the action which is append..
 // parm(2) is the new options wanted to be appended..
-SBsdk.SBfunctions.select2_action('.selector_select', 'append', options);</p>
-<pre><code>
-
---------------------------
-
-## SPECIAL SELECT IMAGE WIDGET
-
-**Preview:**   
-  ~~~~~~~      
-![select2-image-widget](/img/select2-image-widget.png)
-
-**Parameters:**    
-  ~~~~~~~~~~~~ 
-
+SBsdk.SBfunctions.select2_action('.selector_select', 'append', options);
 </code></pre>
 
-<p>type = 'select';
+<hr />
+<h2 id="special-select-image-widget">SPECIAL SELECT IMAGE WIDGET</h2>
+<p><strong>Preview:</strong> <br />
+  ~~~~~~~    <br />
+<img alt="select2-image-widget" src="../../img/select2-image-widget.png" /></p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'select';
 options = {
   wrapperClass: 'wrapper-class',
   class: 'class',
@@ -701,44 +700,37 @@ options = {
       value: '',
       selected: 1,
       label: '',
-      class:'',</p>
-<pre><code>  imageSelect2: 'url', // the image url
-  customHtml: "html"  // some html that is added beside the option Label
-},
-..
-</code></pre>
-<p>],</p>
-<p>select2: {
+      class:'',
+
+      imageSelect2: 'url', // the image url
+      customHtml: &quot;html&quot;  // some html that is added beside the option Label
+    },
+    ..
+  ],
+
+  select2: {
     dropdownCssClass: 'dropdownClass', // adds a class for the select dropdown
     addAsterisk: defaultValueOfSelectField, // adds a '*' for the default value text 
     searchable: { // adds a search for the select
       placeholder: 'hello' // the place holder text of the search
-    },</p>
-<pre><code>image: 1
-</code></pre>
-<p>}
-};</p>
-<pre><code>
-**Helper Functions:**  
-  ~~~~~~~~~~~~ 
+    },
 
-Same helper functions of [special select](/sdk/dom-generation/#special-select)       
-
------------------------
-
-## SPECIAL SELECT WIDGET
-
-
-**Preview:**     
- ~~~~~~~  
-![widget](/img/widget.png)
-
-**Parameters:**    
-  ~~~~~~~~~~~~ 
-
+    image: 1
+  }
+};
 </code></pre>
 
-<p>type = 'select';
+<p><strong>Helper Functions:</strong><br />
+  ~~~~~~~~~~~~ </p>
+<p>Same helper functions of <a href="../../sdk/dom-generation/#special-select">special select</a>       </p>
+<hr />
+<h2 id="special-select-widget">SPECIAL SELECT WIDGET</h2>
+<p><strong>Preview:</strong>   <br />
+ ~~~~~~~<br />
+<img alt="widget" src="../../img/widget.png" /></p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'select';
 options = {
   wrapperClass: 'wrapper-class',
   class: 'class',
@@ -752,36 +744,31 @@ options = {
       value: '',
       selected: 1,
       label: '',
-      class:'',</p>
-<pre><code>  imageSelect2: 'url', // the image url
-  customHtml: "html"  // some html that is added beside the option Label
-},
-..
-</code></pre>
-<p>],</p>
-<p>select2: {
+      class:'',
+
+      imageSelect2: 'url', // the image url
+      customHtml: &quot;html&quot;  // some html that is added beside the option Label
+    },
+    ..
+  ],
+
+  select2: {
     dropdownCssClass: 'dropdownClass', // adds a class for the select dropdown
     image: 1
-  },</p>
-<p>widget: { emptyText: 'no more results found', addButtonClass:'class-to-the-add-btn'} 
-};</p>
-<pre><code>
+  },
 
-**Helper Functions:**  
-  ~~~~~~~~~~~~ 
-
-Same helper functions of [special select](/sdk/dom-generation/#special-select) 
-
--------------------------
-
-## UPLOAD
-
-**Parameters:**    
-  ~~~~~~~~~~~~ 
-
+  widget: { emptyText: 'no more results found', addButtonClass:'class-to-the-add-btn'} 
+};
 </code></pre>
 
-<p>type = 'upload';
+<p><strong>Helper Functions:</strong><br />
+  ~~~~~~~~~~~~ </p>
+<p>Same helper functions of <a href="../../sdk/dom-generation/#special-select">special select</a> </p>
+<hr />
+<h2 id="upload">UPLOAD</h2>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'upload';
 options = {
   wrapperClass: 'wrapper-class',
   class: 'class',
@@ -791,19 +778,14 @@ options = {
   required: '1', // (don't use if not required)
   id: '',
   size: ''
-};</p>
-<pre><code>
------------------- 
-
-## TEXTAREA
-
-**Parameters:**    
-  ~~~~~~~~~~~~ 
-
-
+};
 </code></pre>
 
-<p>type = 'textarea';
+<hr />
+<h2 id="textarea">TEXTAREA</h2>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'textarea';
 options = {
   wrapperClass: 'wrapper-class',
   class: 'class',
@@ -816,195 +798,172 @@ options = {
   cols:'',
   placeholder:'',
   maxlength:''
-};</p>
-<pre><code>
--------------
-
-## WYSIWYG TEXT EDITOR
-
-**Preview:**     
-  ~~~~~~
-![wysiwyg](/img/wysiwyg.png)
-
-**Parameters:**    
-  ~~~~~~~~~~~~ 
-
+};
 </code></pre>
 
-<p>type = 'wysiwyg';
+<hr />
+<h2 id="wysiwyg-text-editor">WYSIWYG TEXT EDITOR</h2>
+<p><strong>Preview:</strong>   <br />
+  ~~~~~~
+<img alt="wysiwyg" src="../../img/wysiwyg.png" /></p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'wysiwyg';
 options = {
   wrapperClass: 'wrapper-class-of-wysiwyg',
   class: 'class', //(REQUIRED)
   Title: 'title',
   required: '1', // (don't use if not required)
   value: '', //(string contains markup --can be html)
-};</p>
-<pre><code>
-
-**Helper Functions:**  
-  ~~~~~~~~~~~~ 
-
-**1- Get or Set the wysiwyg data:**      
-
-`var get_data = SBsdk.SBfunctions.wysiwyg_data(class_of_wysiwyg);` // gets the data      
-`SBsdk.SBfunctions.wysiwyg_data(class_of_wysiwyg, 'set', HTML_data);` // set data       
-
-**Example**          
+};
 </code></pre>
 
-<p>SBsdk.SBfunctions.wysiwyg_data('.pop-up', 'set', '<p>hello</p>'); // sets the html inside the wysiwyg         <br />
-var get_data = SBsdk.SBfunctions.wysiwyg_data('.pop-up'); // returns the html inside the wysiwyg that is <p>hello</p>         </p>
-<pre><code>
-**2- Configure your wysiwyg:**    
-
-
--  To change the configuration of all of your wysiwyg use the function:       
-`window.SBsdk.SBfunctions.wysiwyg_configuration(config);`        
-
-
-A) by default you will have the configuration used in Shopbuilder platform that is               
+<p><strong>Helper Functions:</strong><br />
+  ~~~~~~~~~~~~ </p>
+<p><strong>1- Get or Set the wysiwyg data:</strong>      </p>
+<p><code>var get_data = SBsdk.SBfunctions.wysiwyg_data(class_of_wysiwyg);</code> // gets the data    <br />
+<code>SBsdk.SBfunctions.wysiwyg_data(class_of_wysiwyg, 'set', HTML_data);</code> // set data       </p>
+<p><strong>Example</strong>          </p>
+<pre><code>SBsdk.SBfunctions.wysiwyg_data('.pop-up', 'set', '&lt;p&gt;hello&lt;/p&gt;'); // sets the html inside the wysiwyg           
+var get_data = SBsdk.SBfunctions.wysiwyg_data('.pop-up'); // returns the html inside the wysiwyg that is &lt;p&gt;hello&lt;/p&gt;         
 </code></pre>
 
-<p>config.toolbar = [["Bold", "Italic", "Underline", "JustifyLeft", "JustifyCenter", "JustifyRight", "JustifyBlock", "BidiLtr", "BidiRtl", "BulletedList", "NumberedList", "Outdent", "Indent", "Undo", "Redo", "Link", "Unlink", "Anchor", "base64image", "Cut", "Copy", "Paste", "PasteText", "PasteFromWord", "RemoveFormat", "Format", "FontSize", "video_filter"]];</p>
-<pre><code>
-To get the SB config simply use:             
-`config = '';`         
-`window.SBsdk.SBfunctions.wysiwyg_configuration(config);`  
-
-Ex. Let's try it out together .. copy the following code into the console and voilà.         
-
+<p><strong>2- Configure your wysiwyg:</strong>    </p>
+<ul>
+<li>To change the configuration of all of your wysiwyg use the function:     <br />
+<code>window.SBsdk.SBfunctions.wysiwyg_configuration(config);</code>        </li>
+</ul>
+<p>A) by default you will have the configuration used in Shopbuilder platform that is               </p>
+<pre><code>config.toolbar = [[&quot;Bold&quot;, &quot;Italic&quot;, &quot;Underline&quot;, &quot;JustifyLeft&quot;, &quot;JustifyCenter&quot;, &quot;JustifyRight&quot;, &quot;JustifyBlock&quot;, &quot;BidiLtr&quot;, &quot;BidiRtl&quot;, &quot;BulletedList&quot;, &quot;NumberedList&quot;, &quot;Outdent&quot;, &quot;Indent&quot;, &quot;Undo&quot;, &quot;Redo&quot;, &quot;Link&quot;, &quot;Unlink&quot;, &quot;Anchor&quot;, &quot;base64image&quot;, &quot;Cut&quot;, &quot;Copy&quot;, &quot;Paste&quot;, &quot;PasteText&quot;, &quot;PasteFromWord&quot;, &quot;RemoveFormat&quot;, &quot;Format&quot;, &quot;FontSize&quot;, &quot;video_filter&quot;]];
 </code></pre>
 
-<p>config = ''; // gets the configurations of sb
+<p>To get the SB config simply use:           <br />
+<code>config = '';</code>       <br />
+<code>window.SBsdk.SBfunctions.wysiwyg_configuration(config);</code>  </p>
+<p>Ex. Let's try it out together .. copy the following code into the console and voilà.         </p>
+<pre><code>config = ''; // gets the configurations of sb
 // set the configuration
 window.SBsdk.SBfunctions.wysiwyg_configuration(config);
 // then insert your wysiwyg
-dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {"wrapperClass": 'hello', "class": 'class-editor' , "Title": 'title',"required":1, "value": '<h2>Hello</h2><p>world!</p>'});
+dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {&quot;wrapperClass&quot;: 'hello', &quot;class&quot;: 'class-editor' , &quot;Title&quot;: 'title',&quot;required&quot;:1, &quot;value&quot;: '&lt;h2&gt;Hello&lt;/h2&gt;&lt;p&gt;world!&lt;/p&gt;'});
 jQuery('body').append(dom);
-SBsdk.SBfunctions.refresh();</p>
-<pre><code>
+SBsdk.SBfunctions.refresh();
 
-**B) To get ALL of the supported items in a wysiwyg**         
-`config = {};`         
-`window.SBsdk.SBfunctions.wysiwyg_configuration(config);`               
-
-SET     
-`config = {};`   
-That is equivalent to:
 </code></pre>
 
-<pre><code>  config= {};
-  // Toolbar configuration generated automatically by the editor based on config.toolbarGroups.
-  config.toolbar = [
-    { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
-    { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
-    { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
-    { name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
-    '/',
-    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] },
-    { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
-    { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
-    { name: 'insert', items: [ 'Image', 'base64image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
-    '/',
-    { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
-    { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
-    { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
-    { name: 'others', items: [ '-' ] },
-    { name: 'about', items: [ 'About' ] }
-  ];
-  // Toolbar groups configuration.
-  config.toolbarGroups = [
-    { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
-    { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
-    { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ] },
-    { name: 'forms' },
-    '/',
-    { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
-    { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
-    { name: 'links' },
-    { name: 'insert' },
-    '/',
-    { name: 'styles' },
-    { name: 'colors' },
-    { name: 'tools' },
-    { name: 'others' },
-    { name: 'about' }
-  ];
-</code></pre>
-<pre><code>
-note that to use an image plugin you can use either: `base64image` or `Image`           
-
-
-**C) you can customize your configuration to get the desired wysiwyg**     
-
-- choose the items from the Supported items of the wysiwyg mentioned above in part (B)
-
-**Example**:
+<p><strong>B) To get ALL of the supported items in a wysiwyg</strong>       <br />
+<code>config = {};</code>       <br />
+<code>window.SBsdk.SBfunctions.wysiwyg_configuration(config);</code>               </p>
+<p>SET   <br />
+<code>config = {};</code> <br />
+That is equivalent to:</p>
+<pre><code>      config= {};
+      // Toolbar configuration generated automatically by the editor based on config.toolbarGroups.
+      config.toolbar = [
+        { name: 'document', groups: [ 'mode', 'document', 'doctools' ], items: [ 'Source', '-', 'Save', 'NewPage', 'Preview', 'Print', '-', 'Templates' ] },
+        { name: 'clipboard', groups: [ 'clipboard', 'undo' ], items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] },
+        { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ], items: [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ] },
+        { name: 'forms', items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ] },
+        '/',
+        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] },
+        { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl', 'Language' ] },
+        { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
+        { name: 'insert', items: [ 'Image', 'base64image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ] },
+        '/',
+        { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
+        { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
+        { name: 'tools', items: [ 'Maximize', 'ShowBlocks' ] },
+        { name: 'others', items: [ '-' ] },
+        { name: 'about', items: [ 'About' ] }
+      ];
+      // Toolbar groups configuration.
+      config.toolbarGroups = [
+        { name: 'document', groups: [ 'mode', 'document', 'doctools' ] },
+        { name: 'clipboard', groups: [ 'clipboard', 'undo' ] },
+        { name: 'editing', groups: [ 'find', 'selection', 'spellchecker' ] },
+        { name: 'forms' },
+        '/',
+        { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ] },
+        { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ] },
+        { name: 'links' },
+        { name: 'insert' },
+        '/',
+        { name: 'styles' },
+        { name: 'colors' },
+        { name: 'tools' },
+        { name: 'others' },
+        { name: 'about' }
+      ];
 </code></pre>
 
-<p>// It should be the first function to execute before any wysiwyg injection      <br />
-config= {};        <br />
-config.toolbar = [[ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ]];                <br />
-window.SBsdk.SBfunctions.wysiwyg_configuration(config);             </p>
-<p>// then insert your wysiwyg
-dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {"wrapperClass": 'hello', "class": 'class-editor' , "Title": 'title',"required":1, "value": '<h2>Hello</h2><p>world!</p>'});
+<p>note that to use an image plugin you can use either: <code>base64image</code> or <code>Image</code>           </p>
+<p><strong>C) you can customize your configuration to get the desired wysiwyg</strong>     </p>
+<ul>
+<li>choose the items from the Supported items of the wysiwyg mentioned above in part (B)</li>
+</ul>
+<p><strong>Example</strong>:</p>
+<pre><code>// It should be the first function to execute before any wysiwyg injection        
+config= {};          
+config.toolbar = [[ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ]];                  
+window.SBsdk.SBfunctions.wysiwyg_configuration(config);             
+
+// then insert your wysiwyg
+dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {&quot;wrapperClass&quot;: 'hello', &quot;class&quot;: 'class-editor' , &quot;Title&quot;: 'title',&quot;required&quot;:1, &quot;value&quot;: '&lt;h2&gt;Hello&lt;/h2&gt;&lt;p&gt;world!&lt;/p&gt;'});
 jQuery('body').append(dom);
-SBsdk.SBfunctions.refresh();       </p>
-<pre><code>
-- To add a seperator between an item and another we use  '-':
-
-**Example**: Try it out with us
-
+SBsdk.SBfunctions.refresh();       
 </code></pre>
 
-<p>// It should be the first function to execute before any wysiwyg injection      <br />
-config= {};         <br />
-config.toolbar = [[ 'Cut', 'Copy', '-', 'Undo', 'Redo' ]];                <br />
-window.SBsdk.SBfunctions.wysiwyg_configuration(config);             </p>
-<p>// then insert your wysiwyg
-dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {"wrapperClass": 'hello', "class": 'class-editor' , "Title": 'title',"required":1, "value": '<h2>Hello</h2><p>world!</p>'});
+<ul>
+<li>To add a seperator between an item and another we use  '-':</li>
+</ul>
+<p><strong>Example</strong>: Try it out with us</p>
+<pre><code>// It should be the first function to execute before any wysiwyg injection        
+config= {};           
+config.toolbar = [[ 'Cut', 'Copy', '-', 'Undo', 'Redo' ]];                  
+window.SBsdk.SBfunctions.wysiwyg_configuration(config);             
+
+// then insert your wysiwyg
+dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {&quot;wrapperClass&quot;: 'hello', &quot;class&quot;: 'class-editor' , &quot;Title&quot;: 'title',&quot;required&quot;:1, &quot;value&quot;: '&lt;h2&gt;Hello&lt;/h2&gt;&lt;p&gt;world!&lt;/p&gt;'});
 jQuery('body').append(dom);
-SBsdk.SBfunctions.refresh();       </p>
-<pre><code>
-- to group your items and devide them on lines: note that '/' will make add your items on a new line
-
-
-**Example:** Try it out
-
+SBsdk.SBfunctions.refresh();       
 </code></pre>
 
-<p>config= {};</p>
-<p>// create your groups</p>
-<p>config.toolbarGroups = [
+<ul>
+<li>to group your items and devide them on lines: note that '/' will make add your items on a new line</li>
+</ul>
+<p><strong>Example:</strong> Try it out</p>
+<pre><code>config= {};
+
+// create your groups
+
+config.toolbarGroups = [
   { name: 'clipboard'},   // a clipboard group
   '/',                    // new line
   { name: 'basicstyles'}, // basicstyles group
   { name: 'paragraph'}  // paragraph group
-];</p>
-<p>// add the items of each group
+];
+
+// add the items of each group
 config.toolbar = [
   { name: 'clipboard', items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ] }, // for clipboard group the following items.
   '/',  // new line
   { name: 'basicstyles', items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'CopyFormatting', 'RemoveFormat' ] }, // for the basic styles
   { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight'] } // for the paragraph
-];</p>
-<p>window.SBsdk.SBfunctions.wysiwyg_configuration(config);             </p>
-<p>// then insert your wysiwyg
-dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {"wrapperClass": 'hello', "class": 'class-editor' , "Title": 'title',"required":1, "value": '<h2>Hello</h2><p>world!</p>'});
+];
+
+window.SBsdk.SBfunctions.wysiwyg_configuration(config);             
+
+// then insert your wysiwyg
+dom = window.SBsdk.SBfunctions.generateDom('wysiwyg', {&quot;wrapperClass&quot;: 'hello', &quot;class&quot;: 'class-editor' , &quot;Title&quot;: 'title',&quot;required&quot;:1, &quot;value&quot;: '&lt;h2&gt;Hello&lt;/h2&gt;&lt;p&gt;world!&lt;/p&gt;'});
 jQuery('body').append(dom);
-SBsdk.SBfunctions.refresh();      </p>
-<pre><code>
-
-
-----------------
-
-## LINK
-**Parameters:**    
-  ~~~~~~~~~~~~ 
-
+SBsdk.SBfunctions.refresh();      
 </code></pre>
 
-<p>type = 'link';
+<hr />
+<h2 id="link">LINK</h2>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'link';
 options = {
   wrapperClass: 'wrapper-class',
   class: 'class', //(REQUIRED)
@@ -1014,23 +973,17 @@ options = {
   id: '',
   target: '',
   wrapper: 1, // if you want a link with no wrapper .. remove the wrapper option
-  type:'' // can be "btn", "delete" or "add" (this option is for the BO)
-};</p>
-<pre><code>
--------------
-
-## FIELDSET     
-
-We have 2 kinds of fieldsets: (Styled only for BO)          
-
-1.Section Fieldset:     
-
-**Parameters:**    
-  ~~~~~~~~~~~~ 
-
+  type:'' // can be &quot;btn&quot;, &quot;delete&quot; or &quot;add&quot; (this option is for the BO)
+};
 </code></pre>
 
-<p>type = 'fieldset';
+<hr />
+<h2 id="fieldset">FIELDSET</h2>
+<p>We have 2 kinds of fieldsets: (Styled only for BO)          </p>
+<p>1.Section Fieldset:     </p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'fieldset';
 options = {
   wrapperClass: 'wrapper-class',
   mainTitle: 'mainTitle',
@@ -1038,27 +991,18 @@ options = {
   content: dom,
   opensManyAtaTime: 1, // dont put this option if what was wanted is to open one fieldset at a time
   opened_by_default: '1', // dont put this option if what was wanted is to have the fieldset closed
-};</p>
-<pre><code>
+};
+</code></pre>
 
-**Preview :**             
-  ~~~~~~~~~~~~~~~~~~~~~~~~~                  
-
-  Closed Fieldset
-
-  ![fieldset](/img/closed-fieldset.png)    
-
-  Opened Fieldset       
-
-  ![fieldset](/img/opened-fieldset.png)    
-
-
-**Example :** Let's try it together, open your console             
-  ~~~~~~~~~~~~~~~~~~~~~~~~~                               
-
-
-  ```            
-  type = 'fieldset';
+<p><strong>Preview :</strong>           <br />
+  ~~~~~~~~~~~~~~~~~~~~~~~~~                  </p>
+<p>Closed Fieldset</p>
+<p><img alt="fieldset" src="../../img/closed-fieldset.png" />    </p>
+<p>Opened Fieldset       </p>
+<p><img alt="fieldset" src="../../img/opened-fieldset.png" />    </p>
+<p><strong>Example :</strong> Let's try it together, open your console           <br />
+  ~~~~~~~~~~~~~~~~~~~~~~~~~                               </p>
+<p><code>type = 'fieldset';
   options = {
    wrapperClass: 'wrapper-class',
    mainTitle: 'mainTitle',
@@ -1066,18 +1010,11 @@ options = {
    content:'dom',
   };
   jQuery('body').append(SBsdk.SBfunctions.generateDom(type, options));
-  // window.SBsdk_init.SBsdk_fieldsets(); // if not loaded on page load
-  ```         
-
-
-2.Normal Fieldset:     
-
-**Parameters:**    
-  ~~~~~~~~~~~~ 
-
-</code></pre>
-
-<p>type = 'fieldset';
+  // window.SBsdk_init.SBsdk_fieldsets(); // if not loaded on page load</code>         </p>
+<p>2.Normal Fieldset:     </p>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'fieldset';
 options = {
   wrapperClass: 'wrapper-class',
   mainTitle: 'mainTitle',
@@ -1085,27 +1022,18 @@ options = {
   content: dom,
   type: 'fieldset',
   opened_by_default: '1', // dont put this option if what was wanted is to have the fieldset closed
-};</p>
-<pre><code>
+};
+</code></pre>
 
-**Preview :**             
-  ~~~~~~~~~~~~~~~~~~~~~~~~~                  
-
-  Closed Fieldset
-
-  ![fieldset](/img/closed--fieldset.png)    
-
-  Opened Fieldset       
-
-  ![fieldset](/img/opened--fieldset.png)    
-
-
-**Example :** Let's try it together, open your console             
-  ~~~~~~~~~~~~~~~~~~~~~~~~~                               
-
-
-  ```            
-  type = 'fieldset';
+<p><strong>Preview :</strong>           <br />
+  ~~~~~~~~~~~~~~~~~~~~~~~~~                  </p>
+<p>Closed Fieldset</p>
+<p><img alt="fieldset" src="../../img/closed--fieldset.png" />    </p>
+<p>Opened Fieldset       </p>
+<p><img alt="fieldset" src="../../img/opened--fieldset.png" />    </p>
+<p><strong>Example :</strong> Let's try it together, open your console           <br />
+  ~~~~~~~~~~~~~~~~~~~~~~~~~                               </p>
+<p><code>type = 'fieldset';
   options = {
    wrapperClass: 'wrapper-class',
    mainTitle: 'mainTitle',
@@ -1114,51 +1042,49 @@ options = {
    type: 'fieldset',
   };
   jQuery('body').append(SBsdk.SBfunctions.generateDom(type, options));
-  // window.SBsdk_init.SBsdk_fieldsets(); // if not loaded on page load
-  ```         
-
-
----------------------
-
-## BUTTON
-**Parameters:**    
-  ~~~~~~~~~~~~ 
-
-</code></pre>
-
-<p>type = 'button';
+  // window.SBsdk_init.SBsdk_fieldsets(); // if not loaded on page load</code>         </p>
+<hr />
+<h2 id="button">BUTTON</h2>
+<p><strong>Parameters:</strong>  <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>type = 'button';
 options = {
   Title: 'Title',
   class: 'class',
   id: 'id',
-};</p>
-<pre><code>
-----------------
-
-#### Examples  
-
+};
 </code></pre>
 
-<p>//Ex Radio</p>
-<p>window.SBsdk.SBfunctions.generateDom('radio', {
- "wrapperClass": 'hellooooo', // wrapper class
-"name" : "name_radios[name_radios]" , // (required) name that is provided for all the radio inputs 
+<hr />
+<h4 id="examples">Examples</h4>
+<pre><code>//Ex Radio
+
+window.SBsdk.SBfunctions.generateDom('radio', {
+ &quot;wrapperClass&quot;: 'hellooooo', // wrapper class
+&quot;name&quot; : &quot;name_radios[name_radios]&quot; , // (required) name that is provided for all the radio inputs 
    data: [ 
-     {"Title":'ok', "class": 'ddd', "id": 'dddff',  "value":  1, "checked": 1},
-     {"Title": 'ok1', "class": 'aaa', "id": 'ssd', "value": 0}
+     {&quot;Title&quot;:'ok', &quot;class&quot;: 'ddd', &quot;id&quot;: 'dddff',  &quot;value&quot;:  1, &quot;checked&quot;: 1},
+     {&quot;Title&quot;: 'ok1', &quot;class&quot;: 'aaa', &quot;id&quot;: 'ssd', &quot;value&quot;: 0}
    ]
-});</p>
-<p>//Ex. checkboxes:</p>
-<p>window.SBsdk.SBfunctions.generateDom('checkbox', {
-  "wrapperClass": 'hellooooo',
-  "toggle": 1, // optional in case you wanted a toggle like checkbox
+});
+
+
+
+//Ex. checkboxes:
+
+window.SBsdk.SBfunctions.generateDom('checkbox', {
+  &quot;wrapperClass&quot;: 'hellooooo',
+  &quot;toggle&quot;: 1, // optional in case you wanted a toggle like checkbox
    data: [ 
-     {"Title":'ok', "class": 'ddd', "id": 'dddff',  "value":  1, "checked": 1},
-     {"Title": 'ok1', "class": 'aaa', "id": 'ssd', "value": 0, "disabled": 1}
+     {&quot;Title&quot;:'ok', &quot;class&quot;: 'ddd', &quot;id&quot;: 'dddff',  &quot;value&quot;:  1, &quot;checked&quot;: 1},
+     {&quot;Title&quot;: 'ok1', &quot;class&quot;: 'aaa', &quot;id&quot;: 'ssd', &quot;value&quot;: 0, &quot;disabled&quot;: 1}
    ]
-});</p>
-<p>//Ex. text field     </p>
-<p>window.SBsdk.SBfunctions.generateDom('textfield', {
+});
+
+
+//Ex. text field     
+
+window.SBsdk.SBfunctions.generateDom('textfield', {
       wrapperClass: 'sb-manage-input',
       Title: 'Title',
       required: 1,
@@ -1168,18 +1094,24 @@ options = {
       size: 60,
       maxlength: 255,
       value: 'default value'
-});</p>
-<p>// this will generate                <br />
-// <input class="text-full form-control form-text  required " placeholder="placeholder" type="text" id="i-am-an-id" name="hello" value="default value" size="60" maxlength="255"> </p>
-<p>//Ex. Fieldsets
+});
+
+// this will generate                  
+// &lt;input class=&quot;text-full form-control form-text  required &quot; placeholder=&quot;placeholder&quot; type=&quot;text&quot; id=&quot;i-am-an-id&quot; name=&quot;hello&quot; value=&quot;default value&quot; size=&quot;60&quot; maxlength=&quot;255&quot;&gt; 
+
+
+//Ex. Fieldsets
 window.SBsdk.SBfunctions.generateDom('fieldset', {
       wrapperClass: 'fieldset-custom-wrapper', 
       mainTitle: 'Hello fieldset',
-      subTitle: '<img ..><img ..>',
+      subTitle: '&lt;img ..&gt;&lt;img ..&gt;',
       content: 'fieldset content fieldset content fieldset content '
-});</p>
-<p>//Ex. normal select      </p>
-<p>window.SBsdk.SBfunctions.generateDom('select', {
+});
+
+
+//Ex. normal select      
+
+ window.SBsdk.SBfunctions.generateDom('select', {
        required:1,
        Title : 'hello select',
        wrapperClass: 'select-dummy-wrapper-class',
@@ -1189,23 +1121,30 @@ window.SBsdk.SBfunctions.generateDom('fieldset', {
            {'value': 'one', 'label' : 'one'},
            {'value': 'two', 'selected' : 'selected' , 'label' : 'two'}
        ]
-});                                <br />
-// this will generate                  <br />
-// <div class="form-item form-type-select form-group select-dummy-wrapper-class "><label class="control-label" for="id-select">hello select <span class="form-required" title="This field is required.">*</span> </label><select class=" select-dummy-class " id=" id-select "><option "="" value="one">one</option><option "="" value="two" selected="selected">two</option></select></div>           </p>
-<p>//Ex. for a select2 library -- select2
-// before to $('select').select2(options) where options = {'dropdownCssClass':'sb-intro-theme-drop'}     </p>
-<p>// After:     </p>
-<p>window.SBsdk.SBfunctions.generateDom('select', {
+});                                  
+// this will generate                    
+// &lt;div class=&quot;form-item form-type-select form-group select-dummy-wrapper-class &quot;&gt;&lt;label class=&quot;control-label&quot; for=&quot;id-select&quot;&gt;hello select &lt;span class=&quot;form-required&quot; title=&quot;This field is required.&quot;&gt;*&lt;/span&gt; &lt;/label&gt;&lt;select class=&quot; select-dummy-class &quot; id=&quot; id-select &quot;&gt;&lt;option &quot;=&quot;&quot; value=&quot;one&quot;&gt;one&lt;/option&gt;&lt;option &quot;=&quot;&quot; value=&quot;two&quot; selected=&quot;selected&quot;&gt;two&lt;/option&gt;&lt;/select&gt;&lt;/div&gt;           
+
+//Ex. for a select2 library -- select2
+// before to $('select').select2(options) where options = {'dropdownCssClass':'sb-intro-theme-drop'}     
+
+// After:     
+
+window.SBsdk.SBfunctions.generateDom('select', {
   select2: {'dropdownCssClass':'sb-intro-theme-drop'} ,
   options: [
      {'value': 'one', 'label' : 'one'},
      {'value': 'two', 'selected' : 'selected' , 'label' : 'two'}
   ]
-});</p>
-<p>//if you want a normal select field dont add {{select2}} option <br />
-// if you want the select2 but you dont have options for it:     select2: {}      </p>
-<p>//Ex. Multiple select2</p>
-<p>window.SBsdk.SBfunctions.generateDom('select', {
+});
+
+//if you want a normal select field dont add {{select2}} option   
+// if you want the select2 but you dont have options for it:     select2: {}      
+
+//Ex. Multiple select2
+
+
+window.SBsdk.SBfunctions.generateDom('select', {
   select2: {} , // Dont include if you want a normal multiple select
   multiple: 1,
   name : 'multi[]',
@@ -1213,9 +1152,11 @@ window.SBsdk.SBfunctions.generateDom('fieldset', {
      {'value': 'one', 'label' : 'one'},
      {'value': 'two', 'selected' : 'selected' , 'label' : 'two'}
   ]
-});</p>
-<p>//Ex. Multiple select2 widget:</p>
-<p>window.SBsdk.SBfunctions.generateDom('select', {
+});
+
+//Ex. Multiple select2 widget:
+
+window.SBsdk.SBfunctions.generateDom('select', {
   select2: {} , // Dont include if you want a normal multiple select
   multiple: 1,
   name : 'multi[]',
@@ -1227,9 +1168,11 @@ window.SBsdk.SBfunctions.generateDom('fieldset', {
      {'value': 'one', 'label' : 'one'},
      {'value': 'two', 'selected' : 'selected' , 'label' : 'two'}
   ]
-});</p>
-<p>//Ex. Multiple select2 widget:</p>
-<p>window.SBsdk.SBfunctions.generateDom('select', {
+});
+
+//Ex. Multiple select2 widget:
+
+window.SBsdk.SBfunctions.generateDom('select', {
   select2: {
      image:1,
      dropDownCss: 'drop-down-class',
@@ -1246,20 +1189,22 @@ window.SBsdk.SBfunctions.generateDom('fieldset', {
       'label' : 'one',
        class: 'class1',
        imageSelect2: 'https://../img-url.png',
-       customHtml : '<div>Good bye</div>'
-     },</p>
-<pre><code> {'value': 'two',
-  'selected' : 'selected' ,
-   class: 'class2',
-  'label' : 'two',
-   imageSelect2: 'https://../img-url.png',
-   customHtml : '&lt;div&gt;Good Morning&lt;/div&gt;'
- }
-</code></pre>
-<p>]
-});</p>
-<p>//Ex. Image upload:</p>
-<p>window.SBsdk.SBfunctions.generateDom('image_upload', {
+       customHtml : '&lt;div&gt;Good bye&lt;/div&gt;'
+     },
+
+     {'value': 'two',
+      'selected' : 'selected' ,
+       class: 'class2',
+      'label' : 'two',
+       imageSelect2: 'https://../img-url.png',
+       customHtml : '&lt;div&gt;Good Morning&lt;/div&gt;'
+     }
+  ]
+});
+
+//Ex. Image upload:
+
+window.SBsdk.SBfunctions.generateDom('image_upload', {
   Title: Image Upload Section Title , // Title of the upload
   TitleClass: 'image-upload-section-title-class'  , // class of the title
   multiple: 1, // if we want to upload multiple images (dont use if you want a single image uploader)
@@ -1273,23 +1218,27 @@ window.SBsdk.SBfunctions.generateDom('fieldset', {
   uploadFileData: { // upload button that is clicked automatically after the upload
             name: 'a1', 
             id: 'hello1',
-  },           <br />
-  // <em>values</em> is used if there are already existing images added       <br />
-  // if multiple image upload then:        <br />
+  },             
+  // *values* is used if there are already existing images added         
+  // if multiple image upload then:          
   values: [
     {viewImgData:{ width, height, src, alt }, deleteFileData:{ id, name}, muliple:1 },
     { viewImgData:{ width, height, src, alt }, deleteFileData:{ id, name}, muliple:1},
     { viewImgData:{ width, height, src, alt }, deleteFileData:{ id, name}, muliple:1 },
-  ]     <br />
+  ]       
    // if single image upload
-   values: { viewImgData:{ width, height, src, alt }, deleteFileData:{ id, name} }        <br />
+   values: { viewImgData:{ width, height, src, alt }, deleteFileData:{ id, name} }          
   //(Where viewImgData is all the information for the image)
   //(and   deleteFileData is all the information for the delete button of the image)
-  // and <em>multiple</em> is required for muliple image upload  <br />
-});</p>
-<p>wysiwyg example:        </p>
-<p>window.SBsdk.SBfunctions.generateDom('wysiwyg', {"wrapperClass": 'hello', "class": 'class-editor' , "Title": 'title',"required":1, "value": '<h2>Hello</h2><p>world!</p>'});</p>
-<p>```      </p>
+  // and *multiple* is required for muliple image upload    
+});
+
+wysiwyg example:        
+
+window.SBsdk.SBfunctions.generateDom('wysiwyg', {&quot;wrapperClass&quot;: 'hello', &quot;class&quot;: 'class-editor' , &quot;Title&quot;: 'title',&quot;required&quot;:1, &quot;value&quot;: '&lt;h2&gt;Hello&lt;/h2&gt;&lt;p&gt;world!&lt;/p&gt;'});
+
+</code></pre>
+
 <hr />
               
             </div>

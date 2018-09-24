@@ -409,7 +409,7 @@ $(document).on("sdk_tabs",function(data) {
   console.log(data.tabs_data.id); // the id of the list item clicked
   console.log(data.tabs_data.tabs_wrapper_selector); // the selector object reference of the tab wrapper .. 
 });
-
+```
 
 
 --------------------   
@@ -526,7 +526,7 @@ options = {
   id: '',
   multiple: 1, // multiple select (don't use if not multiple)
   options: [{value: '', selected: 1, label: '', class:''}, ..],
-
+  default_value: "default_value", // this can be used only in single select (not "multiple") this will overide any use of "selected" option
   select2: {
     dropdownCssClass: 'dropdownClass', // adds a class for the select dropdown
     addAsterisk: defaultValueOfSelectField, // adds a '*' for the default value text 
