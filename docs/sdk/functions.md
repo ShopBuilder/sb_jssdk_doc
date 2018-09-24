@@ -301,6 +301,48 @@ window.SBsdk.SBfunctions.sbsdk_select_style('select#edit-field-gender-und',
 
 ```
 
+----------------------------------------
+
+
+#### FO - Helper -- to Style Existing checkbox/radio
+ 
+  `SBsdk.SBfunctions.apply_on_existing_elts(input_selector, type);`
+
+- this function adds a link that once pressed serves as if the real input was pressed as well
+- u may style it to look the way you wish
+- hide the real input using css 
+
+Parameters: 
+`type`: can be `'checkbox'` or `'radio'`
+`input_selector`: is the selector of the checkboxes or radio to apply on
+
+      
+**Example:**   
+```       
+  SBsdk.SBfunctions.apply_on_existing_elts('.wrapper-div [type="checkbox"]', 'checkbox');
+  SBsdk.SBfunctions.apply_on_existing_elts('.wrapper2-div [type="radio"]', 'radio');
+```
+
+After calling those 2 functions 
+use css:
+
+```
+/*hide the inputs*/
+.sdk-elt-dressed [type="checkbox"], 
+.sdk-elt-dressed [type="radio"]{
+  display:none;
+}
+
+/*style the checkboxes*/
+.toggleC{
+  // style the checkboxes
+}
+
+/*style the radios*/
+.toggleR{
+  // style the radio
+}
+```
 
 --------------------------------------------      
 

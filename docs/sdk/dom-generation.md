@@ -4,7 +4,7 @@
 
 For Dom Generation you have the following function.
             
-`window.SBsdk.SBfunctions.SBmessages.generateDom(type, options);`         
+`window.SBsdk.SBfunctions.generateDom(type, options);`         
 
 The parameters:        
 -**type** is a String      
@@ -186,6 +186,7 @@ options = {
   TitleClass: 'TitleClass',
   wrapperId: 'wrapperId',
   multiple : 1,
+  description : 'description that appears under the image uploader',
   inputFileData:{ max, id, name, size, class }, // the input of type file data
   deleteFileData:{name, id, class}, // the delete btn data
   uploadFileData:{ name, id, class}, // the upload btn data
@@ -353,6 +354,63 @@ $(document).on('click', ".delete-btn-class",function(event) {
 });
 
 ```
+
+--------------------   
+      
+## TABS
+
+```
+type = 'tabs'; 
+options = {
+  wrapperClass: "", // wrapper class
+  list: [ // defines with the list items
+     {title:'title1',   id: 'test1',    class:'test1'}, // title and id are required
+     {title:'title2',   id: 'test2',    class:'test2',    active: '1'}, // active makes the tab active by default
+  ]
+};
+
+```
+
+Example:
+
+```
+type = 'tabs';
+options = {
+  wrapperClass: "tabs-here",
+  list: [
+     {title:'title1',   id: 'test1',    class:'test1'},
+     {title:'title2',   id: 'test2',    class:'test2',    active: '1'},
+     {title:'title3',   id: 'test3',    class:'test3'}
+  ]
+};
+
+// append the dom being generated
+jQuery('body').append(SBsdk.SBfunctions.generateDom(type, options));
+
+//refresh the tabs library if not added at page load
+window.SBsdk_init.SBsdk_libraries('tabs');
+```
+
+**Helper Events:**       
+  ~~~~~~~~~~~~ 
+
+**- `sdk_tabs` EVENT:**       
+This event is used to allow 3rd party apps to respond to the click of an item of the tabs
+
+```
+$(document).on("sdk_tabs",function(data) {
+  // you will find the following data
+
+  console.log(data.type); // ie "sdk_tabs"
+  console.log(data.action); // ie "tab-switched"
+  // and
+  console.log(data.tabs_data);
+  // that contains: 
+  console.log(data.tabs_data.id); // the id of the list item clicked
+  console.log(data.tabs_data.tabs_wrapper_selector); // the selector object reference of the tab wrapper .. 
+});
+
+
 
 --------------------   
       

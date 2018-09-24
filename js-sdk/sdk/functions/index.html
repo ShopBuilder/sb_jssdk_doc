@@ -93,6 +93,9 @@
                 <li class="toctree-l3"><a href="#fo-apply-special-select-effect-on-existing-selects">FO - Apply Special Select Effect On Existing Selects</a></li>
                 
             
+                <li class="toctree-l3"><a href="#fo-helper-to-style-existing-checkboxradio">FO - Helper -- to Style Existing checkbox/radio</a></li>
+                
+            
                 <li class="toctree-l3"><a href="#fo-get-resource-rendered-raw-html">FO - Get Resource - Rendered Raw HTML</a></li>
                 
             
@@ -469,6 +472,41 @@ and <strong>options</strong>: <code>(optional)</code>               </p>
   searchable: {placeholder: 'hello'}
 });
 
+</code></pre>
+
+<hr />
+<h4 id="fo-helper-to-style-existing-checkboxradio">FO - Helper -- to Style Existing checkbox/radio</h4>
+<p><code>SBsdk.SBfunctions.apply_on_existing_elts(input_selector, type);</code></p>
+<ul>
+<li>this function adds a link that once pressed serves as if the real input was pressed as well</li>
+<li>u may style it to look the way you wish</li>
+<li>hide the real input using css </li>
+</ul>
+<p>Parameters: 
+<code>type</code>: can be <code>'checkbox'</code> or <code>'radio'</code>
+<code>input_selector</code>: is the selector of the checkboxes or radio to apply on</p>
+<p><strong>Example:</strong>   </p>
+<pre><code>  SBsdk.SBfunctions.apply_on_existing_elts('.wrapper-div [type=&quot;checkbox&quot;]', 'checkbox');
+  SBsdk.SBfunctions.apply_on_existing_elts('.wrapper2-div [type=&quot;radio&quot;]', 'radio');
+</code></pre>
+
+<p>After calling those 2 functions 
+use css:</p>
+<pre><code>/*hide the inputs*/
+.sdk-elt-dressed [type=&quot;checkbox&quot;], 
+.sdk-elt-dressed [type=&quot;radio&quot;]{
+  display:none;
+}
+
+/*style the checkboxes*/
+.toggleC{
+  // style the checkboxes
+}
+
+/*style the radios*/
+.toggleR{
+  // style the radio
+}
 </code></pre>
 
 <hr />
