@@ -10,6 +10,91 @@ To see all of the functions available:
 - open your shopbuilder website       
 - open the console and type `console.log(window.SBsdk.SBfunctions)`       
 
+
+---------------------------------
+    
+            
+#### BO - CRUD Widget
+
+`SBsdk.SBfunctions.crud_widget(options);`   
+**Parameters:**          
+the `options` parameter has the following structure:   
+```
+options= {
+  main_selector_class: 'main-selector-class',
+  main_selector_id: 'main-selector-id', // [REQUIRED]
+  append_to: '.region-content', // If not specified, will be appeneded to the body...
+  crud_items:  [ // crud information
+    {
+      item_id:'1',  // [REQUIRED]
+      class:'crud1', 
+      title: 'crud one', // [REQUIRED]
+      multi_selection: 'checked', // dont add this option if you do not want the muli selection functionality.. Accepted values are checked/unchecked
+    }, {...
+  ]
+};
+```
+*Where:* 
+
+- `main_selector_class` will be the class added to the crud widget           
+- `main_selector_id` **(REQUIRED)** will be the Id of the crud widget       
+- `append_to` the selector where you like to append your widget to; if this option isnt used; widget will be added to the `<body>` by default          
+- `append_to` if not used the whole widget will be added to the `<body>`                                  
+- `crud_items` will hold the information for each crud item:       
+
+
+within `crud_items`:    
+
+- `item_id` **(REQUIRED)** will be the id of the crud item
+- `title` **(REQUIRED)** will be the title of the crud item
+- `class` will be the class of the crud item
+- `multi_selection` This option is to allow the crud item to be selectable (as checkbox functionality).
+
+
+Preview:    
+~~~~~~    
+  
+![table-component](/img/crud-preview.png)   
+
+         
+**Helper Events:**       
+  ~~~~~~~~~~~~ 
+
+**- `crud_widget` EVENT:**       
+This event is used to allow 3rd party apps to respond to the actions performed on the widget
+
+
+```
+$(document).on("crud_widget",function(event) {
+  // you will find the following data
+  console.log(event.action); // will be the action performed on the crud item. Can be "select_multiple", "delete" or "edit"
+  console.log(event.crud_data); // is an object with the information needed about the item and action performed
+  /* ex: crud_data: {item_id: "1", status: "check" or "unchecked", main_selector_id: "main-selector-id"} */
+});
+```    
+
+**Example:**       
+  ~~~~~~~~~~~~ 
+
+```
+jQuery(document).on("crud_widget",function(event) {
+  console.log(event); 
+});        
+
+
+options= {
+          main_selector_class: 'main-selector-class',
+          main_selector_id: 'main-selector-id',
+          crud_items:  [
+            {item_id:'1', class:'crud1', title: 'crud one'},
+            {item_id:'2', class:'crud2', title: 'crud two'},
+            {item_id:'3', class:'crud3', title: 'crud three'}
+          ]
+        };
+
+SBsdk.SBfunctions.crud_widget(options);
+```
+
 ---------------------------------
     
             
