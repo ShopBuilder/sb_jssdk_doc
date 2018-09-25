@@ -120,6 +120,9 @@
                 <li class="toctree-l3"><a href="#bo-mini-table-image-uploader">BO - MINI TABLE IMAGE UPLOADER</a></li>
                 
             
+                <li class="toctree-l3"><a href="#tabs">TABS</a></li>
+                
+            
                 <li class="toctree-l3"><a href="#textfield">TEXTFIELD</a></li>
                 
             
@@ -203,7 +206,7 @@
 - The titles prefixed by <strong>BO</strong> means that the type was made specifically for the <strong>Back office pages</strong>          <br />
 - <strong>Otherwise</strong> the function is made to be used for <strong>both</strong>.    </p>
 <p>For Dom Generation you have the following function.</p>
-<p><code>window.SBsdk.SBfunctions.SBmessages.generateDom(type, options);</code>         </p>
+<p><code>window.SBsdk.SBfunctions.generateDom(type, options);</code>         </p>
 <p>The parameters:      <br />
 -<strong>type</strong> is a String    <br />
 -<strong>options</strong> is an obj   </p>
@@ -344,6 +347,7 @@ options = {
   TitleClass: 'TitleClass',
   wrapperId: 'wrapperId',
   multiple : 1,
+  description : 'description that appears under the image uploader',
   inputFileData:{ max, id, name, size, class }, // the input of type file data
   deleteFileData:{name, id, class}, // the delete btn data
   uploadFileData:{ name, id, class}, // the upload btn data
@@ -494,6 +498,54 @@ $(document).on('click', &quot;.delete-btn-class&quot;,function(event) {
 </code></pre>
 
 <hr />
+<h2 id="tabs">TABS</h2>
+<pre><code>type = 'tabs'; 
+options = {
+  wrapperClass: &quot;&quot;, // wrapper class
+  list: [ // defines with the list items
+     {title:'title1',   id: 'test1',    class:'test1'}, // title and id are required
+     {title:'title2',   id: 'test2',    class:'test2',    active: '1'}, // active makes the tab active by default
+  ]
+};
+
+</code></pre>
+
+<p>Example:</p>
+<pre><code>type = 'tabs';
+options = {
+  wrapperClass: &quot;tabs-here&quot;,
+  list: [
+     {title:'title1',   id: 'test1',    class:'test1'},
+     {title:'title2',   id: 'test2',    class:'test2',    active: '1'},
+     {title:'title3',   id: 'test3',    class:'test3'}
+  ]
+};
+
+// append the dom being generated
+jQuery('body').append(SBsdk.SBfunctions.generateDom(type, options));
+
+//refresh the tabs library if not added at page load
+window.SBsdk_init.SBsdk_libraries('tabs');
+</code></pre>
+
+<p><strong>Helper Events:</strong>     <br />
+  ~~~~~~~~~~~~ </p>
+<p><strong>- <code>sdk_tabs</code> EVENT:</strong>     <br />
+This event is used to allow 3rd party apps to respond to the click of an item of the tabs</p>
+<pre><code>$(document).on(&quot;sdk_tabs&quot;,function(data) {
+  // you will find the following data
+
+  console.log(data.type); // ie &quot;sdk_tabs&quot;
+  console.log(data.action); // ie &quot;tab-switched&quot;
+  // and
+  console.log(data.tabs_data);
+  // that contains: 
+  console.log(data.tabs_data.id); // the id of the list item clicked
+  console.log(data.tabs_data.tabs_wrapper_selector); // the selector object reference of the tab wrapper .. 
+});
+</code></pre>
+
+<hr />
 <h2 id="textfield">TEXTFIELD</h2>
 <p><strong>Parameters:</strong><br />
   ~~~~~~~~~~~~ </p>
@@ -582,7 +634,7 @@ options = {
   id: '',
   multiple: 1, // multiple select (don't use if not multiple)
   options: [{value: '', selected: 1, label: '', class:''}, ..],
-
+  default_value: &quot;default_value&quot;, // this can be used only in single select (not &quot;multiple&quot;) this will overide any use of &quot;selected&quot; option
   select2: {
     dropdownCssClass: 'dropdownClass', // adds a class for the select dropdown
     addAsterisk: defaultValueOfSelectField, // adds a '*' for the default value text 

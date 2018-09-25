@@ -81,6 +81,9 @@
         
             <ul>
             
+                <li class="toctree-l3"><a href="#bo-crud-widget">BO - CRUD Widget</a></li>
+                
+            
                 <li class="toctree-l3"><a href="#bo-table-component">BO - Table Component</a></li>
                 
             
@@ -91,6 +94,9 @@
                 
             
                 <li class="toctree-l3"><a href="#fo-apply-special-select-effect-on-existing-selects">FO - Apply Special Select Effect On Existing Selects</a></li>
+                
+            
+                <li class="toctree-l3"><a href="#fo-helper-to-style-existing-checkboxradio">FO - Helper -- to Style Existing checkbox/radio</a></li>
                 
             
                 <li class="toctree-l3"><a href="#fo-get-resource-rendered-raw-html">FO - Get Resource - Rendered Raw HTML</a></li>
@@ -208,6 +214,76 @@
 <p>To see all of the functions available:       <br />
 - open your shopbuilder website     <br />
 - open the console and type <code>console.log(window.SBsdk.SBfunctions)</code>       </p>
+<hr />
+<h4 id="bo-crud-widget">BO - CRUD Widget</h4>
+<p><code>SBsdk.SBfunctions.crud_widget(options);</code> <br />
+<strong>Parameters:</strong>        <br />
+the <code>options</code> parameter has the following structure:   </p>
+<pre><code>options= {
+  main_selector_class: 'main-selector-class',
+  main_selector_id: 'main-selector-id', // [REQUIRED]
+  append_to: '.region-content', // If not specified, will be appeneded to the body...
+  crud_items:  [ // crud information
+    {
+      item_id:'1',  // [REQUIRED]
+      class:'crud1', 
+      title: 'crud one', // [REQUIRED]
+      multi_selection: 'checked', // dont add this option if you do not want the muli selection functionality.. Accepted values are checked/unchecked
+    }, {...
+  ]
+};
+</code></pre>
+
+<p><em>Where:</em> </p>
+<ul>
+<li><code>main_selector_class</code> will be the class added to the crud widget           </li>
+<li><code>main_selector_id</code> <strong>(REQUIRED)</strong> will be the Id of the crud widget       </li>
+<li><code>append_to</code> the selector where you like to append your widget to; if this option isnt used; widget will be added to the <code>&lt;body&gt;</code> by default          </li>
+<li><code>append_to</code> if not used the whole widget will be added to the <code>&lt;body&gt;</code>                                  </li>
+<li><code>crud_items</code> will hold the information for each crud item:       </li>
+</ul>
+<p>within <code>crud_items</code>:    </p>
+<ul>
+<li><code>item_id</code> <strong>(REQUIRED)</strong> will be the id of the crud item</li>
+<li><code>title</code> <strong>(REQUIRED)</strong> will be the title of the crud item</li>
+<li><code>class</code> will be the class of the crud item</li>
+<li><code>multi_selection</code> This option is to allow the crud item to be selectable (as checkbox functionality).</li>
+</ul>
+<p>Preview:  <br />
+~~~~~~    </p>
+<p><img alt="table-component" src="../../img/crud-preview.png" />   </p>
+<p><strong>Helper Events:</strong>     <br />
+  ~~~~~~~~~~~~ </p>
+<p><strong>- <code>crud_widget</code> EVENT:</strong>     <br />
+This event is used to allow 3rd party apps to respond to the actions performed on the widget</p>
+<pre><code>$(document).on(&quot;crud_widget&quot;,function(event) {
+  // you will find the following data
+  console.log(event.action); // will be the action performed on the crud item. Can be &quot;select_multiple&quot;, &quot;delete&quot; or &quot;edit&quot;
+  console.log(event.crud_data); // is an object with the information needed about the item and action performed
+  /* ex: crud_data: {item_id: &quot;1&quot;, status: &quot;check&quot; or &quot;unchecked&quot;, main_selector_id: &quot;main-selector-id&quot;} */
+});
+</code></pre>
+
+<p><strong>Example:</strong>     <br />
+  ~~~~~~~~~~~~ </p>
+<pre><code>jQuery(document).on(&quot;crud_widget&quot;,function(event) {
+  console.log(event); 
+});        
+
+
+options= {
+          main_selector_class: 'main-selector-class',
+          main_selector_id: 'main-selector-id',
+          crud_items:  [
+            {item_id:'1', class:'crud1', title: 'crud one'},
+            {item_id:'2', class:'crud2', title: 'crud two'},
+            {item_id:'3', class:'crud3', title: 'crud three'}
+          ]
+        };
+
+SBsdk.SBfunctions.crud_widget(options);
+</code></pre>
+
 <hr />
 <h4 id="bo-table-component">BO - Table Component</h4>
 <p><code>SBsdk.SBfunctions.backoffice_table(options);</code> <br />
@@ -469,6 +545,41 @@ and <strong>options</strong>: <code>(optional)</code>               </p>
   searchable: {placeholder: 'hello'}
 });
 
+</code></pre>
+
+<hr />
+<h4 id="fo-helper-to-style-existing-checkboxradio">FO - Helper -- to Style Existing checkbox/radio</h4>
+<p><code>SBsdk.SBfunctions.apply_on_existing_elts(input_selector, type);</code></p>
+<ul>
+<li>this function adds a link that once pressed serves as if the real input was pressed as well</li>
+<li>u may style it to look the way you wish</li>
+<li>hide the real input using css </li>
+</ul>
+<p>Parameters: 
+<code>type</code>: can be <code>'checkbox'</code> or <code>'radio'</code>
+<code>input_selector</code>: is the selector of the checkboxes or radio to apply on</p>
+<p><strong>Example:</strong>   </p>
+<pre><code>  SBsdk.SBfunctions.apply_on_existing_elts('.wrapper-div [type=&quot;checkbox&quot;]', 'checkbox');
+  SBsdk.SBfunctions.apply_on_existing_elts('.wrapper2-div [type=&quot;radio&quot;]', 'radio');
+</code></pre>
+
+<p>After calling those 2 functions 
+use css:</p>
+<pre><code>/*hide the inputs*/
+.sdk-elt-dressed [type=&quot;checkbox&quot;], 
+.sdk-elt-dressed [type=&quot;radio&quot;]{
+  display:none;
+}
+
+/*style the checkboxes*/
+.toggleC{
+  // style the checkboxes
+}
+
+/*style the radios*/
+.toggleR{
+  // style the radio
+}
 </code></pre>
 
 <hr />
