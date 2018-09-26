@@ -38,8 +38,7 @@ options= {
 
 - `main_selector_class` will be the class added to the crud widget           
 - `main_selector_id` **(REQUIRED)** will be the Id of the crud widget       
-- `append_to` the selector where you like to append your widget to; if this option isnt used; widget will be added to the `<body>` by default          
-- `append_to` if not used the whole widget will be added to the `<body>`                                  
+- `return_or_append` the selector where you like to append your widget to; if this option isnt used; widget will be added to the `<body>` by default; to return the dom of the widget instead of appending `return_or_append = "return_dom"`                          
 - `crud_items` will hold the information for each crud item:       
 
 
