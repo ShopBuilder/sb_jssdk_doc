@@ -236,8 +236,22 @@ console.log(window.SBsdk.SBdata.SBwebsite_data);
 </code></pre>
 
 <ul>
-<li><strong>Google Map Marker information:</strong></li>
+<li><strong>Google Map information:</strong>  </li>
 </ul>
+<p>google map info:</p>
+<blockquote>
+<p>For pages containing a map, the global  <code>window.SBsdk.SBdata.SBwebsite_data.gmap_object</code> will represent the google map object that you can manipulate as needed; note that in other pages where the map doesn't exist this global will be empty ie. <code>window.SBsdk.SBdata.SBwebsite_data.gmap_object = ''</code>         </p>
+<p>Use this global as per <a href="https://developers.google.com/maps/documentation/javascript/reference/map">google maps documentations</a>.</p>
+</blockquote>
+<p>Example: use the google map function <code>panBy</code> will be as follows</p>
+<pre><code>if(window.SBsdk.SBdata.SBwebsite_data.gmap_object !== ''){
+  /* if it is not empty then there is the google maps object!! */
+  var map_object = window.SBsdk.SBdata.SBwebsite_data.gmap_object;
+  map_object.panBy(500, 100);
+}
+</code></pre>
+
+<p>google marker info:</p>
 <blockquote>
 <p>1- To access the marker image being used by the SB platform or a theme app use: <code>window.SBsdk.SBdata.SBwebsite_data.map_marker.theme</code>.                <br />
  2- To customize your marker using a theme app (ie. overides the one being used in the SB platform) <a href="../../sdk/callbacks/#google-map-marker-callback">click here</a> <br />

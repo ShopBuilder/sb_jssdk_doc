@@ -92,9 +92,27 @@ console.log(window.SBsdk.SBdata.SBwebsite_data);
   map_marker //Array of user roles ex. ["Authenticated", "merchant"]                
 }
 ```
-     
+          
+       
+- **Google Map information:**  
 
-- **Google Map Marker information:**
+google map info:
+ 
+>  For pages containing a map, the global  `window.SBsdk.SBdata.SBwebsite_data.gmap_object` will represent the google map object that you can manipulate as needed; note that in other pages where the map doesn't exist this global will be empty ie. `window.SBsdk.SBdata.SBwebsite_data.gmap_object = ''`         
+               
+>  Use this global as per [google maps documentations](https://developers.google.com/maps/documentation/javascript/reference/map).
+
+Example: use the google map function `panBy` will be as follows
+```
+if(window.SBsdk.SBdata.SBwebsite_data.gmap_object !== ''){
+  /* if it is not empty then there is the google maps object!! */
+  var map_object = window.SBsdk.SBdata.SBwebsite_data.gmap_object;
+  map_object.panBy(500, 100);
+}
+```
+
+          
+google marker info:
  
 >  1- To access the marker image being used by the SB platform or a theme app use: `window.SBsdk.SBdata.SBwebsite_data.map_marker.theme`.                  
 >  2- To customize your marker using a theme app (ie. overides the one being used in the SB platform) [click here](/sdk/callbacks/#google-map-marker-callback)   
